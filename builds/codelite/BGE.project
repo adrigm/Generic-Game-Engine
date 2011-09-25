@@ -9,6 +9,24 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="../../src/main.cpp"/>
+    <VirtualDirectory Name="BGE">
+      <File Name="../../src/BGE/app.cpp"/>
+      <File Name="../../src/BGE/app.h"/>
+      <File Name="../../src/BGE/BGE.h"/>
+      <File Name="../../src/BGE/clock.cpp"/>
+      <File Name="../../src/BGE/clock.h"/>
+      <File Name="../../src/BGE/scene.cpp"/>
+      <File Name="../../src/BGE/scene.h"/>
+      <File Name="../../src/BGE/scene_manager.cpp"/>
+      <File Name="../../src/BGE/scene_manager.h"/>
+      <File Name="../../src/BGE/stat_manager.cpp"/>
+      <File Name="../../src/BGE/stat_manager.h"/>
+      <File Name="../../src/BGE/types.h"/>
+    </VirtualDirectory>
+    <File Name="../../src/scene_main.cpp"/>
+    <File Name="../../src/scene_main.h"/>
+    <File Name="../../src/scene_start.cpp"/>
+    <File Name="../../src/scene_start.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -28,7 +46,9 @@
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/../../../$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)/../../../" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[]]>
+        <![CDATA[
+      
+      ]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
         <PostConnectCommands/>
@@ -65,6 +85,8 @@
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[
+      
+      
       ]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
