@@ -11,7 +11,7 @@ App::App() :
 	window_settings(),
 	window_style(sf::Style::Close | sf::Style::Resize),
 	input(window.GetInput()),
-	exit_code(0),
+	exit_code(BGE::StatusNoError),
 	running(false),
 	update_clock(),
 	update_time(0.0f),

@@ -92,7 +92,7 @@ protected:
 
 private:
 	/// Representa el id único de la escena
-	SceneID id;
+	const SceneID id;
 	/// Comprueba si cleanup debe ser llamado
 	bool m_cleanup;
 	/// Comprueba si la escena está inicializada
