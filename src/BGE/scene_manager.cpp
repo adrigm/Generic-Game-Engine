@@ -1,5 +1,4 @@
 #include "scene_manager.h"
-#include <iostream>
 
 namespace BGE
 {
@@ -15,6 +14,7 @@ SceneManager::SceneManager() :
 
 SceneManager::~SceneManager()
 {
+	app->log << "SceneManager::~SceneManager() Destructor llamado" << std::endl;
 }
 
 void SceneManager::AddScene(Scene* a_scene)
@@ -94,11 +94,15 @@ void SceneManager::RemoveAllScene()
 			inactives_scenes[i] = NULL;
 		}
 	}
-	app->log << "SceneManager::RemoveAllScene() Eliminada escena con id="
-					 << active_scene->GetID() << std::endl;
-	active_scene->Cleanup();
-	delete active_scene;
-	active_scene = NULL;
+	
+	if (active_scene)
+	{
+		app->log << "SceneManager::RemoveAllScene() Eliminada escena con id="
+					<< active_scene->GetID() << std::endl;
+		active_scene->Cleanup();
+		delete active_scene;
+		active_scene = NULL;
+	}
 }
 
 void SceneManager::RemoveAllInactiveScene()

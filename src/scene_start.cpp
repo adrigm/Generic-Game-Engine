@@ -24,20 +24,6 @@ void SceneStart::Init()
 
 void SceneStart::Events(sf::Event event)
 {
-	if (event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Tab)
-	{
-		if (!vis)
-		{
-			app->stat_manager.SetShow(true);
-			vis = true;
-		}
-		else
-		{
-			app->stat_manager.SetShow(false);
-			vis = false;
-		}
-	}
-
 	if (event.Type == sf::Event::MouseButtonPressed)
 	{
 		if (event.MouseButton.Button == sf::Mouse::Left)

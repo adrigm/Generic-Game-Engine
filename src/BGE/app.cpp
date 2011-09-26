@@ -16,8 +16,7 @@ App::App() :
 	update_clock(),
 	update_time(0.0f),
 	scene(NULL),
-	scene_manager(),
-	stat_manager()
+	scene_manager()
 {
 	// Creamos el archivo de log
 	log_file.assign("log.txt");
@@ -30,6 +29,8 @@ App::App() :
 
 App::~App()
 {
+	// Escribimos en el log el código de salida
+	log << "App::Run() terminado con código: " << exit_code << std::endl;
 }
 
 void App::SetFirstScene(Scene* first)
@@ -61,21 +62,16 @@ int App::Run()
 	// PreInit() Se encarga de 2 cosas:
 	// 1) Abrir el archivo de configuración
 	// 2) Crear la ventana con los valores obtenidos del archivo
-	
 	PreInit();
 
 	// Init() Se encarga de crear el SceneManager y cargar la primera escena
-	if (Init())
-	{
-		// Loop() Implementa el bucle de la aplicación
-		Loop();
-	}
+	Init();
+	
+	// Loop() Implementa el bucle de la aplicación
+	Loop();
 	
 	// Cleanup() Se encarga de eliminar todos los objetos creados
 	Cleanup();
-
-	// Escribimos en el log el código de salida
-	log << "App::Run() terminado con código: " << exit_code << std::endl;
 
 	// Código de salida de la aplicación
 	return exit_code;
@@ -119,22 +115,13 @@ void App::PreInit()
 	log << "App::PreInit() Completado" << std::endl;
 }
 
-bool App::Init()
+void App::Init()
 {
 	// Creamos el SceneManager
 	scene_manager = SceneManager::Instance();
 
 	// Pasamos la dirección de la App al SceneManager
 	scene_manager->RegisterApp(this);
-
-	// Pasamos la dirección de la App al StatManager
-	stat_manager.RegisterApp(this);
-
-	// Iniciamos el StarManager
-	stat_manager.DoInit();
-
-	// Lo establecemos como no visible
-	stat_manager.SetShow(false);
 
 	// Comprobamos que se haya establecido escena inicial
 	if (scene != NULL)
@@ -153,16 +140,10 @@ bool App::Init()
 			
 		// Salimos con código -2
 		Quit(StatusAppInitFailed);
-		
-		// Salimos del init con el codigo false
-		return false;
 	}
 
 	// Escribimos en el log
 	log << "App::Init() Completado" << std::endl;
-	
-	// Devolvemos true si se completa init
-	return true;
 }
 
 void App::Loop()
@@ -197,14 +178,8 @@ void App::Loop()
 		// Llamamos al método Update() de la escena activa
 		scene_manager->UpdateScene();
 
-		stat_manager.Update();
-
 		// Llamamos al método Draw() de la escena activa
 		scene_manager->DrawScene();
-		
-		
-		// Dibujamos las estadísticas
-		stat_manager.Draw();
 
 		// Actualizamos la ventana
 		window.Display();

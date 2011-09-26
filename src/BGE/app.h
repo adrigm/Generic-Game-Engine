@@ -15,9 +15,6 @@
 #include "types.h"
 #include "scene_manager.h"
 #include "scene.h"
-#include "stat_manager.h"
-
-#include <iostream>
 
 namespace BGE
 {
@@ -52,8 +49,6 @@ public:
 	Scene* scene;
 	/// Puntero al SceneManager
 	SceneManager* scene_manager;
-	/// Control de estadísticas
-	StatManager stat_manager;
 
 	/**
 	 * @brief Devuelve la Instancia única de la clase App
@@ -111,7 +106,7 @@ protected:
 	 * 
 	 * @brief Devuelve true si se inicializa correctamente
 	 */
-	virtual bool Init(void);
+	virtual void Init(void);
 	
 	/**
 	 * Lleva el bucle de la aplicación se encarga de mantenerla en ejecución

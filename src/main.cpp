@@ -32,5 +32,6 @@ int main(int argc, char* argv[])
 	// Eliminamos la aplicación
 	BGE::App::Release();
 	
+	// Devolvemos el código de salida
 	return exit_code;
 }

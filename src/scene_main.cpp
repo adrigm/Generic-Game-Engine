@@ -31,7 +31,7 @@ void SceneMain::Update()
 
 void SceneMain::Draw()
 {
-	app->window.Clear(sf::Color(255, 0, 0));
+	app->window.Clear(sf::Color(180, 210, 255));
 }
 
 void SceneMain::Cleanup()

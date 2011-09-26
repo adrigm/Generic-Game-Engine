@@ -2,7 +2,6 @@
 #define SCENEMANAGER_H
 
 #include <vector>
-#include <SFML/System.hpp>
 #include "types.h"
 #include "scene.h"
 
@@ -14,9 +13,6 @@ class SceneManager
 	static SceneManager* ms_instance;
 
 public:
-	// Guarda el id de la próxima escena actica
-	SceneID next_scene;
-
 	static SceneManager* Instance();
 	static void Release();
 
@@ -54,15 +50,6 @@ public:
 	 */
 	void RemoveAllInactiveScene();
 
-
-	/**
-	 * Cambia la escena activa inmediatamente. USAR SetActiveScene() para
-	 * cambiar de escena
-	 *
-	 * @param id_scene ID de la escena a cambiar
-	 */
-	void ChangeScene(SceneID id_scene);
-
 	/**
 	 * Llama el método Event() de la escena activa
 	 *
@@ -92,6 +79,8 @@ private:
 	friend class App;
 	/// Escena actualmente activa
 	Scene* active_scene;
+	/// Próxima escena actica
+	SceneID next_scene;
 	// Lista de escenas inacticas
 	std::vector<Scene*> inactives_scenes;
 	// Puntero a la aplicación
@@ -99,6 +88,14 @@ private:
 
 	SceneManager();
 	~SceneManager();
+	
+	/**
+	 * Cambia la escena activa inmediatamente. USAR SetActiveScene() para
+	 * cambiar de escena
+	 *
+	 * @param id_scene ID de la escena a cambiar
+	 */
+	void ChangeScene(SceneID id_scene);
 	
 	/**
 	 * Elimina todas las escenas de la pila.
