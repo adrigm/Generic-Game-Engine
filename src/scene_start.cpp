@@ -22,10 +22,6 @@ void SceneStart::Init()
 	app->scene_manager->AddScene(main);
 }
 
-void SceneStart::ReInit()
-{
-}
-
 void SceneStart::Events(sf::Event event)
 {
 	if (event.Type == sf::Event::KeyPressed && event.Key.Code == sf::Key::Tab)

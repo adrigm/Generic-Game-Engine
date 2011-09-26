@@ -14,7 +14,6 @@ public:
 	virtual ~SceneMain();
 
 	virtual void Init(void);
-	virtual void ReInit(void);
 	virtual void Events(sf::Event theEvent);
 	virtual void Update(void);
 	virtual void Draw(void);

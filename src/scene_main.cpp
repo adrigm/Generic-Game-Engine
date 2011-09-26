@@ -13,11 +13,7 @@ SceneMain::~SceneMain()
 void SceneMain::Init()
 {
 	BGE::Scene::Init();
-	app->scene_manager->RemoveScene("Start");
-}
-
-void SceneMain::ReInit()
-{
+	//app->scene_manager->RemoveAllInactiveScene();
 }
 
 void SceneMain::Events(sf::Event event)

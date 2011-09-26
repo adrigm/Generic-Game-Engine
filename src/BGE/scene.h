@@ -11,7 +11,6 @@
 #define SCENE_H
 
 #include <cassert>
-#include <SFML/Graphics.hpp>
 
 #include "types.h"
 #include "app.h"
@@ -49,16 +48,6 @@ public:
 	virtual void Init();
 	
 	/**
-	 * Método virtual que hace un reinicio de la escena
-	 */
-	virtual void ReInit() = 0;
-	
-	/**
-	 * Método llamado al destruir la escena
-	 */
-	virtual void DeInit();
-	
-	/**
 	 * Método llamano al pausar la escena
 	 */
 	virtual void Pause();
@@ -83,12 +72,6 @@ public:
 	 * Método encargado de dibujar en la escena, llamado en relación a los FPS
 	 */
 	virtual void Draw(void) = 0;
-	
-	/**
-	 * Devuelve el tiempo pasado desde que se llamo al Init() o desde la última
-	 * pausa.
-	 */
-	float GetElapsedTime() const;
 	
 	/**
 	 * Método que es llamado al eliminar la escena, se ecarga de la limpieza
@@ -116,14 +99,6 @@ private:
 	bool m_init;
 	/// Comprueba si la escena está pausada
 	bool m_paused;
-	/// Reloj para calcular el tiempo pasado
-	sf::Clock elapsed_clock;
-	/// Total del tiempo pasado desde que el Init() es llamdo
-	float elapsed_time;
-	/// Reloj para calcular el tiempo em pausa
-	sf::Clock paused_clock;
-	/// Total del tiempo pausado desde que Init() se llamo
-	float paused_time;
 
 	/**
 	 * Our copy constructor is private because we do not allow copies of

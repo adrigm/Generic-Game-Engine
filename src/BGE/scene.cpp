@@ -7,9 +7,7 @@ Scene::Scene(SceneID m_id, App* p_app) :
 	app(p_app),
 	m_init(false),
 	m_paused(false),
-	m_cleanup(false),
-	elapsed_time(0.0f),
-	paused_time(0.0f)
+	m_cleanup(false)
 {
 	// Comprobamos que el puntero es correcto
 	assert(NULL != p_app && "Scene::Scene() puntero p_app corrupto");
@@ -68,31 +66,6 @@ void Scene::Init()
 		m_init = true;
 		// Quitamos el pause si está activado
 		m_paused = false;
-		// Ponemos los contadores de tiempo a cero y reseteamos los relojes
-		elapsed_time = 0.0f;
-		elapsed_clock.Reset();
-		paused_time = 0.0f;
-		paused_clock.Reset();
-	}
-}
-
-void Scene::DeInit()
-{
-	app->log << "Scene::DeInit() con ID=" << id << " llamado" << std::endl;
-
-	// Comrpobamos que la escena esté inicializada
-	if(m_init)
-	{
-		// Activamos la necesidad de limpieza
-		m_cleanup = true;
-		// Establecemos la escena como no inicializada
-		m_init = false;
-		// Actualizamos los contadores
-		elapsed_time += elapsed_clock.GetElapsedTime();
-		if(m_paused)
-		{
-			paused_time += paused_clock.GetElapsedTime();
-		}
 	}
 }
 
@@ -105,8 +78,6 @@ void Scene::Pause()
 	{
 		// La ponemos en estadod de pausa
 		m_paused = true;
-		// Reseteamos el reloj de pausa
-		paused_clock.Reset();
 	}
 }
 
@@ -119,26 +90,12 @@ void Scene::Resume()
 	{
 		// Quitamos la pausa
 		m_paused = false;
-		// Añadimos el tiempo pausado a su contador
-		paused_time += paused_clock.GetElapsedTime();
 	}
 }
 
 void Scene::Cleanup()
 {
 	app->log << "Scene::Cleanup() con ID=" << id << " llamado" << std::endl;
-}
-
-float Scene::GetElapsedTime() const
-{
-	float result = elapsed_clock.GetElapsedTime();
-
-	if(!m_init)
-	{
-		result = elapsed_time;
-	}
-
-	return result;
 }
 
 } // Namespace BGE
