@@ -1,0 +1,13 @@
+*.o
+*.o.d
+/obj/
+*.out
+*.tags
+*.mk
+*.session
+*.dll
+*.exe
+*.lib
+*.list
+*.a
+*.ilk
