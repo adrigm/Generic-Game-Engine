@@ -11,3 +11,5 @@
 *.list
 *.a
 *.ilk
+/.svn/
+.svn
