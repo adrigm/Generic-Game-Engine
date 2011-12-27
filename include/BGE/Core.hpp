@@ -26,7 +26,6 @@
 #include <BGE/Core/classes/App.hpp>
 #include <BGE/Core/classes/AssetManager.hpp>
 #include <BGE/Core/classes/ConfigReader.hpp>
-#include <BGE/Core/classes/tmx/Tmx.h>
 #include <BGE/Core/classes/StatManager.hpp>
 #include <BGE/Core/classes/SceneManager.hpp>
 #include <BGE/Core/classes/TAsset.hpp>
