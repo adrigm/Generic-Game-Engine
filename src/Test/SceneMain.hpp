@@ -28,7 +28,6 @@ private:
 	sf::Sprite hero;
 	sf::String text;
 	sf::String otext;
-	sf::SoundBuffer buffersonido;
 	sf::Sound sonido;
 	sf::Music musica;
 };

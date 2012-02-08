@@ -294,6 +294,14 @@ void AssetManager::Cleanup()
 		mFonts.erase(itFonts++);
 	}
 
+	// Eliminamos todos los sonidos
+	std::map<std::string, sf::SoundBuffer>::iterator itSounds = mSounds.begin();
+	while (itSounds != mSounds.end())
+	{
+		mApp->mLog << "AssetManager::Cleanup() Eliminado Sonido con ID=" << itSounds->first << std::endl;
+		mSounds.erase(itSounds++);
+	}
+
 	// Eliminamos todas las Configuraciones
 	std::map<std::string, ConfigReader*>::iterator itConfig = mConfigFiles.begin();
 	while (itConfig != mConfigFiles.end())

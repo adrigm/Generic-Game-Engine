@@ -28,8 +28,7 @@ void SceneMain::Init()
 	otext.SetText("Hola Mundo");
 	otext.SetColor(sf::Color(0, 0, 0));
 	otext.SetPosition(400, 400);
-	buffersonido.LoadFromFile(mApp->GetExecutableDir() + "resources/sonido.ogg");
-	sonido.SetBuffer(buffersonido);
+	sonido.SetBuffer(mApp->mAssetManager->GetSoundBuffer("sonido.ogg"));
 	musica.OpenFromFile(mApp->GetExecutableDir() + "resources/musica.ogg");
 	musica.SetLoop(true);
 	musica.Play();
