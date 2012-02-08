@@ -168,6 +168,57 @@ void AssetManager::DeleteFont(const std::string& theFilename)
 		mFonts.erase( it );
 }
 
+const sf::SoundBuffer& AssetManager::GetSoundBuffer(const std::string& theFilename)
+{
+	// Check, whether the image already exists
+	for( std::map<std::string, sf::SoundBuffer>::const_iterator it = mSounds.begin();
+		 it != mSounds.end(); 
+		 ++it)
+	{
+		if(theFilename == it->first)
+		{
+			mApp->mLog << "AssetManager::GetFont() " << theFilename << " using existing Font.\n";
+			return it->second;
+		}
+	}
+	
+	// The image doesen't exists. Create it and save it.
+	sf::SoundBuffer sound;
+
+	// Search project's main directory
+	if( sound.LoadFromFile(mApp->GetExecutableDir() + theFilename ) )
+	{
+		mSounds[theFilename] = sound;
+		mApp->mLog << "AssetManager::GetFont() " << theFilename << " loading Font.\n";
+		return mSounds[theFilename];
+	}
+
+	// If the image has still not been found, search all registered directories
+	for( std::vector< std::string >::iterator it = mDirectories.begin();
+		 it != mDirectories.end();
+		 ++it )
+	{
+		if( sound.LoadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
+		{
+			mSounds[theFilename] = sound;
+			mApp->mLog << "AssetManager::GetFont() " << theFilename << " loading Font.\n";
+			return mSounds[theFilename];
+		}
+
+	}
+
+	mApp->mLog << "AssetManager::GetFont(): Font was not found. It is filled with an empty image.\n";
+	mSounds[theFilename] = sound;
+	return mSounds[theFilename];
+}
+
+void AssetManager::DeleteSoundBuffer(const std::string& theFilename)
+{
+	std::map<std::string, sf::SoundBuffer>::const_iterator it = mSounds.find( theFilename );
+	if( it != mSounds.end() )
+		mSounds.erase( it );
+}
+
 const ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
 {
 	// Check, whether the image already exists

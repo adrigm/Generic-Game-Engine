@@ -2,6 +2,7 @@
 #define SCENE_MAIN_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <GGE/Core.hpp>
 
 class SceneMain : public GGE::IScene
@@ -27,6 +28,9 @@ private:
 	sf::Sprite hero;
 	sf::String text;
 	sf::String otext;
+	sf::SoundBuffer buffersonido;
+	sf::Sound sonido;
+	sf::Music musica;
 };
 
 #endif // SCENE_MAIN_HPP

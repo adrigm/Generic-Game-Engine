@@ -11,6 +11,7 @@
 #include <string>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <GGE/Core/Core_types.hpp>
 #include <GGE/Core/classes/App.hpp>
 #include <GGE/Core/classes/ConfigReader.hpp>
@@ -38,6 +39,10 @@ public:
 
 	void DeleteFont(const std::string& theFilename);
 
+	const sf::SoundBuffer& GetSoundBuffer(const std::string& theFilename);
+
+	void DeleteSoundBuffer(const std::string& theFilename);
+
 	const ConfigReader& GetConfigFile(const std::string& theFilename);
 
 	void DeleteConfigFile(const std::string& theFilename);
@@ -53,6 +58,8 @@ private:
 	std::map<std::string, sf::Image> mImages;
 	/// Contenedor de tipografias
 	std::map<std::string, sf::Font> mFonts;
+	/// Contenedor de Sonidos
+	std::map<std::string, sf::SoundBuffer> mSounds;
 	/// Contenedor de archivos de configuración
 	std::map<std::string, ConfigReader*> mConfigFiles;
 
