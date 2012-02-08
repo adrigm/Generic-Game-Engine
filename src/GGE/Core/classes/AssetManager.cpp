@@ -10,6 +10,7 @@ AssetManager::AssetManager(App* theApp) :
 	mImages(),
 	mConfigFiles()
 {
+	mApp->mLog << "AssetManager::ctor()" << std::endl;
 }
 
 AssetManager::~AssetManager()
@@ -17,6 +18,38 @@ AssetManager::~AssetManager()
 	mImages.clear();
 	mConfigFiles.clear();
 	mDirectories.clear();
+
+	mApp->mLog << "AssetManager::dtor()" << std::endl;
+}
+
+void AssetManager::AddDirectory( const std::string& directory )
+{
+	// Check whether the path already exists
+	for( std::vector<std::string>::const_iterator it  = mDirectories.begin();
+		 it != mDirectories.end();
+		++it )
+	{
+		// The path exists. So it isn't necessary to add id once more.
+		if( directory == (*it) )
+			return;
+	}
+
+	// insert the directory
+	mDirectories.push_back( directory );
+	mApp->mLog << "AssetManager::AddDirectory() Dir=" << directory << std::endl;
+}
+
+void AssetManager::RemoveDirectory( const std::string& directory )
+{
+	for( std::vector<std::string>::const_iterator it  = mDirectories.begin();
+		 it != mDirectories.end(); )
+	{
+		// The path exists. So it isn't necessary to add id once more.
+		if( directory == (*it) )
+			it = mDirectories.erase( it );
+		else
+			++it;
+	}
 }
 
 const sf::Image& AssetManager::GetImage( const std::string& theFilename )
@@ -65,53 +98,74 @@ const sf::Image& AssetManager::GetImage( const std::string& theFilename )
 
 void AssetManager::DeleteImage( const sf::Image& image )
 {
-	for( std::map<std::string, sf::Image>::const_iterator it = mImages.begin();
+	for(std::map<std::string, sf::Image>::const_iterator it = mImages.begin();
 		 it != mImages.end(); 
 		 ++it)
 	{
 		if( &image == &it->second )
 		{
-			mImages.erase( it );
-						return;
+			mImages.erase(it);
+			return;
 		}
 	}
 }
 
-void AssetManager::DeleteImage( const std::string& theFilename )
+void AssetManager::DeleteImage(const std::string& theFilename)
 {
 	std::map<std::string, sf::Image>::const_iterator it = mImages.find( theFilename );
 	if( it != mImages.end() )
 		mImages.erase( it );
 }
 
-void AssetManager::AddDirectory( const std::string& directory )
+const sf::Font& AssetManager::GetFont(const std::string& theFilename)
 {
-	// Check whether the path already exists
-	for( std::vector<std::string>::const_iterator it  = mDirectories.begin();
-		 it != mDirectories.end();
-		++it )
+	// Check, whether the image already exists
+	for( std::map<std::string, sf::Font>::const_iterator it = mFonts.begin();
+		 it != mFonts.end(); 
+		 ++it)
 	{
-		// The path exists. So it isn't necessary to add id once more.
-		if( directory == (*it) )
-			return;
+		if(theFilename == it->first)
+		{
+			mApp->mLog << "AssetManager::GetFont() " << theFilename << " using existing Font.\n";
+			return it->second;
+		}
+	}
+	
+	// The image doesen't exists. Create it and save it.
+	sf::Font font;
+
+	// Search project's main directory
+	if( font.LoadFromFile(mApp->GetExecutableDir() + theFilename ) )
+	{
+		mFonts[theFilename] = font;
+		mApp->mLog << "AssetManager::GetFont() " << theFilename << " loading Font.\n";
+		return mFonts[theFilename];
 	}
 
-	// insert the directory
-	mDirectories.push_back( directory );
-	mApp->mLog << "AssetManager::AddDirectory() Dir=" << directory << std::endl;
+	// If the image has still not been found, search all registered directories
+	for( std::vector< std::string >::iterator it = mDirectories.begin();
+		 it != mDirectories.end();
+		 ++it )
+	{
+		if( font.LoadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
+		{
+			mFonts[theFilename] = font;
+			mApp->mLog << "AssetManager::GetFont() " << theFilename << " loading Font.\n";
+			return mFonts[theFilename];
+		}
+
+	}
+
+	mApp->mLog << "AssetManager::GetFont(): Font was not found. It is filled with an empty image.\n";
+	mFonts[theFilename] = sf::Font::GetDefaultFont();
+	return mFonts[theFilename];
 }
 
-void AssetManager::RemoveDirectory( const std::string& directory )
+void AssetManager::DeleteFont(const std::string& theFilename)
 {
-	for( std::vector<std::string>::const_iterator it  = mDirectories.begin();
-		 it != mDirectories.end(); )
-	{
-		// The path exists. So it isn't necessary to add id once more.
-		if( directory == (*it) )
-			it = mDirectories.erase( it );
-		else
-			++it;
-	}
+	std::map<std::string, sf::Font>::const_iterator it = mFonts.find( theFilename );
+	if( it != mFonts.end() )
+		mFonts.erase( it );
 }
 
 const ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
@@ -133,7 +187,7 @@ const ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
 	anConfigFile->RegisterApp(mApp);
 
 	// Search project's main directory
-	if( anConfigFile->Read(theFilename))
+	if( anConfigFile->Read(mApp->GetExecutableDir() + theFilename))
 	{
 		mConfigFiles[theFilename] = anConfigFile;
 		mApp->mLog << "AssetManager::GetConfigFile() ID=" << theFilename << std::endl;
@@ -145,7 +199,7 @@ const ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
 		 it != mDirectories.end();
 		 ++it )
 	{
-		if( anConfigFile->Read( (*it) + theFilename ) )
+		if( anConfigFile->Read(mApp->GetExecutableDir() + (*it) + theFilename ) )
 		{
 			mConfigFiles[theFilename] = anConfigFile;
 			mApp->mLog << "AssetManager::GetConfigFile() ID=" << theFilename << std::endl;
@@ -181,12 +235,21 @@ void AssetManager::Cleanup()
 		mImages.erase(itImages++);
 	}
 
+	// Eliminamos todas las tipografias
+	std::map<std::string, sf::Font>::iterator itFonts = mFonts.begin();
+	while (itFonts != mFonts.end())
+	{
+		mApp->mLog << "AssetManager::Cleanup() Eliminada Font con ID=" << itFonts->first << std::endl;
+		mFonts.erase(itFonts++);
+	}
+
 	// Eliminamos todas las Configuraciones
 	std::map<std::string, ConfigReader*>::iterator itConfig = mConfigFiles.begin();
 	while (itConfig != mConfigFiles.end())
 	{
-		mApp->mLog << "AssetManager::Cleanup() Eliminado ConfigFile con ID=" << itConfig->first << std::endl;
-		delete itConfig->second;
+		//delete itConfig->second;
+		mApp->mLog << "AssetManager::Cleanup() Eliminado ConfigFile con ID=" 
+			<< itConfig->first << std::endl;
 		mConfigFiles.erase(itConfig++);
 	}
 

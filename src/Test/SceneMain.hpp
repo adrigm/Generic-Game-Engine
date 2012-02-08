@@ -25,6 +25,8 @@ public:
 
 private:
 	sf::Sprite hero;
+	sf::String text;
+	sf::String otext;
 };
 
 #endif // SCENE_MAIN_HPP

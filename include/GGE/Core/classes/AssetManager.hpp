@@ -34,6 +34,10 @@ public:
 
 	void DeleteImage(const std::string& theFilename);
 
+	const sf::Font& GetFont(const std::string& theFilename);
+
+	void DeleteFont(const std::string& theFilename);
+
 	const ConfigReader& GetConfigFile(const std::string& theFilename);
 
 	void DeleteConfigFile(const std::string& theFilename);
@@ -47,6 +51,8 @@ private:
 	std::vector< std::string > mDirectories;
 	/// Contenedor de imagenes
 	std::map<std::string, sf::Image> mImages;
+	/// Contenedor de tipografias
+	std::map<std::string, sf::Font> mFonts;
 	/// Contenedor de archivos de configuración
 	std::map<std::string, ConfigReader*> mConfigFiles;
 

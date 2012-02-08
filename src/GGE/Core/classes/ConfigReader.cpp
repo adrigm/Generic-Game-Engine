@@ -40,10 +40,9 @@ ConfigReader::~ConfigReader()
 	iter = mSections.begin();
 	while(iter != mSections.end())
 	{
-		typeNameValue* anMap = iter->second;
 		mSections.erase(iter++);
-		delete anMap;
 	}
+	mSections.clear();
 
 	// Clear pointers we don't need anymore
 	mApp = NULL;

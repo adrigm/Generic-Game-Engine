@@ -10,11 +10,12 @@ SceneManager::SceneManager(App* theApp) :
 	mInactivesScenes(),
 	mNextScene("")
 {
+	mApp->mLog << "SceneManager::ctor()" << std::endl;
 }
 
 SceneManager::~SceneManager()
 {
-	mApp->mLog << "SceneManager::~SceneManager() Destructor llamado" << std::endl;
+	mApp->mLog << "SceneManager::dtor()" << std::endl;
 }
 
 void SceneManager::AddScene(IScene* theScene)

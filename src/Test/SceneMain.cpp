@@ -17,9 +17,17 @@ void SceneMain::Init()
 	mApp->mAssetManager->AddDirectory("resources/");
 	hero.SetImage(mApp->mAssetManager->GetImage("sprite.png"));
 	sf::Image a = mApp->mAssetManager->GetImage("sprite.png");
-	GGE::ConfigReader conf;
-	conf = mApp->mAssetManager->GetConfigFile("swindow.cfg");
+	GGE::ConfigReader conf = mApp->mAssetManager->GetConfigFile("window.cfg");
 	std::cout << conf.GetUint32("window", "width", 0) << std::endl;
+	mApp->mAssetManager->DeleteConfigFile("window.cfg");
+	text.SetFont(mApp->mAssetManager->GetFont("segoeui.ttf"));
+	text.SetText("Generic Game Engine");
+	text.SetColor(sf::Color(255, 0, 0));
+	text.SetSize(40);
+	otext.SetFont(mApp->mAssetManager->GetFont("segoeui.ttf"));
+	otext.SetText("Hola Mundo");
+	otext.SetColor(sf::Color(0, 0, 0));
+	otext.SetPosition(400, 400);
 }
 
 void SceneMain::ReInit()
@@ -40,16 +48,22 @@ void SceneMain::Events(sf::Event theEvent)
 
 void SceneMain::Update()
 {
-	/*if (mApp->mInput.IsKeyDown(sf::Key::Space))
+	if (mApp->mInput.IsKeyDown(sf::Key::Add))
 	{
-		mApp->mSceneManager->SetActiveScene("Menu");
-	}*/
+		otext.SetSize(10);
+	}
+	if (mApp->mInput.IsKeyDown(sf::Key::Subtract))
+	{
+		otext.Scale(-0.1, -0.1);
+	}
 }
 
 void SceneMain::Draw()
 {
 	mApp->mWindow.Clear(sf::Color(180, 200, 255));
 	mApp->mWindow.Draw(hero);
+	mApp->mWindow.Draw(text);
+	mApp->mWindow.Draw(otext);
 }
 
 void SceneMain::Cleanup()
