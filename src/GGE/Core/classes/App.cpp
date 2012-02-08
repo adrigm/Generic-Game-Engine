@@ -215,7 +215,11 @@ void App::Loop()
 
 void App::Cleanup()
 {
+	// Eliminamos todas las escenas del SceneManager
 	mSceneManager->RemoveAllScene();
+
+	// Eliminamos todos los recursos
+	mAssetManager->Cleanup();
 
 	// Eliminamos el SceneManager
 	delete mSceneManager;

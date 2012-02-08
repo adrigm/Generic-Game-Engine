@@ -40,6 +40,9 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-/builds/
 /bin/
-/lib/
+*.cd
+*.sdf
+*.ipch
+/ipch/
+/builds/

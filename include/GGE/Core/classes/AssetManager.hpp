@@ -38,6 +38,8 @@ public:
 
 	void DeleteConfigFile(const std::string& theFilename);
 
+	void Cleanup();
+
 private:
 	/// Puntero a App
 	App* mApp;

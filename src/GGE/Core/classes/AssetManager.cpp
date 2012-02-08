@@ -98,6 +98,7 @@ void AssetManager::AddDirectory( const std::string& directory )
 
 	// insert the directory
 	mDirectories.push_back( directory );
+	mApp->mLog << "AssetManager::AddDirectory() Dir=" << directory << std::endl;
 }
 
 void AssetManager::RemoveDirectory( const std::string& directory )
@@ -122,7 +123,7 @@ const ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
 	{
 		if( theFilename == it->first )
 		{
-			mApp->mLog << "AssetManager::GetConfigFile(): " << theFilename << " ya existe" << std::endl;
+			mApp->mLog << "AssetManager::GetConfigFile() ID=" << theFilename << " ya existe" << std::endl;
 			return *it->second;
 		}
 	}
@@ -135,7 +136,7 @@ const ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
 	if( anConfigFile->Read(theFilename))
 	{
 		mConfigFiles[theFilename] = anConfigFile;
-		mApp->mLog << "AssetManager::GetConfigFile(): " << theFilename << std::endl;
+		mApp->mLog << "AssetManager::GetConfigFile() ID=" << theFilename << std::endl;
 		return *mConfigFiles[theFilename];
 	}
 
@@ -147,13 +148,13 @@ const ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
 		if( anConfigFile->Read( (*it) + theFilename ) )
 		{
 			mConfigFiles[theFilename] = anConfigFile;
-			mApp->mLog << "AssetManager::GetConfigFile(): " << theFilename << std::endl;
+			mApp->mLog << "AssetManager::GetConfigFile() ID=" << theFilename << std::endl;
 			return *mConfigFiles[theFilename];
 		}
 
 	}
 
-	mApp->mLog << "AssetManager::GetConfigFile() "<< theFilename 
+	mApp->mLog << "AssetManager::GetConfigFile() ID="<< theFilename 
 		<< " No Encontrado, se crea uno vacío" << std::endl;
 	mConfigFiles[theFilename] = anConfigFile;
 	return *mConfigFiles[theFilename];
@@ -166,8 +167,30 @@ void AssetManager::DeleteConfigFile(const std::string& theFilename)
 	{
 		delete it->second;
 		mConfigFiles.erase(it);
-		mApp->mLog << "AssetManager::DeleteConfigFile() " << theFilename << std::endl;
+		mApp->mLog << "AssetManager::DeleteConfigFile() ID=" << theFilename << std::endl;
 	}
+}
+
+void AssetManager::Cleanup()
+{
+	// Eliminamos todas las imagenes
+	std::map<std::string, sf::Image>::iterator itImages = mImages.begin();
+	while (itImages != mImages.end())
+	{
+		mApp->mLog << "AssetManager::Cleanup() Eliminada imagen con ID=" << itImages->first << std::endl;
+		mImages.erase(itImages++);
+	}
+
+	// Eliminamos todas las Configuraciones
+	std::map<std::string, ConfigReader*>::iterator itConfig = mConfigFiles.begin();
+	while (itConfig != mConfigFiles.end())
+	{
+		mApp->mLog << "AssetManager::Cleanup() Eliminado ConfigFile con ID=" << itConfig->first << std::endl;
+		delete itConfig->second;
+		mConfigFiles.erase(itConfig++);
+	}
+
+	mApp->mLog << "AssetManager::Cleanup() Terminado" << std::endl;
 }
 
 
