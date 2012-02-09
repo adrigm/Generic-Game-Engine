@@ -219,6 +219,61 @@ void AssetManager::DeleteSoundBuffer(const std::string& theFilename)
 		mSounds.erase( it );
 }
 
+sf::Music* AssetManager::GetMusic(const std::string& theFilename)
+{
+	// Check, whether the image already exists
+	for( std::map<std::string, sf::Music*>::const_iterator it = mMusic.begin();
+		 it != mMusic.end(); 
+		 ++it)
+	{
+		if(theFilename == it->first)
+		{
+			mApp->mLog << "AssetManager::GetMusic() " << theFilename << " using existing Music.\n";
+			return it->second;
+		}
+	}
+	
+	// The image doesen't exists. Create it and save it.
+	sf::Music* music = new sf::Music();
+
+	// Search project's main directory
+	if( music->OpenFromFile(mApp->GetExecutableDir() + theFilename ) )
+	{
+		mMusic[theFilename] = music;
+		mApp->mLog << "AssetManager::GetMusic() " << theFilename << " loading Music.\n";
+		return mMusic[theFilename];
+	}
+
+	// If the image has still not been found, search all registered directories
+	for( std::vector< std::string >::iterator it = mDirectories.begin();
+		 it != mDirectories.end();
+		 ++it )
+	{
+		if( music->OpenFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
+		{
+			mMusic[theFilename] = music;
+			mApp->mLog << "AssetManager::GetMusic() " << theFilename << " loading Music.\n";
+			return mMusic[theFilename];
+		}
+
+	}
+
+	mApp->mLog << "AssetManager::GetMusic(): Font was not found. It is filled with an empty music.\n";
+	mMusic[theFilename] = music;
+	return mMusic[theFilename];
+}
+
+void AssetManager::DeleteMusic(const std::string& theFilename)
+{
+	std::map<std::string, sf::Music*>::const_iterator it = mMusic.find(theFilename);
+	if(it != mMusic.end())
+	{
+		delete it->second;
+		mMusic.erase(it);
+		mApp->mLog << "AssetManager::DeleteConfigFile() ID=" << theFilename << std::endl;
+	}
+}
+
 const ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
 {
 	// Check, whether the image already exists
@@ -310,6 +365,16 @@ void AssetManager::Cleanup()
 		mApp->mLog << "AssetManager::Cleanup() Eliminado ConfigFile con ID=" 
 			<< itConfig->first << std::endl;
 		mConfigFiles.erase(itConfig++);
+	}
+
+	// Eliminamos todas la Musica
+	std::map<std::string, sf::Music*>::iterator itMusic = mMusic.begin();
+	while (itMusic != mMusic.end())
+	{
+		//delete itConfig->second;
+		mApp->mLog << "AssetManager::Cleanup() Eliminado ConfigFile con ID=" 
+			<< itMusic->first << std::endl;
+		mMusic.erase(itMusic++);
 	}
 
 	mApp->mLog << "AssetManager::Cleanup() Terminado" << std::endl;

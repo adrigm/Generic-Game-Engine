@@ -29,7 +29,6 @@ private:
 	sf::String text;
 	sf::String otext;
 	sf::Sound sonido;
-	sf::Music musica;
 };
 
 #endif // SCENE_MAIN_HPP

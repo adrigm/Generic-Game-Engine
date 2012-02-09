@@ -43,6 +43,10 @@ public:
 
 	void DeleteSoundBuffer(const std::string& theFilename);
 
+	sf::Music* GetMusic(const std::string& theFilename);
+
+	void DeleteMusic(const std::string& theFilename);
+
 	const ConfigReader& GetConfigFile(const std::string& theFilename);
 
 	void DeleteConfigFile(const std::string& theFilename);
@@ -60,6 +64,8 @@ private:
 	std::map<std::string, sf::Font> mFonts;
 	/// Contenedor de Sonidos
 	std::map<std::string, sf::SoundBuffer> mSounds;
+	/// Contenedor de Musica
+	std::map<std::string, sf::Music*> mMusic;
 	/// Contenedor de archivos de configuración
 	std::map<std::string, ConfigReader*> mConfigFiles;
 

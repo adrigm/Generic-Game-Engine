@@ -29,9 +29,7 @@ void SceneMain::Init()
 	otext.SetColor(sf::Color(0, 0, 0));
 	otext.SetPosition(400, 400);
 	sonido.SetBuffer(mApp->mAssetManager->GetSoundBuffer("sonido.ogg"));
-	musica.OpenFromFile(mApp->GetExecutableDir() + "resources/musica.ogg");
-	musica.SetLoop(true);
-	musica.Play();
+	mApp->mAssetManager->GetMusic("musica.ogg")->Play();
 }
 
 void SceneMain::ReInit()
