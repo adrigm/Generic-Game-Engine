@@ -1,4 +1,4 @@
-#include <GGE/Core/classes/SceneManager.hpp>
+#include <GGE/Core/SceneManager.hpp>
 
 
 namespace GGE

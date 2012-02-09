@@ -2,7 +2,7 @@
 #define SCENE_MENU_HPP
 
 #include <SFML/Graphics.hpp>
-#include <GGE/Core/classes/IScene.hpp>
+#include <GGE/Core/IScene.hpp>
 
 class SceneMenu : public GGE::IScene
 {

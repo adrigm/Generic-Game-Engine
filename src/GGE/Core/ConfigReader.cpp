@@ -2,7 +2,7 @@
 * Provides the ConfigReader class in the GGE namespace which is responsible
 * for providing the reading of configuration files.
 *
-* @file src/GGE/Core/classes/ConfigReader.cpp
+* @file src/GGE/Core/ConfigReader.cpp
 * @author Ryan Lindeman
 * @date 20110101 - Initial Release
 * @date 20110108 - Added GetFloat and ParseFloat
@@ -20,8 +20,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <sstream>
-#include <GGE/Core/classes/App.hpp>
-#include <GGE/Core/classes/ConfigReader.hpp>
+#include <GGE/Core/App.hpp>
+#include <GGE/Core/ConfigReader.hpp>
 
 namespace GGE
 {

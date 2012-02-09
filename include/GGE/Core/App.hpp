@@ -13,9 +13,9 @@
 #include <fstream>
 #include <SFML/Graphics.hpp>
 #include <GGE/Core/Core_types.hpp>
-#include <GGE/Core/classes/IScene.hpp>
-#include <GGE/Core/classes/SceneManager.hpp>
-#include <GGE/Core/classes/AssetManager.hpp>
+#include <GGE/Core/IScene.hpp>
+#include <GGE/Core/SceneManager.hpp>
+#include <GGE/Core/AssetManager.hpp>
 
 namespace GGE
 {

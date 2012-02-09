@@ -18,10 +18,10 @@
 #include <GGE/Config.hpp>
 
 // GGE Core includes
-#include <GGE/Core/classes/App.hpp>
-#include <GGE/Core/classes/AssetManager.hpp>
-#include <GGE/Core/classes/SceneManager.hpp>
-#include <GGE/Core/classes/ConfigReader.hpp>
+#include <GGE/Core/App.hpp>
+#include <GGE/Core/AssetManager.hpp>
+#include <GGE/Core/SceneManager.hpp>
+#include <GGE/Core/ConfigReader.hpp>
 
 #endif // GGE_CORE_HPP_INCLUDED
 

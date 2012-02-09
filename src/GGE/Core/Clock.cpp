@@ -1,4 +1,4 @@
-#include <GGE/Core/classes/Clock.hpp>
+#include <GGE/Core/Clock.hpp>
 
 namespace GGE
 {

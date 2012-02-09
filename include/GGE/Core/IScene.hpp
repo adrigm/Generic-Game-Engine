@@ -13,7 +13,7 @@
 #include <cassert>
 
 #include <GGE/Core/Core_types.hpp>
-#include <GGE/Core/classes/App.hpp>
+#include <GGE/Core/App.hpp>
 
 namespace GGE
 {

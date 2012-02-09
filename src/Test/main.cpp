@@ -6,7 +6,7 @@
  * @date 20110422 - Initial Release
  */
 
-#include <GGE/Core/classes/App.hpp>
+#include <GGE/Core/App.hpp>
 #include "SceneMain.hpp"
 
 int main(int argc, char* argv[])

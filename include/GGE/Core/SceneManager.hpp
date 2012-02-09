@@ -3,7 +3,7 @@
 
 #include <map>
 #include <GGE/Core/Core_types.hpp>
-#include <GGE/Core/classes/IScene.hpp>
+#include <GGE/Core/IScene.hpp>
 
 namespace GGE
 {

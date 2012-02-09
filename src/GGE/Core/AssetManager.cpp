@@ -1,4 +1,4 @@
-#include <GGE/Core/classes/AssetManager.hpp>
+#include <GGE/Core/AssetManager.hpp>
 
  
 namespace GGE

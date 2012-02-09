@@ -1,5 +1,5 @@
-#include <GGE/Core/classes/App.hpp>
-#include <GGE/Core/classes/ConfigReader.hpp>
+#include <GGE/Core/App.hpp>
+#include <GGE/Core/ConfigReader.hpp>
 
 namespace GGE
 {
