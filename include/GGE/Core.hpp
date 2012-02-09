@@ -22,6 +22,7 @@
 #include <GGE/Core/AssetManager.hpp>
 #include <GGE/Core/SceneManager.hpp>
 #include <GGE/Core/ConfigReader.hpp>
+#include <GGE/Core/tmx/tmx.hpp>
 
 #endif // GGE_CORE_HPP_INCLUDED
 

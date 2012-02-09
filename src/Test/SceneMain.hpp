@@ -29,6 +29,7 @@ private:
 	sf::String text;
 	sf::String otext;
 	sf::Sound sonido;
+	GGE::TmxMap map;
 };
 
 #endif // SCENE_MAIN_HPP

@@ -30,6 +30,9 @@ void SceneMain::Init()
 	otext.SetPosition(400, 400);
 	sonido.SetBuffer(mApp->mAssetManager->GetSoundBuffer("sonido.ogg"));
 	mApp->mAssetManager->GetMusic("musica.ogg")->Play();
+	map.LoadFromFile(mApp->GetExecutableDir() + "resources/mapa.tmx");
+	//std::cout << map.mProperties.GetProperty("dias") << std::endl;
+	std::cout << map.mTilesets[0].GetTileProperty(1, "tile") << std::endl;
 }
 
 void SceneMain::ReInit()
