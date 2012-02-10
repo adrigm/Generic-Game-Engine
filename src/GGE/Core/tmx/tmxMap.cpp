@@ -145,6 +145,14 @@ bool TmxMap::LoadFromFile(std::string& theFilename)
 			anLayer.SetWidth(node.attribute("width").as_uint());
 			anLayer.SetHeight(node.attribute("height").as_uint());
 
+			// Obtenemos la opacidad
+			if (node.attribute("opacity"))
+				anLayer.SetOpacity(node.attribute("opacity").as_double());
+
+			// Obtenemos si es visible
+			if (node.attribute("visible"))
+				anLayer.SetOpacity(node.attribute("visible").as_bool());
+
 			// Obtenemos el nodo data
 			pugi::xml_node nodeData = node.child("data");
 			
@@ -178,12 +186,93 @@ bool TmxMap::LoadFromFile(std::string& theFilename)
 
 		if (anNode == "objectgroup")
 		{
+			// Creamos un TmxObjectGroup
+			TmxObjectGroup anObjectGroup;
 
+			// Obtenemos el nombre de la capa
+			anObjectGroup.SetName(node.attribute("name").value());
+
+			// Obtenemos el ancho y el alto
+			anObjectGroup.SetWidth(node.attribute("width").as_uint());
+			anObjectGroup.SetHeight(node.attribute("height").as_uint());
+
+			// Obtenemos el color
+			anObjectGroup.SetColor(node.attribute("color").value());
+
+			// Obtenemos la opacidad
+			if (node.attribute("opacity"))
+				anObjectGroup.SetOpacity(node.attribute("opacity").as_double());
+
+			// Obtenemos si es visible
+			if (node.attribute("visible"))
+				anObjectGroup.SetOpacity(node.attribute("visible").as_bool());
+
+			// Obtenemos el nodo de propiedades
+			pugi::xml_node nodeProperties = node.child("properties");
+			
+			// Recorremos las propiedades
+			for (pugi::xml_node Layerprop = nodeProperties.first_child(); 
+				Layerprop; Layerprop = Layerprop.next_sibling())
+			{
+				std::string name = Layerprop.attribute("name").value();
+				std::string value = Layerprop.attribute("value").value();
+				anObjectGroup.mProperties.SetProperty(name, value);
+			}
+
+
+			// Recorremos los nodos hijos buscando objetos
+			for (pugi::xml_node nodeObject = node.first_child(); 
+				nodeObject; nodeObject = nodeObject.next_sibling())
+			{
+				std::string nodeName = nodeObject.name();
+				if (nodeName == "object")
+				{
+					// Creamos un object
+					TmxObject object;
+
+					// Obtenemos el nombre del objeto
+					if (nodeObject.attribute("name"))
+						object.SetName(nodeObject.attribute("name").value());
+
+					// Obtenemos el tipo del objeto
+					if (nodeObject.attribute("type"))
+						object.SetType(nodeObject.attribute("type").value());
+
+					// Obtenemos la PosX del objeto
+					if (nodeObject.attribute("x"))
+						object.SetPosX(nodeObject.attribute("x").as_uint());
+
+					// Obtenemos la PosY del objeto
+					if (nodeObject.attribute("y"))
+						object.SetPosY(nodeObject.attribute("y").as_uint());
+
+					// Obtenemos el width del objeto
+					if (nodeObject.attribute("width"))
+						object.SetWidth(nodeObject.attribute("width").as_uint());
+
+					// Obtenemos el height del objeto
+					if (nodeObject.attribute("height"))
+						object.SetHeight(nodeObject.attribute("height").as_uint());
+
+					// Obtenemos el tile del objeto
+					if (nodeObject.attribute("gid"))
+						object.SetTile(nodeObject.attribute("gid").as_uint());
+
+					// Obtenemos el nodo de propiedades
+					pugi::xml_node nodeProperties = nodeObject.child("properties");
+			
+					// Recorremos las propiedades
+					for (pugi::xml_node Layerprop = nodeProperties.first_child(); 
+						Layerprop; Layerprop = Layerprop.next_sibling())
+					{
+						std::string name = Layerprop.attribute("name").value();
+						std::string value = Layerprop.attribute("value").value();
+						object.mProperties.SetProperty(name, value);
+					}
+				}
+			}
 		}
 	}
-
-	//std::cout << mTilesets[0].GetTileProperty(1, "tile") << std::endl;
-	//std::cout << mTilesets[1].GetWidth() << std::endl;
 }
 
 } // Namespace GGE

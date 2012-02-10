@@ -143,4 +143,24 @@ std::string TmxLayer::GetData() const
 	return mData;
 }
 
+void TmxLayer::SetVisible(bool theVisible)
+{
+	mVisible = theVisible;
+}
+
+bool TmxLayer::GetVisible() const
+{
+	return mVisible;
+}
+
+void TmxLayer::SetOpacity(const double theOpacity)
+{
+	mOpacity = theOpacity;
+}
+
+double TmxLayer::GetOpacity() const
+{
+	return mOpacity;
+}
+
 } // Namespace GGE

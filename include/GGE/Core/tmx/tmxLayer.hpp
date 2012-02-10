@@ -39,6 +39,12 @@ public:
 	void SetData(const std::string& theData);
 	std::string GetData() const;
 
+	void SetVisible(bool theVisible = true);
+	bool GetVisible() const;
+
+	void SetOpacity(const double theOpacity = 1.0);
+	double GetOpacity() const;
+
 private:
 	/// Nombre de la capa
 	std::string mName;
@@ -52,6 +58,10 @@ private:
 	std::string mCompression;
 	/// Cadena de datos de tiles
 	std::string mData;
+	// Visibilidad
+	bool mVisible;
+	// Opacidad
+	double mOpacity;
 
 };
 
