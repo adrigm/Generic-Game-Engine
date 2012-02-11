@@ -15,6 +15,7 @@
 #include <GGE/Core/Core_types.hpp>
 #include <GGE/Core/App.hpp>
 #include <GGE/Core/ConfigReader.hpp>
+#include <GGE/Core/tmx/tmx.hpp>
  
 namespace GGE
 {
@@ -51,6 +52,9 @@ public:
 
 	void DeleteConfigFile(const std::string& theFilename);
 
+	const TmxMap& GetTmxMap(const std::string& theFilename);
+	void DeleteTmxMap(const std::string& theFilename);
+
 	void Cleanup();
 
 private:
@@ -68,6 +72,8 @@ private:
 	std::map<std::string, sf::Music*> mMusic;
 	/// Contenedor de archivos de configuración
 	std::map<std::string, ConfigReader*> mConfigFiles;
+	/// Contenedor de archivos TMX
+	std::map<std::string, TmxMap> mTmxMap;
 
 	AssetManager(const AssetManager&);
 	AssetManager& operator =( const AssetManager&);

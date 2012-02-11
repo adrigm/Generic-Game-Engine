@@ -29,6 +29,7 @@ private:
 	Hero hero;
 	int frame;
 	float time;
+	GGE::TmxMap map;
 };
 
 #endif // SCENE_MAIN_HPP

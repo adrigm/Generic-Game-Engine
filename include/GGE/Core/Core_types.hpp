@@ -52,6 +52,14 @@ namespace GGE
   class SceneManager;
   class IScene;
   class Actor;
+
+  /// Foward declare TmxMap
+  class TmxProperties;
+  class TmxTileset;
+  class TmxLayer;
+  class TmxObject;
+  class TmxObjectGroup;
+  class TmxMap;
  
   /// Declare Action ID typedef which is used for identifying Action objects
   typedef std::string typeActionID;

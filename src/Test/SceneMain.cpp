@@ -16,11 +16,13 @@ void SceneMain::Init()
 {
 	mApp->mSceneManager->AddScene(new SceneMenu("Menu", mApp));
 	mApp->mAssetManager->AddDirectory("resources/");
+	map = mApp->mAssetManager->GetTmxMap("mapa.tmx");
 	hero.SetImage(mApp->mAssetManager->GetImage("sprite.png"));
 	hero.SetGrid(4, 4);
 	frame = 1;
 	time = 0;
 	//hero.SetCenter(hero.GetWidth()/2, hero.GetHeight());
+	//std::cout << map.mTilesets[1].GetFirstGid() << std::endl;
 }
 
 void SceneMain::ReInit()
@@ -42,7 +44,7 @@ void SceneMain::Events(sf::Event theEvent)
 void SceneMain::Update()
 {
 	hero.Update();
-	std::cout << hero.GetPosition().x << std::endl;
+	//std::cout << hero.GetPosition().x << std::endl;
 }
 
 void SceneMain::Draw()

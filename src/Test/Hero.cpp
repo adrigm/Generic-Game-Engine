@@ -169,19 +169,31 @@ void Hero::Quiet()
 {
 	if (mApp->mInput.IsKeyDown(sf::Key::Right))
 	{
-		this->ChangeStatus(WALK_RIGHT);
+		if (mStatus == QUIET_RIGHT)
+			this->ChangeStatus(WALK_RIGHT);
+		else
+			this->ChangeStatus(QUIET_RIGHT);
 	}
 	else if (mApp->mInput.IsKeyDown(sf::Key::Left))
 	{
-		this->ChangeStatus(WALK_LEFT);
+		if (mStatus == QUIET_LEFT)
+			this->ChangeStatus(WALK_LEFT);
+		else
+			this->ChangeStatus(QUIET_LEFT);
 	}
 	else if (mApp->mInput.IsKeyDown(sf::Key::Up))
 	{
-		this->ChangeStatus(WALK_UP);
+		if (mStatus == QUIET_UP)
+			this->ChangeStatus(WALK_UP);
+		else
+			this->ChangeStatus(QUIET_UP);
 	}
 	else if (mApp->mInput.IsKeyDown(sf::Key::Down))
 	{
-		this->ChangeStatus(WALK_DOWN);
+		if (mStatus == QUIET_DOWN)
+			this->ChangeStatus(WALK_DOWN);
+		else
+			this->ChangeStatus(QUIET_DOWN);
 	}
 	this->NextFrame();
 }

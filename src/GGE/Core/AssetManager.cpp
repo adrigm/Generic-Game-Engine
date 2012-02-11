@@ -380,5 +380,57 @@ void AssetManager::Cleanup()
 	mApp->mLog << "AssetManager::Cleanup() Terminado" << std::endl;
 }
 
+const GGE::TmxMap& AssetManager::GetTmxMap(const std::string& theFilename)
+{
+	// Check, whether the image already exists
+	for( std::map<std::string, GGE::TmxMap>::const_iterator it = mTmxMap.begin();
+		 it != mTmxMap.end(); 
+		 ++it)
+	{
+		if(theFilename == it->first)
+		{
+			mApp->mLog << "AssetManager::GetTmxMap() " << theFilename << " using existing TmxMap.\n";
+			return it->second;
+		}
+	}
+	
+	// The image doesen't exists. Create it and save it.
+	GGE::TmxMap map;
+	map.RegisterApp(mApp);
+
+	// Search project's main directory
+	if( map.LoadFromFile(mApp->GetExecutableDir() + theFilename ) )
+	{
+		mTmxMap[theFilename] = map;
+		mApp->mLog << "AssetManager::GetTmxMap() " << theFilename << " loading TmxMap.\n";
+		return mTmxMap[theFilename];
+	}
+
+	// If the image has still not been found, search all registered directories
+	for( std::vector< std::string >::iterator it = mDirectories.begin();
+		 it != mDirectories.end();
+		 ++it )
+	{
+		if( map.LoadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
+		{
+			mTmxMap[theFilename] = map;
+			mApp->mLog << "AssetManager::GetTmxMap() " << theFilename << " loading TmxMap.\n";
+			return mTmxMap[theFilename];
+		}
+
+	}
+
+	mApp->mLog << "AssetManager::GetTmxMap(): TmxMap was not found. It is filled with an empty image.\n";
+	mTmxMap[theFilename] = map;
+	return mTmxMap[theFilename];
+}
+
+void AssetManager::DeleteTmxMap(const std::string& theFilename)
+{
+	std::map<std::string, GGE::TmxMap>::const_iterator it = mTmxMap.find( theFilename );
+	if( it != mTmxMap.end() )
+		mTmxMap.erase( it );
+}
+
 
 } // namespace GGE
