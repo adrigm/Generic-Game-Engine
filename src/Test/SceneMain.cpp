@@ -18,6 +18,7 @@ void SceneMain::Init()
 	mApp->mAssetManager->AddDirectory("resources/");
 	map = mApp->mAssetManager->GetTmxMap("mapa.tmx");
 	hero.SetImage(mApp->mAssetManager->GetImage("sprite.png"));
+	mApp->mAssetManager->GetImage("sprite.png").SetSmooth(false);
 	hero.SetGrid(4, 4);
 	frame = 1;
 	time = 0;

@@ -30,17 +30,17 @@ public:
 
 	void RemoveDirectory(const std::string& theDitectory);
 
-	const sf::Image& GetImage(const std::string& theFilename);
+	sf::Image& GetImage(const std::string& theFilename);
 
 	void DeleteImage(const sf::Image& theImage);
 
 	void DeleteImage(const std::string& theFilename);
 
-	const sf::Font& GetFont(const std::string& theFilename);
+	sf::Font& GetFont(const std::string& theFilename);
 
 	void DeleteFont(const std::string& theFilename);
 
-	const sf::SoundBuffer& GetSoundBuffer(const std::string& theFilename);
+	sf::SoundBuffer& GetSoundBuffer(const std::string& theFilename);
 
 	void DeleteSoundBuffer(const std::string& theFilename);
 
@@ -48,11 +48,11 @@ public:
 
 	void DeleteMusic(const std::string& theFilename);
 
-	const ConfigReader& GetConfigFile(const std::string& theFilename);
+	ConfigReader& GetConfigFile(const std::string& theFilename);
 
 	void DeleteConfigFile(const std::string& theFilename);
 
-	const TmxMap& GetTmxMap(const std::string& theFilename);
+	TmxMap& GetTmxMap(const std::string& theFilename);
 	void DeleteTmxMap(const std::string& theFilename);
 
 	void Cleanup();

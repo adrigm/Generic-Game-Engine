@@ -25,7 +25,7 @@ AssetManager::~AssetManager()
 void AssetManager::AddDirectory( const std::string& directory )
 {
 	// Check whether the path already exists
-	for( std::vector<std::string>::const_iterator it  = mDirectories.begin();
+	for( std::vector<std::string>::iterator it  = mDirectories.begin();
 		 it != mDirectories.end();
 		++it )
 	{
@@ -41,7 +41,7 @@ void AssetManager::AddDirectory( const std::string& directory )
 
 void AssetManager::RemoveDirectory( const std::string& directory )
 {
-	for( std::vector<std::string>::const_iterator it  = mDirectories.begin();
+	for( std::vector<std::string>::iterator it  = mDirectories.begin();
 		 it != mDirectories.end(); )
 	{
 		// The path exists. So it isn't necessary to add id once more.
@@ -52,10 +52,10 @@ void AssetManager::RemoveDirectory( const std::string& directory )
 	}
 }
 
-const sf::Image& AssetManager::GetImage( const std::string& theFilename )
+sf::Image& AssetManager::GetImage( const std::string& theFilename )
 {
 	// Check, whether the image already exists
-	for( std::map<std::string, sf::Image>::const_iterator it = mImages.begin();
+	for( std::map<std::string, sf::Image>::iterator it = mImages.begin();
 		 it != mImages.end(); 
 		 ++it)
 	{
@@ -98,7 +98,7 @@ const sf::Image& AssetManager::GetImage( const std::string& theFilename )
 
 void AssetManager::DeleteImage( const sf::Image& image )
 {
-	for(std::map<std::string, sf::Image>::const_iterator it = mImages.begin();
+	for(std::map<std::string, sf::Image>::iterator it = mImages.begin();
 		 it != mImages.end(); 
 		 ++it)
 	{
@@ -112,15 +112,15 @@ void AssetManager::DeleteImage( const sf::Image& image )
 
 void AssetManager::DeleteImage(const std::string& theFilename)
 {
-	std::map<std::string, sf::Image>::const_iterator it = mImages.find( theFilename );
+	std::map<std::string, sf::Image>::iterator it = mImages.find( theFilename );
 	if( it != mImages.end() )
 		mImages.erase( it );
 }
 
-const sf::Font& AssetManager::GetFont(const std::string& theFilename)
+sf::Font& AssetManager::GetFont(const std::string& theFilename)
 {
 	// Check, whether the image already exists
-	for( std::map<std::string, sf::Font>::const_iterator it = mFonts.begin();
+	for( std::map<std::string, sf::Font>::iterator it = mFonts.begin();
 		 it != mFonts.end(); 
 		 ++it)
 	{
@@ -163,15 +163,15 @@ const sf::Font& AssetManager::GetFont(const std::string& theFilename)
 
 void AssetManager::DeleteFont(const std::string& theFilename)
 {
-	std::map<std::string, sf::Font>::const_iterator it = mFonts.find( theFilename );
+	std::map<std::string, sf::Font>::iterator it = mFonts.find( theFilename );
 	if( it != mFonts.end() )
 		mFonts.erase( it );
 }
 
-const sf::SoundBuffer& AssetManager::GetSoundBuffer(const std::string& theFilename)
+sf::SoundBuffer& AssetManager::GetSoundBuffer(const std::string& theFilename)
 {
 	// Check, whether the image already exists
-	for( std::map<std::string, sf::SoundBuffer>::const_iterator it = mSounds.begin();
+	for( std::map<std::string, sf::SoundBuffer>::iterator it = mSounds.begin();
 		 it != mSounds.end(); 
 		 ++it)
 	{
@@ -214,7 +214,7 @@ const sf::SoundBuffer& AssetManager::GetSoundBuffer(const std::string& theFilena
 
 void AssetManager::DeleteSoundBuffer(const std::string& theFilename)
 {
-	std::map<std::string, sf::SoundBuffer>::const_iterator it = mSounds.find( theFilename );
+	std::map<std::string, sf::SoundBuffer>::iterator it = mSounds.find( theFilename );
 	if( it != mSounds.end() )
 		mSounds.erase( it );
 }
@@ -222,7 +222,7 @@ void AssetManager::DeleteSoundBuffer(const std::string& theFilename)
 sf::Music* AssetManager::GetMusic(const std::string& theFilename)
 {
 	// Check, whether the image already exists
-	for( std::map<std::string, sf::Music*>::const_iterator it = mMusic.begin();
+	for( std::map<std::string, sf::Music*>::iterator it = mMusic.begin();
 		 it != mMusic.end(); 
 		 ++it)
 	{
@@ -265,7 +265,7 @@ sf::Music* AssetManager::GetMusic(const std::string& theFilename)
 
 void AssetManager::DeleteMusic(const std::string& theFilename)
 {
-	std::map<std::string, sf::Music*>::const_iterator it = mMusic.find(theFilename);
+	std::map<std::string, sf::Music*>::iterator it = mMusic.find(theFilename);
 	if(it != mMusic.end())
 	{
 		delete it->second;
@@ -274,10 +274,10 @@ void AssetManager::DeleteMusic(const std::string& theFilename)
 	}
 }
 
-const ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
+ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
 {
 	// Check, whether the image already exists
-	for( std::map<std::string, ConfigReader*>::const_iterator it = mConfigFiles.begin();
+	for( std::map<std::string, ConfigReader*>::iterator it = mConfigFiles.begin();
 		 it != mConfigFiles.end(); 
 		 ++it)
 	{
@@ -322,7 +322,7 @@ const ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
 
 void AssetManager::DeleteConfigFile(const std::string& theFilename)
 {
-	std::map<std::string, ConfigReader*>::const_iterator it = mConfigFiles.find(theFilename);
+	std::map<std::string, ConfigReader*>::iterator it = mConfigFiles.find(theFilename);
 	if(it != mConfigFiles.end())
 	{
 		delete it->second;
@@ -380,10 +380,10 @@ void AssetManager::Cleanup()
 	mApp->mLog << "AssetManager::Cleanup() Terminado" << std::endl;
 }
 
-const GGE::TmxMap& AssetManager::GetTmxMap(const std::string& theFilename)
+GGE::TmxMap& AssetManager::GetTmxMap(const std::string& theFilename)
 {
 	// Check, whether the image already exists
-	for( std::map<std::string, GGE::TmxMap>::const_iterator it = mTmxMap.begin();
+	for( std::map<std::string, GGE::TmxMap>::iterator it = mTmxMap.begin();
 		 it != mTmxMap.end(); 
 		 ++it)
 	{
@@ -427,7 +427,7 @@ const GGE::TmxMap& AssetManager::GetTmxMap(const std::string& theFilename)
 
 void AssetManager::DeleteTmxMap(const std::string& theFilename)
 {
-	std::map<std::string, GGE::TmxMap>::const_iterator it = mTmxMap.find( theFilename );
+	std::map<std::string, GGE::TmxMap>::iterator it = mTmxMap.find( theFilename );
 	if( it != mTmxMap.end() )
 		mTmxMap.erase( it );
 }
