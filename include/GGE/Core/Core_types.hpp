@@ -47,10 +47,11 @@ namespace GGE
 
   // Forward declare GGE classes provided
   class App;
-  class AssetManager;
   class ConfigReader;
+  class AssetManager;
   class SceneManager;
   class IScene;
+  class Actor;
  
   /// Declare Action ID typedef which is used for identifying Action objects
   typedef std::string typeActionID;
