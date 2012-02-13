@@ -60,6 +60,10 @@ namespace GGE
   class TmxObject;
   class TmxObjectGroup;
   class TmxMap;
+
+  // Foward declare Map
+  class Tileset;
+  class Map;
  
   /// Declare Action ID typedef which is used for identifying Action objects
   typedef std::string typeActionID;

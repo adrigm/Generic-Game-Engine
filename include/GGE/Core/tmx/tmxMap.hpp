@@ -30,6 +30,14 @@ public:
 	void RegisterApp(App* theApp);
 	bool LoadFromFile(std::string& theFilename);
 
+	double GetVersion() const;
+	std::string GetOrientation() const;
+	GGE::Uint32 GetWidth() const;
+	GGE::Uint32 GetHeight() const;
+	GGE::Uint32 GetTileWidth() const;
+	GGE::Uint32 GetTileHeight() const;
+	
+
 private:
 	/// Puntero a la App
 	App* mApp;

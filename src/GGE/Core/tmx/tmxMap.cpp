@@ -275,4 +275,34 @@ bool TmxMap::LoadFromFile(std::string& theFilename)
 	}
 }
 
+double TmxMap::GetVersion() const
+{
+	return mVersion;
+}
+
+std::string TmxMap::GetOrientation() const
+{
+	return mOrientation;
+}
+
+GGE::Uint32 TmxMap::GetWidth() const
+{
+	return mWidth;
+}
+
+GGE::Uint32 TmxMap::GetHeight() const
+{
+	return mHeight;
+}
+
+GGE::Uint32 TmxMap::GetTileWidth() const
+{
+	return mTileWidth;
+}
+
+GGE::Uint32 TmxMap::GetTileHeight() const
+{
+	return mTileHeight;
+}
+
 } // Namespace GGE

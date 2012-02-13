@@ -8,6 +8,7 @@ Actor::Actor() :
 	mRows(1),
 	mCols(1)
 {
+	mAbsCord = this->GetPosition();
 }
 
 Actor::~Actor()
