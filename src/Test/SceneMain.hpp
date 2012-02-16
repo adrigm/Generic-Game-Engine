@@ -26,11 +26,8 @@ public:
 	virtual void Cleanup();
 
 private:
-	Hero hero;
-	int frame;
-	float time;
-	GGE::Map map;
-	sf::Sprite rejilla;
+	Hero heroe;
+	GGE::Map mapa;
 };
 
 #endif // SCENE_MAIN_HPP

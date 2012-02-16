@@ -5,7 +5,10 @@ namespace GGE
 {
 
 Map::Map(App* theApp) :
-	mApp(theApp)
+	mApp(theApp),
+	mScroll(false),
+	correctionX(0),
+	correctionY(0)
 {
 }
 
@@ -33,54 +36,50 @@ bool Map::Load(TmxMap& theTmx)
 
 void Map::Update()
 {
-	// Obetenemos la posicion desde la que se mide el Scroll.
-	sf::Vector2f pos;
-	pos.x = mPlayer->GetPosition().x;
-	pos.y = mPlayer->GetPosition().y;
-	
-	// Obtenemos las esquinas de la pantalla
-	initial = MouseMap(0, 0);
-	limit_bottom = MouseMap(0, mApp->mWindow.GetHeight());
-	limit_right = MouseMap(mApp->mWindow.GetWidth(), 0);
-	
-
-	// Comprobamos si tenemos que añadir una linea mas de tiles al final de filas y columnas
-	if (limit_right.x >= mWidth)
-		correctionX = 0;
-	else
-		correctionX = 1;
-
-	if (limit_bottom.y >= mHeight)
-		correctionY = 0;
-	else
-		correctionY = 1;
-
-	// Comprobamos los bordes de los mapas para detener el Scroll
-	// Eje X
-	if (pos.x < mApp->mWindow.GetWidth() / 2)
-	{
-		pos.x = mApp->mWindow.GetWidth() / 2;
-	}
-	else if (pos.x > mWidth * mTileWidth - mApp->mWindow.GetWidth() / 2)
-	{
-		pos.x = mWidth * mTileWidth - mApp->mWindow.GetWidth() / 2;
-	}
-	// Eje y
-	if (pos.y < mApp->mWindow.GetHeight() / 2)
-	{
-		pos.y = mApp->mWindow.GetHeight() / 2;
-	}
-	else if (pos.y > mHeight * mTileHeight - mApp->mWindow.GetHeight() / 2)
-	{
-		pos.y = mHeight * mTileHeight - mApp->mWindow.GetHeight() / 2;
-	}
-	
-	// Establecemos la nueva vista
-	vis.SetCenter(pos);
 }
 
 void Map::Draw()
 {
+	// Obtenemos las esquinas de la pantalla
+	initial = MouseMap(0, 0);
+	limit_bottom = MouseMap(0, mApp->mWindow.GetHeight());
+	limit_right = MouseMap(mApp->mWindow.GetWidth(), 0);
+
+	if (mScroll)
+	{
+		// Obetenemos la posicion desde la que se mide el Scroll.
+		sf::Vector2f pos;
+		pos.x = mPlayer->GetPosition().x;
+		pos.y = mPlayer->GetPosition().y;
+
+		// Comprobamos si tenemos que añadir una linea mas de tiles al final de filas y columnas
+		if (limit_right.x >= mWidth)
+			correctionX = 0;
+		else
+			correctionX = 1;
+
+		if (limit_bottom.y >= mHeight)
+			correctionY = 0;
+		else
+			correctionY = 1;
+
+		// Comprobamos los bordes de los mapas para detener el Scroll
+		// Eje X
+		if (pos.x < mApp->mWindow.GetWidth() / 2)
+			pos.x = mApp->mWindow.GetWidth() / 2;
+		else if (pos.x > mWidth * mTileWidth - mApp->mWindow.GetWidth() / 2)
+			pos.x = mWidth * mTileWidth - mApp->mWindow.GetWidth() / 2;
+		// Eje y
+		if (pos.y < mApp->mWindow.GetHeight() / 2)
+			pos.y = mApp->mWindow.GetHeight() / 2;
+		else if (pos.y > mHeight * mTileHeight - mApp->mWindow.GetHeight() / 2)
+			pos.y = mHeight * mTileHeight - mApp->mWindow.GetHeight() / 2;
+	
+		// Establecemos la nueva vista
+		vis.SetCenter(pos);
+	}
+
+	// Dibujamos los tilesets
 	for(int l = 0; l < mData.size(); l++)
 	{
 		for(int r = initial.y; r < limit_bottom.y+correctionY; r++)
@@ -104,11 +103,21 @@ sf::Vector2f Map::Plot(int TheCol, int TheRow)
 
 sf::Vector2f Map::MouseMap(int x, int y)
 {
-	sf::Vector2f vector;
-	vector = mApp->mWindow.ConvertCoords(x, y);
-	vector.x = (int)(vector.x / mTileWidth);
-	vector.y = (int)(vector.y / mTileHeight);
-	return vector;
+	if (mScroll)
+	{
+		sf::Vector2f vector;
+		vector = mApp->mWindow.ConvertCoords(x, y);
+		vector.x = (int)(vector.x / mTileWidth);
+		vector.y = (int)(vector.y / mTileHeight);
+		return vector;
+	}
+	else
+	{
+		sf::Vector2f vector;
+		vector.x = (int)(x / mTileWidth);
+		vector.y = (int)(y / mTileHeight);
+		return vector;
+	}
 }
 
 void Map::SetScrollParallax(GGE::Actor& thePlayer)
@@ -117,6 +126,17 @@ void Map::SetScrollParallax(GGE::Actor& thePlayer)
 	vis = mApp->mWindow.GetDefaultView();
 	vis.SetCenter(mPlayer->GetPosition());
 	mApp->mWindow.SetView(vis);
+	mScroll = true;
+}
+
+GGE::Uint32 Map::GetTile(int theLayer, int theRow, int theCol)
+{
+	return mData[theLayer][theRow][theCol];
+}
+
+void Map::SetTile(int theLayer, int theRow, int theCol, int theValue)
+{
+	mData[theLayer][theRow][theCol] = theValue;
 }
 
 } // Namespace GGE

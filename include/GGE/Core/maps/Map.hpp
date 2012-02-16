@@ -22,6 +22,9 @@ public:
 
 	void SetScrollParallax(GGE::Actor& thePlayer);
 
+	GGE::Uint32 GetTile(int theLayer, int theRow, int theCol);
+	void SetTile(int theLayer, int theRow, int theCol, int theValue);
+
 	sf::Vector2f Plot(int TheCol, int TheRow);
 	sf::Vector2f MouseMap(int x, int y);
 	
@@ -44,8 +47,6 @@ private:
 	std::vector<std::vector<std::vector<GGE::Uint32> > > mData;
 	/// Puntero al Objeto Player
 	GGE::Actor* mPlayer;
-	// Scroll
-	sf::Vector2f mScroll;
 	// view
 	sf::View vis;
 	sf::Vector2f initial;
@@ -53,6 +54,7 @@ private:
 	sf::Vector2f limit_right;
 	int correctionX;
 	int correctionY;
+	bool mScroll;
 };
 
 } // Namespace GGE
