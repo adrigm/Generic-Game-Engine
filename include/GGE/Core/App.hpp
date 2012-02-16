@@ -67,7 +67,7 @@ public:
 	 * Pone en funcionamiento la aplicación. Se encarga de llamar a los métodos
 	 * Preinit, Init, loop y CleanUp
 	 *
-	 * @return Devuel el código de salida de la aplicación
+	 * @return Devuelve el código de salida de la aplicación
 	 */
 	int Run(void);
 
@@ -77,7 +77,13 @@ public:
 	 * @return true si la apicación se está ejecutando
 	 */
 	bool IsRunning(void) const;
-	
+
+	/**
+	 * Gets the update time.
+	 *
+	 * @return	The update time.
+	 */
+
 	float GetUpdateTime(void) const;
 
 	/**

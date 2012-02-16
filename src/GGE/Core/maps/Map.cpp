@@ -41,9 +41,9 @@ void Map::Update()
 void Map::Draw()
 {
 	// Obtenemos las esquinas de la pantalla
-	initial = MouseMap(0, 0);
-	limit_bottom = MouseMap(0, mApp->mWindow.GetHeight());
-	limit_right = MouseMap(mApp->mWindow.GetWidth(), 0);
+	sf::Vector2f initial = MouseMap(0, 0);
+	sf::Vector2f limit_bottom = MouseMap(0, mApp->mWindow.GetHeight());
+	sf::Vector2f limit_right = MouseMap(mApp->mWindow.GetWidth(), 0);
 
 	if (mScroll)
 	{
@@ -140,3 +140,9 @@ void Map::SetTile(int theLayer, int theRow, int theCol, int theValue)
 }
 
 } // Namespace GGE
+
+
+sf::Vector2f GGE::Map::Plot(int TheCol, int TheRow)
+{
+}
+

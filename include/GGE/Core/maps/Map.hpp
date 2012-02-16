@@ -23,8 +23,19 @@ public:
 	void SetScrollParallax(GGE::Actor& thePlayer);
 
 	GGE::Uint32 GetTile(int theLayer, int theRow, int theCol);
+
+	/**
+	 * Sets a tile.
+	 *
+	 * @param	theLayer	the layer.
+	 * @param	theRow  	the row.
+	 * @param	theCol  	the col.
+	 * @param	theValue	the value.
+	 */
+
 	void SetTile(int theLayer, int theRow, int theCol, int theValue);
 
+	
 	sf::Vector2f Plot(int TheCol, int TheRow);
 	sf::Vector2f MouseMap(int x, int y);
 	
@@ -49,9 +60,7 @@ private:
 	GGE::Actor* mPlayer;
 	// view
 	sf::View vis;
-	sf::Vector2f initial;
-	sf::Vector2f limit_bottom;
-	sf::Vector2f limit_right;
+
 	int correctionX;
 	int correctionY;
 	bool mScroll;
