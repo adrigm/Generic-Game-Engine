@@ -103,7 +103,7 @@ void App::PreInit()
  
 	// Use our default configuration file to obtain the initial window settings
 	anConfig.RegisterApp(this);  // For logging purposes, let ConfigReader know about us
-	anConfig.Read(this->GetExecutableDir() + "resources/window.cfg"); // Read in our window settings
+	anConfig.Read(this->GetExecutableDir() + "window.cfg"); // Read in our window settings
  
 	// Are we in Fullscreen mode?
 	if(anConfig.GetBool("window","fullscreen", false))

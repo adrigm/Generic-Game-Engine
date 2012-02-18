@@ -58,7 +58,7 @@ void Tileset::Init(TmxMap* TheTmx)
 	}
 }
 
-void Tileset::Draw(int theIndx, sf::Vector2f thePos)
+void Tileset::Draw(int theIndx, sf::Vector2i thePos)
 {
 	// Numero del tileset del indice indicado
 	int numTileset = this->GetNumTileset(theIndx);
@@ -67,7 +67,7 @@ void Tileset::Draw(int theIndx, sf::Vector2f thePos)
 		// Seleccionamos el tileset
 		mImages[numTileset]->SetSubRect(mRects[theIndx]);
 		// Establecemos la posicion en la que se dibuja
-		mImages[numTileset]->SetPosition(thePos);
+		mImages[numTileset]->SetPosition(thePos.x, thePos.y);
 		// Dibujemos la imagen
 		mApp->mWindow.Draw(*mImages[numTileset]);
 	}

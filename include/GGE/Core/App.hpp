@@ -79,7 +79,7 @@ public:
 	bool IsRunning(void) const;
 
 	/**
-	 * Gets the update time.
+	 * Obtiene el tiempo pasado en cada ciclo del programa.
 	 *
 	 * @return	The update time.
 	 */
@@ -87,7 +87,7 @@ public:
 	float GetUpdateTime(void) const;
 
 	/**
-	 * Para la aplicacion con el código de salida indicado
+	 * Detiene la aplicacion con el código de salida indicado
 	 *
 	 * @param the_exit_code Código de salida de la aplicación
 	 */

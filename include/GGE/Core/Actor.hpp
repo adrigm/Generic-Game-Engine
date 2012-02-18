@@ -13,6 +13,7 @@ class Actor : public sf::Sprite
 public:
 	Actor();
 	~Actor();
+	
 
 	void SetGrid(const GGE::Uint32 theRows = 1, const GGE::Uint32 theCols = 1);
 	void SelectGid(const GGE::Uint32 theRows = 1, const GGE::Uint32 theCols = 1);

@@ -24,29 +24,19 @@ public:
 
 	GGE::Uint32 GetTile(int theLayer, int theRow, int theCol);
 
-	/**
-	 * Sets a tile.
-	 *
-	 * @param	theLayer	the layer.
-	 * @param	theRow  	the row.
-	 * @param	theCol  	the col.
-	 * @param	theValue	the value.
-	 */
-
 	void SetTile(int theLayer, int theRow, int theCol, int theValue);
 
-	
-	sf::Vector2f Plot(int TheCol, int TheRow);
-	sf::Vector2f MouseMap(int x, int y);
+	sf::Vector2i Plot(int TheCol, int TheRow);
+	sf::Vector2i MouseMap(int x, int y);
 	
 private:
 	/// Puntero a la aplicacion
 	App* mApp;
 	/// Fichero TMX
 	TmxMap* mTmx;
-	/// Ancho del mapa
+	/// Número de columnas de tiles del mapa
 	GGE::Uint32 mWidth;
-	/// Alto del mapa;
+	/// Numero de filas de tiles del mapa
 	GGE::Uint32 mHeight;
 	/// Ancho de los tiles
 	GGE::Uint32 mTileWidth;

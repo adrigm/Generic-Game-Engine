@@ -20,15 +20,20 @@ public:
 	void Update();
 
 	void SetDefaultCamera();
+
 	void SetRPGCamera(Map& theMap, Actor& theActor);
 	void SetRTSCamera();
 
 private:
 	/// Puntero a App
 	App* mApp;
+	/// Puntero al Player
+	Actor* mPlayer;
+	/// Puntero al mapa
+	Map* mMap;
 	/// Camara que sigue al jugador
 	sf::View mRPGCamera;
-	/// Cámara por defecto
+	/// Camapara por defecto
 	sf::View mDefaultCamera;
 
 }; // Class Camera

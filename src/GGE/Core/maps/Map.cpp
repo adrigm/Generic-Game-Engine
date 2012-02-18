@@ -41,9 +41,20 @@ void Map::Update()
 void Map::Draw()
 {
 	// Obtenemos las esquinas de la pantalla
-	sf::Vector2f initial = MouseMap(0, 0);
-	sf::Vector2f limit_bottom = MouseMap(0, mApp->mWindow.GetHeight());
-	sf::Vector2f limit_right = MouseMap(mApp->mWindow.GetWidth(), 0);
+	sf::Vector2i initial = MouseMap(0, 0);
+	sf::Vector2i limit_bottom = MouseMap(0, mApp->mWindow.GetHeight());
+	sf::Vector2i limit_right = MouseMap(mApp->mWindow.GetWidth(), 0);
+
+	// Comprobamos si tenemos que añadir una linea mas de tiles al final de filas y columnas
+	if (limit_right.x >= mWidth)
+		correctionX = 0;
+	else
+		correctionX = 1;
+
+	if (limit_bottom.y >= mHeight)
+		correctionY = 0;
+	else
+		correctionY = 1;
 
 	if (mScroll)
 	{
@@ -51,17 +62,6 @@ void Map::Draw()
 		sf::Vector2f pos;
 		pos.x = mPlayer->GetPosition().x;
 		pos.y = mPlayer->GetPosition().y;
-
-		// Comprobamos si tenemos que añadir una linea mas de tiles al final de filas y columnas
-		if (limit_right.x >= mWidth)
-			correctionX = 0;
-		else
-			correctionX = 1;
-
-		if (limit_bottom.y >= mHeight)
-			correctionY = 0;
-		else
-			correctionY = 1;
 
 		// Comprobamos los bordes de los mapas para detener el Scroll
 		// Eje X
@@ -86,34 +86,34 @@ void Map::Draw()
 		{
 			for (int c = initial.x; c < limit_right.x+correctionX; c++)
 			{
-				if (mData[l][r][c] != 0)
+				if (r >= 0 && c >= 0 && r < mHeight && c < mWidth && mData[l][r][c] != 0)
 					mTileset.Draw(mData[l][r][c], Plot(c, r));
 			}
 		}
 	}
 }
 
-sf::Vector2f Map::Plot(int TheCol, int TheRow)
+sf::Vector2i Map::Plot(int TheCol, int TheRow)
 {
-	sf::Vector2f vector;
+	sf::Vector2i vector;
 	vector.x = TheCol * mTileWidth;
 	vector.y = TheRow * mTileHeight;
 	return vector;
 }
 
-sf::Vector2f Map::MouseMap(int x, int y)
+sf::Vector2i Map::MouseMap(int x, int y)
 {
+	sf::Vector2i vector;
+
 	if (mScroll)
 	{
-		sf::Vector2f vector;
-		vector = mApp->mWindow.ConvertCoords(x, y);
-		vector.x = (int)(vector.x / mTileWidth);
-		vector.y = (int)(vector.y / mTileHeight);
+		sf::Vector2f vec = mApp->mWindow.ConvertCoords(x, y);
+		vector.x = (int)(vec.x / mTileWidth);
+		vector.y = (int)(vec.y / mTileHeight);
 		return vector;
 	}
 	else
 	{
-		sf::Vector2f vector;
 		vector.x = (int)(x / mTileWidth);
 		vector.y = (int)(y / mTileHeight);
 		return vector;
@@ -123,7 +123,7 @@ sf::Vector2f Map::MouseMap(int x, int y)
 void Map::SetScrollParallax(GGE::Actor& thePlayer)
 {
 	mPlayer = &thePlayer;
-	vis = mApp->mWindow.GetDefaultView();
+	vis = sf::View(sf::FloatRect(0, 0, mApp->mWindow.GetWidth(), mApp->mWindow.GetHeight()));
 	vis.SetCenter(mPlayer->GetPosition());
 	mApp->mWindow.SetView(vis);
 	mScroll = true;
@@ -140,9 +140,3 @@ void Map::SetTile(int theLayer, int theRow, int theCol, int theValue)
 }
 
 } // Namespace GGE
-
-
-sf::Vector2f GGE::Map::Plot(int TheCol, int TheRow)
-{
-}
-

@@ -46,7 +46,9 @@ void SceneMain::Update()
 {
 	// Demosle algo de movilidad
 	heroe.Update();
+
 	sf::Vector2f pos;
+	//std::cout << mApp->mInput.GetMouseX() << ", " << mApp->mInput.GetMouseY() << std::endl;
 }
 
 void SceneMain::Draw()
