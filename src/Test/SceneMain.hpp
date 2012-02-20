@@ -28,6 +28,7 @@ public:
 private:
 	Hero heroe;
 	GGE::Map mapa;
+	sf::View vis;
 };
 
 #endif // SCENE_MAIN_HPP

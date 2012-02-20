@@ -36,6 +36,9 @@ private:
 	/// Camapara por defecto
 	sf::View mDefaultCamera;
 
+	enum Cameras { DEFAULT, RPG, RTS };
+	Cameras a;
+
 }; // Class Camera
 
 } // Namespace GGE

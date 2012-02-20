@@ -27,6 +27,9 @@ void SceneMain::Init()
 	mapa.Load(mApp->mAssetManager->GetTmxMap("pueblo.tmx"));
 	// Vamos a conectar nuestro mapa a nuestro heroe para que la camara lo siga
 	mapa.SetScrollParallax(heroe);
+	//std::cout << vis.GetHalfSize().x << std::endl; 
+	//vis.SetFromRect(sf::FloatRect(0, 0, 1024, 768));
+	//mApp->mWindow.SetView(vis);
 }
 
 void SceneMain::ReInit()

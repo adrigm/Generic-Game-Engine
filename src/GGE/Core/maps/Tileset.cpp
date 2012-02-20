@@ -19,6 +19,9 @@ void Tileset::RegisterApp(App* theApp)
 
 void Tileset::Init(TmxMap* TheTmx)
 {
+	// Insertamos un rect vacio en los Rects ya que se empieza a contar en el 1 el 0 es sin tile
+	mRects.push_back(sf::IntRect(0, 0, 0, 0));
+
 	int numTilesets = TheTmx->mTilesets.size();
 	for (int i = 0; i < numTilesets; i++)
 	{
@@ -40,9 +43,6 @@ void Tileset::Init(TmxMap* TheTmx)
 		int rows = height / tileHeight; // Numero de filas del tileset
 		int cols = width / tileWidth; // Numero de columnas del tileset
 
-		// Insertamos un rect vacio en los Rects
-		mRects.push_back(sf::IntRect(0, 0, 0, 0));
-
 		for (int r = 0; r < rows; r++)
 		{
 			for(int c = 0; c < cols; c++)
@@ -62,6 +62,8 @@ void Tileset::Draw(int theIndx, sf::Vector2i thePos)
 {
 	// Numero del tileset del indice indicado
 	int numTileset = this->GetNumTileset(theIndx);
+	if (numTileset > 1)
+		std::cout << numTileset << std::endl;
 	if (numTileset != -1 && theIndx != 0)
 	{
 		// Seleccionamos el tileset
@@ -75,10 +77,12 @@ void Tileset::Draw(int theIndx, sf::Vector2i thePos)
 
 int Tileset::GetNumTileset(int theIndx) const
 {
-	for (int i = 0; i < mFirstgid.size(); i++)
+	 for (int i = mFirstgid.size()-1; i >= 0; i--)
 	{
-		if (theIndx <= mFirstgid[i] + mFirstgid.size()-1);
+		if (theIndx >= mFirstgid[i])
+		{
 			return i;
+		}
 	}
 	return -1;
 }

@@ -23,7 +23,6 @@ public:
 	void SetScrollParallax(GGE::Actor& thePlayer);
 
 	GGE::Uint32 GetTile(int theLayer, int theRow, int theCol);
-
 	void SetTile(int theLayer, int theRow, int theCol, int theValue);
 
 	sf::Vector2i Plot(int TheCol, int TheRow);
