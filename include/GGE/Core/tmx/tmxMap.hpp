@@ -28,7 +28,7 @@ public:
 	TmxMap();
 	~TmxMap();
 	void RegisterApp(App* theApp);
-	bool LoadFromFile(std::string& theFilename);
+	bool LoadFromFile(std::string theFilename);
 
 	double GetVersion() const;
 	std::string GetOrientation() const;

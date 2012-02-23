@@ -5,6 +5,7 @@
 *.tags
 *.mk
 *.session
+*.txt
 *.dll
 *.exe
 *.lib

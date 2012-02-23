@@ -19,7 +19,7 @@ void TmxMap::RegisterApp(App* theApp)
 	mApp = theApp;
 }
 
-bool TmxMap::LoadFromFile(std::string& theFilename)
+bool TmxMap::LoadFromFile(std::string theFilename)
 {
 	// Cargamos el archivo de mapa
 	pugi::xml_document doc;
@@ -43,11 +43,11 @@ bool TmxMap::LoadFromFile(std::string& theFilename)
 	// Obtenemos la Orientacion
 	mOrientation = root_node.attribute("orientation").value();
 
-	// Obtenemos el tamaño del mapa
+	// Obtenemos el tamaÃ±o del mapa
 	mWidth = root_node.attribute("width").as_uint();
 	mHeight = root_node.attribute("height").as_uint();
 
-	// Obtenemos el tamaño de los tiles
+	// Obtenemos el tamaÃ±o de los tiles
 	mTileWidth = root_node.attribute("tilewidth").as_uint();
 	mTileHeight = root_node.attribute("tileheight").as_uint();
 
@@ -141,7 +141,7 @@ bool TmxMap::LoadFromFile(std::string& theFilename)
 			// Obtenemos el nombre de la capa
 			anLayer.SetName(node.attribute("name").value());
 			
-			// Obtenemos el tamaño de la capa
+			// Obtenemos el tamaÃ±o de la capa
 			anLayer.SetWidth(node.attribute("width").as_uint());
 			anLayer.SetHeight(node.attribute("height").as_uint());
 

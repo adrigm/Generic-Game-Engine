@@ -65,7 +65,7 @@ void TmxLayer::DescompressData()
 			const int gid = binData[i] | binData[i + 1] << 8 | binData[i + 2] << 16 | binData[i + 3] << 24;
 			values.push_back(gid);
 		}
-		free(binData);
+		//free(binData);
 	}
 			
 	// Creamos un array bidimensional para los datos
