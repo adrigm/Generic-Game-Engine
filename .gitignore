@@ -6,6 +6,8 @@
 *.mk
 *.session
 *.txt
+.build-debug
+.build-release
 *.dll
 *.exe
 *.lib
@@ -46,4 +48,3 @@ _ReSharper*/
 *.sdf
 *.ipch
 /ipch/
-/builds/

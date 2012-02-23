@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Workspace Name="GGE" Database="./GGE.tags">
+  <Project Name="GGE" Path="GGE/GGE.project" Active="No"/>
+  <Project Name="Test" Path="Test/Test.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Project Name="Test" ConfigName="Debug-linux"/>
+      <Project Name="GGE" ConfigName="Debug-linux"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="no">
+      <Project Name="Test" ConfigName="Release-linux"/>
+      <Project Name="GGE" ConfigName="Release-linux"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>
