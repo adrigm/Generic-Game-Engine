@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de código fuente">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Archivos de código fuente\GGE">
+      <UniqueIdentifier>{2052a92a-c729-4282-b91d-d317d8c938b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\GGE\Core">
+      <UniqueIdentifier>{551e9230-049c-4f1a-bda6-26b5531e022c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\GGE">
+      <UniqueIdentifier>{29f5fdf1-0199-41cd-a41c-b883ef8234b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\GGE\Core">
+      <UniqueIdentifier>{acbbdd2c-aef8-438d-af25-9da2e3050f5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\GGE\Core\tmx">
+      <UniqueIdentifier>{9e5c9c0b-c190-44cf-8120-231a6129d082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\GGE\Core\tmx">
+      <UniqueIdentifier>{9dc13ae8-0341-4c02-b985-2db6941a37ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\GGE\Core\utils">
+      <UniqueIdentifier>{05051470-e29c-43b5-9d10-560719a878e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\GGE\Core\utils">
+      <UniqueIdentifier>{76dfcd79-e755-4a03-80dd-80fd0089a7da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\GGE\Core\maps">
+      <UniqueIdentifier>{85b87f18-699f-4ebb-a209-9dd9b2c46d16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\GGE\Core\maps">
+      <UniqueIdentifier>{a09acd67-3a52-4ec5-ba28-747ff3c60691}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\GGE\Config.hpp">
+      <Filter>Archivos de encabezado\GGE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core.hpp">
+      <Filter>Archivos de encabezado\GGE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\Core_types.hpp">
+      <Filter>Archivos de encabezado\GGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\Clock.hpp">
+      <Filter>Archivos de encabezado\GGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\ConfigReader.hpp">
+      <Filter>Archivos de encabezado\GGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\IScene.hpp">
+      <Filter>Archivos de encabezado\GGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\SceneManager.hpp">
+      <Filter>Archivos de encabezado\GGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\App.hpp">
+      <Filter>Archivos de encabezado\GGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\AssetManager.hpp">
+      <Filter>Archivos de encabezado\GGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\utils\pugixml.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\utils\base64.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmx.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxMap.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxObjectgroup.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxTileset.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxLayer.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxPropertiesSet.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\utils\StringUtils.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\utils\zlib.hpp">
+      <Filter>Archivos de código fuente\GGE\Core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxObject.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\tmx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\Actor.hpp">
+      <Filter>Archivos de encabezado\GGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\maps\Map.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\maps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\maps\Tileset.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\maps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\Camera.hpp">
+      <Filter>Archivos de encabezado\GGE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\Cursor.hpp">
+      <Filter>Archivos de encabezado\GGE\Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\GGE\Core\SceneManager.cpp">
+      <Filter>Archivos de código fuente\GGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\IScene.cpp">
+      <Filter>Archivos de código fuente\GGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\ConfigReader.cpp">
+      <Filter>Archivos de código fuente\GGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\Clock.cpp">
+      <Filter>Archivos de código fuente\GGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\AssetManager.cpp">
+      <Filter>Archivos de código fuente\GGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\App.cpp">
+      <Filter>Archivos de código fuente\GGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\utils\base64.cpp">
+      <Filter>Archivos de código fuente\GGE\Core\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\utils\pugixml.cpp">
+      <Filter>Archivos de código fuente\GGE\Core\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxMap.cpp">
+      <Filter>Archivos de código fuente\GGE\Core\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxLayer.cpp">
+      <Filter>Archivos de código fuente\GGE\Core\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxObjectgroup.cpp">
+      <Filter>Archivos de código fuente\GGE\Core\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxTileset.cpp">
+      <Filter>Archivos de código fuente\GGE\Core\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxPropertiesSet.cpp">
+      <Filter>Archivos de código fuente\GGE\Core\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\utils\StringUtils.cpp">
+      <Filter>Archivos de código fuente\GGE\Core\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib.cpp">
+      <Filter>Archivos de encabezado\GGE\Core\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxObject.cpp">
+      <Filter>Archivos de código fuente\GGE\Core\tmx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\Actor.cpp">
+      <Filter>Archivos de código fuente\GGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\maps\Map.cpp">
+      <Filter>Archivos de código fuente\GGE\Core\maps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\maps\Tileset.cpp">
+      <Filter>Archivos de código fuente\GGE\Core\maps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\Camera.cpp">
+      <Filter>Archivos de código fuente\GGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\Cursor.cpp">
+      <Filter>Archivos de código fuente\GGE\Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

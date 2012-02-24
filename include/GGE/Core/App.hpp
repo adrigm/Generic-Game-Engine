@@ -1,7 +1,7 @@
 /**
  * Contiene la clase App base del engine, pone en funcionamiento el juego.
  *
- * @file app.h
+ * @file App.hpp
  * @author Adrián Guerra Marrero
  * @date 20110422
  */
