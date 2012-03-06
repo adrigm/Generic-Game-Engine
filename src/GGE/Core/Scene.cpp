@@ -8,7 +8,8 @@ Scene::Scene(SceneID theID) :
 	mID(theID),
 	mInit(false),
 	mPaused(false),
-	mCleanup(false)
+	mCleanup(false),
+	mColorBack(0, 0, 0)
 {
 	mApp = GGE::App::Instance();
 }
@@ -88,6 +89,29 @@ void Scene::Update(void)
 
 void Scene::Draw(void)
 {
+	mApp->mWindow.Clear(mColorBack);
+
+	std::vector<GGE::Actor*>::const_iterator element;
+	for(element = mActors.begin(); element != mActors.end(); element++)
+	{
+		mApp->mWindow.Draw(**element);
+	}
+}
+
+void Scene::AddActor(GGE::Actor* theActor)
+{
+	// Comprobamos que el Actor no esté añadido ya a la escena
+	std::vector<GGE::Actor*>::iterator element;
+	element = std::find(mActors.begin(), mActors.end(), theActor);
+	if (element == mActors.end())
+	{
+		mActors.push_back(theActor);
+	}
+}
+
+void Scene::SetBackgroundColor(sf::Color theColor)
+{
+	mColorBack = theColor;
 }
 
 } // Namespace GGE

@@ -21,6 +21,8 @@ void SceneMain::Init()
 	mapa.Load(mApp->mAssetManager->GetTmxMap("plat.tmx"));
 	mApp->mCamera->ConnectToSprite(hero);
 	mApp->mCamera->LockToMap(mapa);
+	this->AddActor(&hero);
+	this->SetBackgroundColor(sf::Color(200, 200, 200));
 }
 
 void SceneMain::ReInit()
@@ -39,15 +41,6 @@ void SceneMain::Events(sf::Event theEvent)
 void SceneMain::Update()
 {
 	hero.Update();
-}
-
-void SceneMain::Draw()
-{
-	mApp->mWindow.Clear(sf::Color(200, 200, 200));
-
-	mapa.Draw();
-
-	mApp->mWindow.Draw(hero);
 }
 
 void SceneMain::Cleanup()

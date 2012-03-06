@@ -10,10 +10,12 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <cassert>
-
+#include <algorithm>
+#include <vector>
+#include <SFML/Graphics.hpp>
 #include <GGE/Core/Core_types.hpp>
 #include <GGE/Core/App.hpp>
+#include <GGE/Core/Actor.hpp>
 
 namespace GGE
 {
@@ -86,7 +88,11 @@ public:
 	/**
 	 * Método encargado de dibujar en la escena, llamado en relación a los FPS
 	 */
-	virtual void Draw(void) = 0;
+	void Draw(void);
+
+	void AddActor(GGE::Actor* theActor);
+
+	void SetBackgroundColor(sf::Color theColor);
 
 protected:
 	/// Puntero a la aplicación padre
@@ -109,6 +115,10 @@ private:
 	bool mInit;
 	/// Comprueba si la escena está pausada
 	bool mPaused;
+	/// Lista de Actores a dibujar
+	std::vector<GGE::Actor*> mActors;
+	/// Color de fondo de la escena
+	sf::Color mColorBack;
 
 	/**
 	 * Our copy constructor is private because we do not allow copies of
