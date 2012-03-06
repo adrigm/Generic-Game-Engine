@@ -4,12 +4,15 @@
 namespace GGE
 {
 
-SceneManager::SceneManager(App* theApp) :
-	mApp(theApp),
+SceneManager* SceneManager::ms_instance = 0;
+
+SceneManager::SceneManager() :
+	mApp(NULL),
 	mActiveScene(NULL),
 	mInactivesScenes(),
 	mNextScene("")
 {
+	mApp = GGE::App::Instance();
 	mApp->mLog << "SceneManager::ctor()" << std::endl;
 }
 
@@ -18,9 +21,26 @@ SceneManager::~SceneManager()
 	mApp->mLog << "SceneManager::dtor()" << std::endl;
 }
 
-void SceneManager::AddScene(IScene* theScene)
+SceneManager* SceneManager::Instance()
 {
-	for(std::map<SceneID, IScene*>::iterator it = mInactivesScenes.begin();
+	if(ms_instance == 0){
+		ms_instance = new SceneManager();
+	}
+	return ms_instance;
+}
+
+void SceneManager::Release()
+{
+	if(ms_instance){
+		delete ms_instance;
+	}
+	ms_instance = 0;
+}
+
+
+void SceneManager::AddScene(Scene* theScene)
+{
+	for(std::map<SceneID, Scene*>::iterator it = mInactivesScenes.begin();
 		it != mInactivesScenes.end(); ++it)
 	{
 		if(theScene->GetID() == it->first)
@@ -47,7 +67,7 @@ void SceneManager::AddScene(IScene* theScene)
 
 void SceneManager::SetActiveScene(SceneID theSceneID)
 {
-	for(std::map<SceneID, IScene*>::iterator it = mInactivesScenes.begin();
+	for(std::map<SceneID, Scene*>::iterator it = mInactivesScenes.begin();
 		it != mInactivesScenes.end(); ++it)
 	{
 		if(theSceneID == it->first)
@@ -81,7 +101,7 @@ void SceneManager::ChangeScene(SceneID theSceneID)
 void SceneManager::RemoveScene(SceneID theSceneID)
 {
 	// Buscamos en la lista de escenas inactivas
-	for(std::map<SceneID, IScene*>::iterator it = mInactivesScenes.begin();
+	for(std::map<SceneID, Scene*>::iterator it = mInactivesScenes.begin();
 		it != mInactivesScenes.end(); ++it)
 	{
 		if(theSceneID == it->first)
@@ -109,7 +129,7 @@ void SceneManager::RemoveScene(SceneID theSceneID)
 void SceneManager::RemoveAllInactiveScene()
 {
 	// Recorremos la lista de escenas inactivas
-	std::map<SceneID, IScene*>::iterator it = mInactivesScenes.begin();
+	std::map<SceneID, Scene*>::iterator it = mInactivesScenes.begin();
 	while(it != mInactivesScenes.end())
 	{
 		mApp->mLog << "SceneManager::RemoveAllInactiveScene() Eliminada escena con ID=" 
@@ -146,6 +166,16 @@ void SceneManager::UpdateScene()
 void SceneManager::DrawScene()
 {
 	mActiveScene->Draw();
+}
+
+void SceneManager::ResumeScene()
+{
+	mActiveScene->Resume();
+}
+
+void SceneManager::PauseScene()
+{
+	mActiveScene->Pause();
 }
 
 bool SceneManager::HandleChangeScene()

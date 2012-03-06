@@ -2,12 +2,12 @@
 #define SCENE_MENU_HPP
 
 #include <SFML/Graphics.hpp>
-#include <GGE/Core/IScene.hpp>
+#include <GGE/Core/Scene.hpp>
 
-class SceneMenu : public GGE::IScene
+class SceneMenu : public GGE::Scene
 {
 public:
-	SceneMenu(GGE::SceneID theID, GGE::App* theApp);
+	SceneMenu(GGE::SceneID theID);
 
 	virtual ~SceneMenu();
 
@@ -22,9 +22,6 @@ public:
 	virtual void Draw();
 
 	virtual void Cleanup();
-
-private:
-	sf::String text;
 };
 
 #endif // SCENE_MENU_HPP

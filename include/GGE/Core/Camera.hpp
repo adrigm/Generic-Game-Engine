@@ -3,7 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <GGE/Core/App.hpp>
-#include <GGE/Core/Actor.hpp>
 #include <GGE/Core/maps/Map.hpp>
 
 namespace GGE
@@ -15,29 +14,28 @@ public:
 	Camera();
 	~Camera();
 
-	void RegisterApp(App* theApp);
-
 	void Update();
 
-	void SetDefaultCamera();
+	void ConnectToSprite(sf::Sprite& theSprite);
+	void DisconnectToSprite();
 
-	void SetRPGCamera(Map& theMap, Actor& theActor);
-	void SetRTSCamera();
+	void LockToMap(GGE::Map& theMap);
+
+	void SetDefaultCamera();
 
 private:
 	/// Puntero a App
 	App* mApp;
-	/// Puntero al Player
-	Actor* mPlayer;
-	/// Puntero al mapa
-	Map* mMap;
-	/// Camara que sigue al jugador
-	sf::View mRPGCamera;
-	/// Camapara por defecto
-	sf::View mDefaultCamera;
-
-	enum Cameras { DEFAULT, RPG, RTS };
-	Cameras a;
+	/// Visor de la Cámara
+	sf::View mView;
+	/// Puntero al Sprite conectado
+	sf::Sprite* mSprite;
+	/// Puntero al Mapa conectado
+	GGE::Map* mMap;
+	/// Dice si la Cámara está conectada a un Sprite
+	bool mConectToSprite;
+	/// Dice si la Cámara está atada a un mapa
+	bool mConectToMap;
 
 }; // Class Camera
 

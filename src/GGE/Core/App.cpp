@@ -4,6 +4,8 @@
 namespace GGE
 {
 
+App* App::ms_instance = 0;
+
 App::App(const std::string TheTitle) :
 	mTitle(TheTitle),
 	mVideoMode(DEFAULT_VIDEO_WIDTH, DEFAULT_VIDEO_HEIGHT, DEFAULT_VIDEO_BPP),
@@ -30,6 +32,22 @@ App::~App()
 {
 	// Escribimos en el log el código de salida
 	mLog << "App::Run() terminado con codigo: " << mExitCode << std::endl;
+}
+
+App* App::Instance()
+{
+	if(ms_instance == 0){
+		ms_instance = new App();
+	}
+	return ms_instance;
+}
+
+void App::Release()
+{
+	if(ms_instance){
+		delete ms_instance;
+	}
+	ms_instance = 0;
 }
 
 void App::ProcessArguments(int argc, char* argv[])
@@ -99,10 +117,9 @@ std::string App::GetExecutableDir() const
 
 void App::PreInit()
 {
-	ConfigReader anConfig;       // For reading .INI style files
+	ConfigReader anConfig; // For reading .INI style files
  
 	// Use our default configuration file to obtain the initial window settings
-	anConfig.RegisterApp(this);  // For logging purposes, let ConfigReader know about us
 	anConfig.Read(this->GetExecutableDir() + "window.cfg"); // Read in our window settings
  
 	// Are we in Fullscreen mode?
@@ -136,10 +153,13 @@ void App::PreInit()
 void App::Init()
 {
 	// Creamos el SceneManager
-	mSceneManager = new SceneManager(this);
+	mSceneManager = GGE::SceneManager::Instance();
 
 	// Creamos el AssetManager
-	mAssetManager = new AssetManager(this);
+	mAssetManager = GGE::AssetManager::Instance();
+
+	// Creamos la Cámara
+	mCamera = new Camera();
 
 	// Comprobamos que se haya establecido escena inicial
 	if (mScene != NULL)
@@ -181,10 +201,10 @@ void App::Loop()
 				Quit(StatusAppOK);
 				break;
 			case sf::Event::GainedFocus:	// La ventana obtiene el foco
+				mSceneManager->ResumeScene();
 				break;
 			case sf::Event::LostFocus:		// La ventana pierde el foco
-				break;
-			case sf::Event::Resized:		// La ventana es redimensionada
+				mSceneManager->PauseScene();
 				break;
 			default:	// Otros eventos se los pasamos a la ecena activa
 				mSceneManager->EventScene(event);
@@ -198,6 +218,9 @@ void App::Loop()
 		// Llamamos al método Update() de la escena activa
 		mSceneManager->UpdateScene();
 
+		// Actualizamos la cámara
+		mCamera->Update();
+
 		// Llamamos al método Draw() de la escena activa
 		mSceneManager->DrawScene();
 
@@ -207,6 +230,9 @@ void App::Loop()
 		// Comprobamos cambios de escena
 		if (mSceneManager->HandleChangeScene())
 		{
+			// Restablecemos la cámara por defecto antes de cambiar de escena
+			mCamera->SetDefaultCamera();
+			// Cambiamos el puntero de la escena activa
 			mSceneManager->ChangeScene(mSceneManager->mNextScene);
 		}
 
@@ -222,15 +248,18 @@ void App::Cleanup()
 	mAssetManager->Cleanup();
 
 	// Eliminamos el SceneManager
-	delete mSceneManager;
+	GGE::SceneManager::Release();
 
 	// Eliminamos el AssetManager
-	delete mAssetManager;
+	GGE::AssetManager::Release();
+
+	// Eliminamos la Cámara
+	delete mCamera;
 
 	mLog << "App::Cleanup() Completado" << std::endl;
 }
 
-void App::SetFirstScene(IScene* theScene)
+void App::SetFirstScene(Scene* theScene)
 {
 	if (mScene == NULL)
 	{

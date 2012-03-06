@@ -17,13 +17,13 @@
 
 namespace GGE
 {
-class IScene
+class Scene
 {
 public:
 	/**
 	 * Scene Destructor
 	 */
-	virtual ~IScene();
+	virtual ~Scene();
 
 	/**
 	 * Devuelve el identificador único de la escena
@@ -98,7 +98,7 @@ protected:
 	 * @param m_id Cadena de texto que establece un identificador único
 	 * @param p_app Puntero a la aplicación App
 	 */
-	IScene(SceneID theID, App* theApp);
+	Scene(SceneID theID);
 
 private:
 	/// Representa el id único de la escena
@@ -114,13 +114,13 @@ private:
 	 * Our copy constructor is private because we do not allow copies of
 	 * our Singleton class
 	 */
-	IScene(const IScene&);  // Intentionally undefined
+	Scene(const Scene&);  // Intentionally undefined
 
 	/**
 	 * Our assignment operator is private because we do not allow copies
 	 * of our Singleton class
 	 */
-	IScene& operator=(const IScene&); // Intentionally undefined
+	Scene& operator=(const Scene&); // Intentionally undefined
 
 
 }; // class Scene

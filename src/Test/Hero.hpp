@@ -26,7 +26,7 @@ struct anim
 class Hero : public GGE::Actor
 {
 public:
-	Hero(GGE::App* theApp);
+	Hero();
 	~Hero();
 
 	void Update();

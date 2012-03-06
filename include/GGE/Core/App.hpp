@@ -13,14 +13,17 @@
 #include <fstream>
 #include <SFML/Graphics.hpp>
 #include <GGE/Core/Core_types.hpp>
-#include <GGE/Core/IScene.hpp>
+#include <GGE/Core/Scene.hpp>
 #include <GGE/Core/SceneManager.hpp>
 #include <GGE/Core/AssetManager.hpp>
+#include <GGE/Core/Camera.hpp>
 
 namespace GGE
 {
 class App
 {
+	static App* ms_instance;
+
 public:
 	// Constantes
 	///////////////////////////////////////////////////////////////////////////
@@ -45,15 +48,16 @@ public:
 	/// Log de la aplicación
 	std::ofstream mLog;
 	/// Puntero a Scene inicial
-	IScene* mScene;
+	Scene* mScene;
 	/// Puntero al SceneManager
 	SceneManager* mSceneManager;
 	/// Puntero al AssetManager
 	AssetManager* mAssetManager;
+	/// Camara por defecto
+	Camera* mCamera;
 
-	App(const std::string TheTitle = "GGE Application");
-
-	virtual ~App();
+	static App* Instance();
+	static void Release();
 
 	/**
 	 * Procesa los parámetros pasados por línea de comandos
@@ -100,7 +104,7 @@ public:
 	 */
 	std::string GetExecutableDir(void) const;
 
-	void SetFirstScene(IScene* theScene);
+	void SetFirstScene(Scene* theScene);
 
 protected:
 	/**
@@ -138,17 +142,8 @@ private:
 	/// Almacena la ruta del ejecutable
 	std::string mExecutableDir;
 
-	/**
-	 * App copy constructor is private because we do not allow copies of
-	 * our Singleton class
-	 */
-	App(const App&);                 // Intentionally undefined
-
-	/**
-	 * Our assignment operator is private because we do not allow copies
-	 * of our Singleton class
-	 */
-	App& operator=(const App&);      // Intentionally undefined
+	App(const std::string TheTitle = "GGE Application");
+	virtual ~App();
 
 }; // Class App
 } // namespace GGE

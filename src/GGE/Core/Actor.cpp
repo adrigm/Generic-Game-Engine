@@ -6,9 +6,11 @@ namespace GGE
 
 Actor::Actor() :
 	mRows(1),
-	mCols(1)
+	mCols(1),
+	mWidth(0),
+	mHeight(0),
+	mShow(true)
 {
-	mAbsCord = this->GetPosition();
 }
 
 Actor::~Actor()
@@ -41,11 +43,15 @@ void Actor::SelectGid(const GGE::Uint32 theRows, const GGE::Uint32 theCols)
 
 GGE::Uint32 Actor::GetWidth() const
 {
+	if (mWidth == 0)
+		return this->GetImage()->GetWidth();
 	return mWidth;
 }
 
 GGE::Uint32 Actor::GetHeight() const
 {
+	if (mHeight == 0)
+		return this->GetImage()->GetHeight();
 	return mHeight;
 }
 

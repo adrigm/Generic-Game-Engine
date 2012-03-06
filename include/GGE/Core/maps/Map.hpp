@@ -13,7 +13,7 @@ namespace GGE
 class Map
 {
 public:
-	Map(App* theApp);
+	Map();
 	~Map();
 
 	bool Load(TmxMap& theTmx);
@@ -24,6 +24,12 @@ public:
 
 	GGE::Uint32 GetTile(int theLayer, int theRow, int theCol);
 	void SetTile(int theLayer, int theRow, int theCol, int theValue);
+
+	GGE::Uint32 GetWidth() const;
+	GGE::Uint32 GetHeight() const;
+
+	GGE::Uint32 GetTileWidth() const;
+	GGE::Uint32 GetTileHeight() const;
 
 	sf::Vector2i Plot(int TheCol, int TheRow);
 	sf::Vector2i MouseMap(int x, int y);
@@ -42,17 +48,12 @@ private:
 	/// Alto de los tiles
 	GGE::Uint32 mTileHeight;
 	/// Objeto Tileset
-	Tileset mTileset;
+	Tileset* mTileset;
 	// Data
 	std::vector<std::vector<std::vector<GGE::Uint32> > > mData;
-	/// Puntero al Objeto Player
-	GGE::Actor* mPlayer;
-	// view
-	sf::View vis;
 
 	int correctionX;
 	int correctionY;
-	bool mScroll;
 };
 
 } // Namespace GGE

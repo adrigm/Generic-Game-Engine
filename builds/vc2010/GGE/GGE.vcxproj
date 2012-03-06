@@ -21,7 +21,7 @@
     <ClInclude Include="..\..\..\include\GGE\Core\ConfigReader.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\Core_types.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\Cursor.hpp" />
-    <ClInclude Include="..\..\..\include\GGE\Core\IScene.hpp" />
+    <ClInclude Include="..\..\..\include\GGE\Core\Scene.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\maps\Map.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\maps\Tileset.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\SceneManager.hpp" />
@@ -45,7 +45,7 @@
     <ClCompile Include="..\..\..\src\GGE\Core\Clock.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\ConfigReader.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\Cursor.cpp" />
-    <ClCompile Include="..\..\..\src\GGE\Core\IScene.cpp" />
+    <ClCompile Include="..\..\..\src\GGE\Core\Scene.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\maps\Map.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\maps\Tileset.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\SceneManager.cpp" />

@@ -22,9 +22,12 @@ namespace GGE
 
 class AssetManager
 {
+	// Puntero a la instancia única
+	static AssetManager* ms_instance;
+
 public:
-	AssetManager(App* theApp);
-	~AssetManager();
+	static AssetManager* Instance();
+	static void Release();
 
 	void AddDirectory(const std::string& theDitectory);
 
@@ -53,6 +56,7 @@ public:
 	void DeleteConfigFile(const std::string& theFilename);
 
 	TmxMap& GetTmxMap(const std::string& theFilename);
+
 	void DeleteTmxMap(const std::string& theFilename);
 
 	void Cleanup();
@@ -75,8 +79,8 @@ private:
 	/// Contenedor de archivos TMX
 	std::map<std::string, TmxMap> mTmxMap;
 
-	AssetManager(const AssetManager&);
-	AssetManager& operator =( const AssetManager&);
+	AssetManager();
+	~AssetManager();
 };
 
 } // namespace GGE

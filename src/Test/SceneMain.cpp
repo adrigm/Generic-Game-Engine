@@ -2,10 +2,8 @@
 #include "SceneMain.hpp"
 #include "SceneMenu.hpp"
 
-SceneMain::SceneMain(GGE::SceneID theID, GGE::App* theApp) :
-	GGE::IScene(theID, theApp),
-	heroe(theApp),
-	mapa(theApp)
+SceneMain::SceneMain(GGE::SceneID theID) :
+	GGE::Scene(theID)
 {
 }
 
@@ -15,21 +13,14 @@ SceneMain::~SceneMain()
 
 void SceneMain::Init()
 {
-	// Creamos un directorio donde buscar recursos
 	mApp->mAssetManager->AddDirectory("resources/");
-	// Establecemos la imagen de nuestro heroe
-	heroe.SetImage(mApp->mAssetManager->GetImage("sprite.png"));
-	// Nuestro heroe es un Sprite Sheet!! Definamos la grilla de imagenes
-	heroe.SetGrid(4, 4); // 4 filas y 4 columnas
-	// Cambiemos la posición del heroe
-	heroe.SetPosition(432, 416);
-	// Vamos a cargar el mapa que acabamos de crear
-	mapa.Load(mApp->mAssetManager->GetTmxMap("pueblo.tmx"));
-	// Vamos a conectar nuestro mapa a nuestro heroe para que la camara lo siga
-	mapa.SetScrollParallax(heroe);
-	//std::cout << vis.GetHalfSize().x << std::endl; 
-	//vis.SetFromRect(sf::FloatRect(0, 0, 1024, 768));
-	//mApp->mWindow.SetView(vis);
+	hero.SetImage(mApp->mAssetManager->GetImage("sprite.png"));
+	hero.SetGrid(4, 4);
+	hero.SetCenter(hero.GetWidth()/2, hero.GetHeight());
+	hero.SetPosition(160, 320);
+	mapa.Load(mApp->mAssetManager->GetTmxMap("plat.tmx"));
+	mApp->mCamera->ConnectToSprite(hero);
+	mApp->mCamera->LockToMap(mapa);
 }
 
 void SceneMain::ReInit()
@@ -47,23 +38,16 @@ void SceneMain::Events(sf::Event theEvent)
 
 void SceneMain::Update()
 {
-	// Demosle algo de movilidad
-	heroe.Update();
-
-	sf::Vector2f pos;
-	//std::cout << mApp->mInput.GetMouseX() << ", " << mApp->mInput.GetMouseY() << std::endl;
+	hero.Update();
 }
 
 void SceneMain::Draw()
 {
-	// Color de Fondo
 	mApp->mWindow.Clear(sf::Color(200, 200, 200));
 
-	// Lo dibujamos en pantalla
 	mapa.Draw();
 
-	// Dibujamos a nuestro heroe
-	mApp->mWindow.Draw(heroe);
+	mApp->mWindow.Draw(hero);
 }
 
 void SceneMain::Cleanup()

@@ -4,23 +4,24 @@
 namespace GGE
 {
 
-Map::Map(App* theApp) :
-	mApp(theApp),
-	mScroll(false),
+Map::Map() :
 	correctionX(0),
 	correctionY(0)
 {
+	mApp = GGE::App::Instance();
 }
 
 Map::~Map()
 {
+	delete mTileset;
 }
 
 bool Map::Load(TmxMap& theTmx)
 {
 	mTmx = &theTmx;
-	mTileset.RegisterApp(mApp);
-	mTileset.Init(mTmx);
+	mTileset = new Tileset();
+	mTileset->RegisterApp(mApp);
+	mTileset->Init(mTmx);
 	mWidth = mTmx->GetWidth();
 	mHeight = mTmx->GetHeight();
 	mTileWidth = mTmx->GetTileWidth();
@@ -56,29 +57,6 @@ void Map::Draw()
 	else
 		correctionY = 1;
 
-	if (mScroll)
-	{
-		// Obetenemos la posicion desde la que se mide el Scroll.
-		sf::Vector2f pos;
-		pos.x = mPlayer->GetPosition().x;
-		pos.y = mPlayer->GetPosition().y;
-
-		// Comprobamos los bordes de los mapas para detener el Scroll
-		// Eje X
-		if (pos.x < mApp->mWindow.GetWidth() / 2)
-			pos.x = mApp->mWindow.GetWidth() / 2;
-		else if (pos.x > mWidth * mTileWidth - mApp->mWindow.GetWidth() / 2)
-			pos.x = mWidth * mTileWidth - mApp->mWindow.GetWidth() / 2;
-		// Eje y
-		if (pos.y < mApp->mWindow.GetHeight() / 2)
-			pos.y = mApp->mWindow.GetHeight() / 2;
-		else if (pos.y > mHeight * mTileHeight - mApp->mWindow.GetHeight() / 2)
-			pos.y = mHeight * mTileHeight - mApp->mWindow.GetHeight() / 2;
-	
-		// Establecemos la nueva vista
-		vis.SetCenter(pos);
-	}
-
 	// Dibujamos los tilesets
 	for(int l = 0; l < mData.size(); l++)
 	{
@@ -87,7 +65,7 @@ void Map::Draw()
 			for (int c = initial.x; c < limit_right.x+correctionX; c++)
 			{
 				if (r >= 0 && c >= 0 && r < mHeight && c < mWidth && mData[l][r][c] != 0)
-					mTileset.Draw(mData[l][r][c], Plot(c, r));
+					mTileset->Draw(mData[l][r][c], Plot(c, r));
 			}
 		}
 	}
@@ -105,28 +83,10 @@ sf::Vector2i Map::MouseMap(int x, int y)
 {
 	sf::Vector2i vector;
 
-	if (mScroll)
-	{
-		sf::Vector2f vec = mApp->mWindow.ConvertCoords(x, y);
-		vector.x = (int)(vec.x / mTileWidth);
-		vector.y = (int)(vec.y / mTileHeight);
-		return vector;
-	}
-	else
-	{
-		vector.x = (int)(x / mTileWidth);
-		vector.y = (int)(y / mTileHeight);
-		return vector;
-	}
-}
-
-void Map::SetScrollParallax(GGE::Actor& thePlayer)
-{
-	mPlayer = &thePlayer;
-	vis = sf::View(sf::FloatRect(0, 0, mApp->mWindow.GetWidth(), mApp->mWindow.GetHeight()));
-	vis.SetCenter(mPlayer->GetPosition());
-	mApp->mWindow.SetView(vis);
-	mScroll = true;
+	sf::Vector2f vec = mApp->mWindow.ConvertCoords(x, y);
+	vector.x = (int)(vec.x / mTileWidth);
+	vector.y = (int)(vec.y / mTileHeight);
+	return vector;
 }
 
 GGE::Uint32 Map::GetTile(int theLayer, int theRow, int theCol)
@@ -137,6 +97,26 @@ GGE::Uint32 Map::GetTile(int theLayer, int theRow, int theCol)
 void Map::SetTile(int theLayer, int theRow, int theCol, int theValue)
 {
 	mData[theLayer][theRow][theCol] = theValue;
+}
+
+GGE::Uint32 Map::GetWidth() const
+{
+	return mWidth;
+}
+
+GGE::Uint32 Map::GetHeight() const
+{
+	return mHeight;
+}
+
+GGE::Uint32 Map::GetTileWidth() const
+{
+	return mTileWidth;
+}
+
+GGE::Uint32 Map::GetTileHeight() const
+{
+	return mTileHeight;
 }
 
 } // Namespace GGE

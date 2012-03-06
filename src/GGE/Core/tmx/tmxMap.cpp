@@ -8,15 +8,11 @@ namespace GGE
 
 TmxMap::TmxMap()
 {
+	mApp = App::Instance();
 }
 
 TmxMap::~TmxMap()
 {
-}
-
-void TmxMap::RegisterApp(App* theApp)
-{
-	mApp = theApp;
 }
 
 bool TmxMap::LoadFromFile(std::string theFilename)

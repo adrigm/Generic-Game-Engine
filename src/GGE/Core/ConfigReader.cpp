@@ -28,7 +28,8 @@ namespace GGE
 	ConfigReader::ConfigReader() :
 mApp(NULL)
 {
-	//mApp->mLog << "ConfigReader::ctor()" << std::endl;
+	mApp = App::Instance();
+	mApp->mLog << "ConfigReader::ctor()" << std::endl;
 }
 
 ConfigReader::~ConfigReader()
@@ -46,16 +47,6 @@ ConfigReader::~ConfigReader()
 
 	// Clear pointers we don't need anymore
 	mApp = NULL;
-}
-
-void ConfigReader::RegisterApp(App* theApp)
-{
-	// Check that our pointer is good
-	assert(NULL != theApp && "ConfigReader::RegisterApp() theApp pointer provided is bad");
-
-	// Make a note of the pointer
-	assert(NULL == mApp && "ConfigReader::RegisterApp() theApp pointer was already registered");
-	mApp = theApp;
 }
 
 bool ConfigReader::IsSectionEmpty(const std::string theSection) const

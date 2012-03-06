@@ -60,9 +60,6 @@
     <ClInclude Include="..\..\..\include\GGE\Core\ConfigReader.hpp">
       <Filter>Archivos de encabezado\GGE\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\IScene.hpp">
-      <Filter>Archivos de encabezado\GGE\Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\GGE\Core\SceneManager.hpp">
       <Filter>Archivos de encabezado\GGE\Core</Filter>
     </ClInclude>
@@ -120,12 +117,12 @@
     <ClInclude Include="..\..\..\include\GGE\Core\Cursor.hpp">
       <Filter>Archivos de encabezado\GGE\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\Scene.hpp">
+      <Filter>Archivos de encabezado\GGE\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\GGE\Core\SceneManager.cpp">
-      <Filter>Archivos de código fuente\GGE\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\IScene.cpp">
       <Filter>Archivos de código fuente\GGE\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\GGE\Core\ConfigReader.cpp">
@@ -183,6 +180,9 @@
       <Filter>Archivos de código fuente\GGE\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\GGE\Core\Cursor.cpp">
+      <Filter>Archivos de código fuente\GGE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\Scene.cpp">
       <Filter>Archivos de código fuente\GGE\Core</Filter>
     </ClCompile>
   </ItemGroup>

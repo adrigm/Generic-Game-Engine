@@ -15,19 +15,19 @@ int main(int argc, char* argv[])
 	int anExitCode = GGE::StatusNoError;
 	
 	// Creamos la aplicación
-	GGE::App* anApp = new GGE::App("Test Game");
+	GGE::App* anApp = GGE::App::Instance();
 	
 	// Procesamos parámetros pasados por línea de comandos
 	anApp->ProcessArguments(argc, argv);
 
 	// Establecemos la escena inicial del juego
-	anApp->SetFirstScene(new SceneMain("Main", anApp));
+	anApp->SetFirstScene(new SceneMain("Main"));
 	
 	// Ejecutamos la aplicación
 	anExitCode = anApp->Run();
 	
 	// Eliminamos la aplicación
-	delete anApp;
+	GGE::App::Release();
 	anApp = 0;
 	
 	// Devolvemos el código de salida

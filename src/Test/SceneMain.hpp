@@ -6,10 +6,10 @@
 #include <GGE/Core.hpp>
 #include "Hero.hpp"
 
-class SceneMain : public GGE::IScene
+class SceneMain : public GGE::Scene
 {
 public:
-	SceneMain(GGE::SceneID theID, GGE::App* theApp);
+	SceneMain(GGE::SceneID theID);
 
 	virtual ~SceneMain();
 
@@ -26,9 +26,8 @@ public:
 	virtual void Cleanup();
 
 private:
-	Hero heroe;
+	Hero hero;
 	GGE::Map mapa;
-	sf::View vis;
 };
 
 #endif // SCENE_MAIN_HPP

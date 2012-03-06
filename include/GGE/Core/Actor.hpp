@@ -21,10 +21,6 @@ public:
 	GGE::Uint32 GetWidth() const;
 	GGE::Uint32 GetHeight() const;
 
-
-	/// Coordenadas Absolutas
-	sf::Vector2f mAbsCord;
-
 private:
 	/// Filas del Actor
 	GGE::Uint32 mRows;
@@ -36,6 +32,8 @@ private:
 	GGE::Uint32 mHeight;
 	/// Vector de Rects del Actor
 	std::vector<std::vector<sf::IntRect> > mRects;
+	/// Si el Actor es visible o no
+	bool mShow;
 	
 
 }; // Class Actor

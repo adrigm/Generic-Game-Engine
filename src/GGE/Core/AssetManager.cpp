@@ -4,12 +4,15 @@
 namespace GGE
 {
 
-AssetManager::AssetManager(App* theApp) :
-	mApp(theApp),
+AssetManager* AssetManager::ms_instance = 0;
+
+AssetManager::AssetManager() :
+	mApp(NULL),
 	mDirectories(),
 	mImages(),
 	mConfigFiles()
 {
+	mApp = GGE::App::Instance();
 	mApp->mLog << "AssetManager::ctor()" << std::endl;
 }
 
@@ -20,6 +23,22 @@ AssetManager::~AssetManager()
 	mDirectories.clear();
 
 	mApp->mLog << "AssetManager::dtor()" << std::endl;
+}
+
+AssetManager* AssetManager::Instance()
+{
+	if(ms_instance == 0){
+		ms_instance = new AssetManager();
+	}
+	return ms_instance;
+}
+
+void AssetManager::Release()
+{
+	if(ms_instance){
+		delete ms_instance;
+	}
+	ms_instance = 0;
 }
 
 void AssetManager::AddDirectory( const std::string& directory )
@@ -290,7 +309,6 @@ ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
 	
 	// The image doesen't exists. Create it and save it.
 	ConfigReader* anConfigFile = new ConfigReader();
-	anConfigFile->RegisterApp(mApp);
 
 	// Search project's main directory
 	if( anConfigFile->Read(mApp->GetExecutableDir() + theFilename))
@@ -396,7 +414,6 @@ GGE::TmxMap& AssetManager::GetTmxMap(const std::string& theFilename)
 	
 	// The image doesen't exists. Create it and save it.
 	GGE::TmxMap map;
-	map.RegisterApp(mApp);
 
 	// Search project's main directory
 	if( map.LoadFromFile(mApp->GetExecutableDir() + theFilename ) )

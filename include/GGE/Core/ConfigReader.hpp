@@ -24,13 +24,6 @@ namespace GGE
     virtual ~ConfigReader();
 
     /**
-     * RegisterApp will register a pointer to the App class so it can be used
-     * by the WidgetManager for error handling and log reporting.
-     * @param[in] theApp is a pointer to the App (or App derived) class
-     */
-    void RegisterApp(App* theApp);
-
-    /**
      * IsSectionEmpty determines if theSection provided exists and has 1 or
      * more name, value pairs to retrieve.
      * @param[in] theSection to check
@@ -114,7 +107,7 @@ namespace GGE
     // Variables
     ///////////////////////////////////////////////////////////////////////////
     /// Pointer to the App class for error handling and logging
-    App*                  mApp;
+    App* mApp;
     /// Map to store all the sections and their corresponding name=value pairs
     std::map<const std::string, typeNameValue*> mSections;
 

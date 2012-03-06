@@ -1,13 +1,14 @@
 #include "Hero.hpp"
 #include <iostream>
 
-Hero::Hero(GGE::App* theApp) :
+Hero::Hero() :
 	mStatus(QUIET_DOWN),
-	mApp(theApp),
 	mTime(0.0f),
 	mFrame(1),
 	pos_ant(0)
 {
+	mApp = GGE::App::Instance();
+
 	struct anim left = {8, 2, 1, 4};
 	mAnim[WALK_LEFT] = left;
 	struct anim right = {8, 3, 1, 4};

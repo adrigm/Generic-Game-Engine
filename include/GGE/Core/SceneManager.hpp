@@ -3,17 +3,19 @@
 
 #include <map>
 #include <GGE/Core/Core_types.hpp>
-#include <GGE/Core/IScene.hpp>
+#include <GGE/Core/Scene.hpp>
 
 namespace GGE
 {
 
 class SceneManager
 {
+	// Puntero a la instancia única
+	static SceneManager* ms_instance;
 
 public:
-	SceneManager(App* theApp);
-	~SceneManager();
+	static SceneManager* Instance();
+	static void Release();
 
 	/**
 	 * Añade una escena a la pila de escenas inactivas
@@ -22,7 +24,7 @@ public:
 	 *
 	 * @param a_scene Puntero a la escena que vamos a añadir
 	 */
-	void AddScene(IScene* theScene);
+	void AddScene(Scene* theScene);
 
 
 	/**
@@ -66,6 +68,16 @@ public:
 	 */
 	void UpdateScene();
 
+	/**
+	 * Llama al método Resume de la escena activa
+	 */
+	void ResumeScene();
+
+	/**
+	 * Llama al método Pause de la escena activa
+	 */
+	void PauseScene();
+
 	bool HandleChangeScene();
 
 protected:
@@ -76,11 +88,11 @@ private:
 	// Declaramos la clase App friend
 	friend class App;
 	/// Escena actualmente activa
-	IScene* mActiveScene;
+	Scene* mActiveScene;
 	/// Próxima escena actica
 	SceneID mNextScene;
 	// Lista de escenas inacticas
-	std::map<SceneID, IScene*> mInactivesScenes;
+	std::map<SceneID, Scene*> mInactivesScenes;
 	
 	/**
 	 * Cambia la escena activa inmediatamente. USAR SetActiveScene() para
@@ -98,17 +110,8 @@ private:
 	 */
 	void RemoveAllScene();
 
-	/**
-	 * App copy constructor is private because we do not allow copies of
-	 * our Singleton class
-	 */
-	SceneManager(const SceneManager&);                 // Intentionally undefined
-
-	/**
-	 * Our assignment operator is private because we do not allow copies
-	 * of our Singleton class
-	 */
-	SceneManager& operator=(const SceneManager&);      // Intentionally undefined
+	SceneManager();
+	~SceneManager();
 
 }; // Class SceneManager
 
