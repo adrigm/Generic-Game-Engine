@@ -11,6 +11,9 @@ namespace GGE
 class Camera
 {
 public:
+	/// Visor de la Cámara
+	sf::View mView;
+
 	Camera();
 	~Camera();
 
@@ -26,8 +29,6 @@ public:
 private:
 	/// Puntero a App
 	App* mApp;
-	/// Visor de la Cámara
-	sf::View mView;
 	/// Puntero al Sprite conectado
 	sf::Sprite* mSprite;
 	/// Puntero al Mapa conectado

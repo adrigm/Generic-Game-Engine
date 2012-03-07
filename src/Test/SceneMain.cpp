@@ -13,7 +13,7 @@ SceneMain::~SceneMain()
 
 void SceneMain::Init()
 {
-	mApp->mAssetManager->AddDirectory("resources/");
+	mApp->mAssetManager->AddDirectory("Data/");
 	hero.SetImage(mApp->mAssetManager->GetImage("sprite.png"));
 	hero.SetGrid(4, 4);
 	hero.SetCenter(hero.GetWidth()/2, hero.GetHeight());
@@ -23,6 +23,14 @@ void SceneMain::Init()
 	mApp->mCamera->LockToMap(mapa);
 	this->AddActor(&hero);
 	this->SetBackgroundColor(sf::Color(200, 200, 200));
+	this->AddMap(&mapa);
+	GGE::TmxMap& tmx = mApp->mAssetManager->GetTmxMap("plat.tmx");
+	joya = new GGE::Actor();
+	joya->SetImage(mApp->mAssetManager->GetImage("tileset_platformer.png"));
+	joya->SetGrid(3, 4);
+	joya->SelectGid(3, 4);
+	joya->SetPosition(200, 200);
+	this->AddActor(joya);
 }
 
 void SceneMain::ReInit()
@@ -45,4 +53,5 @@ void SceneMain::Update()
 
 void SceneMain::Cleanup()
 {
+	delete joya;
 }

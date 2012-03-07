@@ -26,6 +26,7 @@ public:
 private:
 	Hero hero;
 	GGE::Map mapa;
+	GGE::Actor* joya;
 };
 
 #endif // SCENE_MAIN_HPP

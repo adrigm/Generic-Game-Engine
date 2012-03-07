@@ -27,10 +27,10 @@ void Tileset::Init(TmxMap* TheTmx)
 	{
 		// Cargamos las imagenes de los Tilesets en el AssetManager
 		std::string dir = TheTmx->mTilesets[i].GetFile();
-		sf::Sprite* sprite = new sf::Sprite();
-		sprite->SetImage(mApp->mAssetManager->GetImage(dir));
+		GGE::Actor* tile = new GGE::Actor();
+		tile->SetImage(mApp->mAssetManager->GetImage(dir));
 		mApp->mAssetManager->GetImage(dir).SetSmooth(false); // Mejor no suavizar los tiles
-		mImages.push_back(sprite);
+		mImages.push_back(tile);
 
 		// Almacenamos el Primer tile del tileset
 		mFirstgid.push_back(TheTmx->mTilesets[i].GetFirstGid());
@@ -62,8 +62,6 @@ void Tileset::Draw(int theIndx, sf::Vector2i thePos)
 {
 	// Numero del tileset del indice indicado
 	int numTileset = this->GetNumTileset(theIndx);
-	if (numTileset > 1)
-		std::cout << numTileset << std::endl;
 	if (numTileset != -1 && theIndx != 0)
 	{
 		// Seleccionamos el tileset

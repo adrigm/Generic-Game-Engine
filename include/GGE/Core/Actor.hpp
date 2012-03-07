@@ -11,12 +11,20 @@ namespace GGE
 class Actor : public sf::Sprite
 {
 public:
+	/// Orden de prioridad de dibujado
+	GGE::Int32 mZOrder;
+
 	Actor();
 	~Actor();
 	
+	void SetImage(const sf::Image& Img);
 
 	void SetGrid(const GGE::Uint32 theRows = 1, const GGE::Uint32 theCols = 1);
 	void SelectGid(const GGE::Uint32 theRows = 1, const GGE::Uint32 theCols = 1);
+
+	bool IsVisible() const;
+	void Show();
+	void Hide();
 
 	GGE::Uint32 GetWidth() const;
 	GGE::Uint32 GetHeight() const;
@@ -33,7 +41,7 @@ private:
 	/// Vector de Rects del Actor
 	std::vector<std::vector<sf::IntRect> > mRects;
 	/// Si el Actor es visible o no
-	bool mShow;
+	bool mVisible;
 	
 
 }; // Class Actor

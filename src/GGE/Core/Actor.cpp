@@ -9,12 +9,20 @@ Actor::Actor() :
 	mCols(1),
 	mWidth(0),
 	mHeight(0),
-	mShow(true)
+	mVisible(true),
+	mZOrder(2)
 {
 }
 
 Actor::~Actor()
 {
+}
+
+void Actor::SetImage(const sf::Image& Img)
+{
+	sf::Sprite::SetImage(Img);
+	mWidth = GetImage()->GetWidth();
+	mHeight = GetImage()->GetHeight();
 }
 
 void Actor::SetGrid(const GGE::Uint32 theRows, const GGE::Uint32 theCols)
@@ -33,7 +41,7 @@ void Actor::SetGrid(const GGE::Uint32 theRows, const GGE::Uint32 theCols)
 		mRects.push_back(anCol);
 		anCol.clear();
 	}
-	this->SetSubRect(mRects[0][0]); 
+	SetSubRect(mRects[0][0]); 
 }
 
 void Actor::SelectGid(const GGE::Uint32 theRows, const GGE::Uint32 theCols)
@@ -43,16 +51,27 @@ void Actor::SelectGid(const GGE::Uint32 theRows, const GGE::Uint32 theCols)
 
 GGE::Uint32 Actor::GetWidth() const
 {
-	if (mWidth == 0)
-		return this->GetImage()->GetWidth();
 	return mWidth;
 }
 
 GGE::Uint32 Actor::GetHeight() const
 {
-	if (mHeight == 0)
-		return this->GetImage()->GetHeight();
 	return mHeight;
+}
+
+bool Actor::IsVisible() const
+{
+	return mVisible;
+}
+
+void Actor::Show()
+{
+	mVisible = true;
+}
+
+void Actor::Hide()
+{
+	mVisible = false;
 }
 
 } // Namespace GGE

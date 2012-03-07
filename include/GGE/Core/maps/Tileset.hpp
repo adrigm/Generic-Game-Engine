@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <GGE/Core/App.hpp>
 #include <GGE/Core/tmx/tmx.hpp>
+#include <GGE/Core/Actor.hpp>
 
 namespace GGE
 {
@@ -42,7 +43,7 @@ private:
 	/// Puntero a APP
 	App* mApp;
 	/// Vector que contiene las imágenes
-	std::vector<sf::Sprite*> mImages;
+	std::vector<GGE::Actor*> mImages;
 	/// Vector que contiene el número del primer tile del tileset
 	std::vector<int> mFirstgid;
 	/// Vector que contiene los rets de los tilesets

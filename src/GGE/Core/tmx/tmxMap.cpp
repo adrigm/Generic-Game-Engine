@@ -144,10 +144,14 @@ bool TmxMap::LoadFromFile(std::string theFilename)
 			// Obtenemos la opacidad
 			if (node.attribute("opacity"))
 				anLayer.SetOpacity(node.attribute("opacity").as_double());
+			else
+				anLayer.SetOpacity(1.0);
 
 			// Obtenemos si es visible
 			if (node.attribute("visible"))
-				anLayer.SetOpacity(node.attribute("visible").as_bool());
+				anLayer.SetVisible(false);
+			else
+				anLayer.SetVisible(true);
 
 			// Obtenemos el nodo data
 			pugi::xml_node nodeData = node.child("data");

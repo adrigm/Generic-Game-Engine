@@ -1,4 +1,5 @@
 #include <GGE/Core/Scene.hpp>
+#include <iostream> // Quitar
 
 namespace GGE
 {
@@ -9,7 +10,8 @@ Scene::Scene(SceneID theID) :
 	mInit(false),
 	mPaused(false),
 	mCleanup(false),
-	mColorBack(0, 0, 0)
+	mColorBack(0, 0, 0),
+	mMap(NULL)
 {
 	mApp = GGE::App::Instance();
 }
@@ -89,12 +91,37 @@ void Scene::Update(void)
 
 void Scene::Draw(void)
 {
+	// Establecemos el color de fondo
 	mApp->mWindow.Clear(mColorBack);
+	
+	if (mMap != NULL)
+	{
+		mMap->Draw();
+	}
 
+	// Recorremos la lista de Actores de la escena para dibujarla
 	std::vector<GGE::Actor*>::const_iterator element;
 	for(element = mActors.begin(); element != mActors.end(); element++)
 	{
-		mApp->mWindow.Draw(**element);
+		GGE::Actor& actor = **element;
+
+		if (actor.IsVisible())
+		{
+			// Obtenemos un rect con las posiciones del Actor
+			sf::FloatRect pos;
+			pos.Top = actor.GetPosition().y - actor.GetCenter().y;
+			pos.Bottom = actor.GetPosition().y + actor.GetHeight() - actor.GetCenter().y;
+			pos.Left = actor.GetPosition().x - actor.GetCenter().x;
+			pos.Right = actor.GetPosition().x + actor.GetWidth() - actor.GetCenter().x;
+		
+			// Obtenemos el rect de la camara
+			sf::FloatRect camera = mApp->mCamera->mView.GetRect();
+
+			// Dibujamos solo los Actores que estén dentro de la cámara
+			if (pos.Top <= camera.Bottom && pos.Bottom >= camera.Top)
+				if (pos.Left <= camera.Right && pos.Right >= camera.Left)
+					mApp->mWindow.Draw(actor);
+		}
 	}
 }
 
@@ -104,14 +131,17 @@ void Scene::AddActor(GGE::Actor* theActor)
 	std::vector<GGE::Actor*>::iterator element;
 	element = std::find(mActors.begin(), mActors.end(), theActor);
 	if (element == mActors.end())
-	{
 		mActors.push_back(theActor);
-	}
 }
 
 void Scene::SetBackgroundColor(sf::Color theColor)
 {
 	mColorBack = theColor;
+}
+
+void Scene::AddMap(GGE::Map* theMap)
+{
+	mMap = theMap;
 }
 
 } // Namespace GGE

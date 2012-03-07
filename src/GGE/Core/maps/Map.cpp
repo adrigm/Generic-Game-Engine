@@ -60,12 +60,16 @@ void Map::Draw()
 	// Dibujamos los tilesets
 	for(int l = 0; l < mData.size(); l++)
 	{
-		for(int r = initial.y; r < limit_bottom.y+correctionY; r++)
+		// Comprobamos que la capa sea visible
+		if (mTmx->mLayers[l].GetVisible())
 		{
-			for (int c = initial.x; c < limit_right.x+correctionX; c++)
+			for(int r = initial.y; r < limit_bottom.y+correctionY; r++)
 			{
-				if (r >= 0 && c >= 0 && r < mHeight && c < mWidth && mData[l][r][c] != 0)
-					mTileset->Draw(mData[l][r][c], Plot(c, r));
+				for (int c = initial.x; c < limit_right.x+correctionX; c++)
+				{
+					if (r >= 0 && c >= 0 && r < mHeight && c < mWidth && mData[l][r][c] != 0)
+						mTileset->Draw(mData[l][r][c], Plot(c, r));
+				}
 			}
 		}
 	}

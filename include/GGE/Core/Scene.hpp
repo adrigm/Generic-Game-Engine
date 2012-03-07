@@ -16,6 +16,7 @@
 #include <GGE/Core/Core_types.hpp>
 #include <GGE/Core/App.hpp>
 #include <GGE/Core/Actor.hpp>
+#include <GGE/Core/maps/Map.hpp>
 
 namespace GGE
 {
@@ -92,6 +93,8 @@ public:
 
 	void AddActor(GGE::Actor* theActor);
 
+	void AddMap(GGE::Map* theMap);
+
 	void SetBackgroundColor(sf::Color theColor);
 
 protected:
@@ -119,6 +122,8 @@ private:
 	std::vector<GGE::Actor*> mActors;
 	/// Color de fondo de la escena
 	sf::Color mColorBack;
+	/// Puntero al mapa de la escena si lo hay
+	GGE::Map* mMap;
 
 	/**
 	 * Our copy constructor is private because we do not allow copies of
