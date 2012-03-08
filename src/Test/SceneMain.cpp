@@ -27,8 +27,8 @@ void SceneMain::Init()
 	GGE::TmxMap& tmx = mApp->mAssetManager->GetTmxMap("plat.tmx");
 	joya = new GGE::Actor();
 	joya->SetImage(mApp->mAssetManager->GetImage("tileset_platformer.png"));
-	joya->SetGrid(3, 4);
-	joya->SelectGid(3, 4);
+	joya->AddRects(sf::IntRect(120, 64, 160, 96));
+	joya->SelectRect(0);
 	joya->SetPosition(200, 200);
 	this->AddActor(joya);
 }

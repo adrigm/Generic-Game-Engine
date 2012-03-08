@@ -44,9 +44,29 @@ void Actor::SetGrid(const GGE::Uint32 theRows, const GGE::Uint32 theCols)
 	SetSubRect(mRects[0][0]); 
 }
 
-void Actor::SelectGid(const GGE::Uint32 theRows, const GGE::Uint32 theCols)
+void Actor::SelectGid(const GGE::Uint32 theRow, const GGE::Uint32 theCol)
 {
-	SetSubRect(mRects[theRows-1][theCols-1]);
+	if (theRow <= mRects.size() && theRow > 0)
+		if (theCol <= mRects[0].size() && theCol > 0)
+			SetSubRect(mRects[theRow-1][theCol-1]);
+}
+
+void Actor::AddRects(const std::vector<sf::IntRect> theListRects)
+{
+	mListRects.insert(mListRects.end(), theListRects.begin(), theListRects.end());
+}
+
+void Actor::AddRects(const sf::IntRect theRect)
+{
+	mListRects.push_back(theRect);
+}
+
+void Actor::SelectRect(const GGE::Uint32 theNumRect)
+{
+	if (theNumRect < mListRects.size())
+	{
+		SetSubRect(mListRects[theNumRect]);
+	}
 }
 
 GGE::Uint32 Actor::GetWidth() const

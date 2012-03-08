@@ -20,7 +20,11 @@ public:
 	void SetImage(const sf::Image& Img);
 
 	void SetGrid(const GGE::Uint32 theRows = 1, const GGE::Uint32 theCols = 1);
-	void SelectGid(const GGE::Uint32 theRows = 1, const GGE::Uint32 theCols = 1);
+	void SelectGid(const GGE::Uint32 theRow = 1, const GGE::Uint32 theCol = 1);
+
+	void AddRects(const std::vector<sf::IntRect> theListRects);
+	void AddRects(const sf::IntRect theRect);
+	void SelectRect(const GGE::Uint32 theNumRect);
 
 	bool IsVisible() const;
 	void Show();
@@ -38,8 +42,10 @@ private:
 	GGE::Uint32 mWidth;
 	/// Alto del Actor
 	GGE::Uint32 mHeight;
-	/// Vector de Rects del Actor
+	/// Vector de Rects del Actor en filas y columnas
 	std::vector<std::vector<sf::IntRect> > mRects;
+	/// Lista de Rects del Actor
+	std::vector<sf::IntRect> mListRects;
 	/// Si el Actor es visible o no
 	bool mVisible;
 	
