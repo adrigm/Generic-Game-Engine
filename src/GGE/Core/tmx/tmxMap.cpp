@@ -305,4 +305,15 @@ GGE::Uint32 TmxMap::GetTileHeight() const
 	return mTileHeight;
 }
 
+GGE::TmxLayer TmxMap::GetTmxLayerbyName(const std::string theName) const
+{
+	for (int layer = 0; layer != mLayers.size(); layer++)
+	{
+		if (mLayers[layer].GetName() == theName)
+			return mLayers[layer];
+	}
+	GGE::TmxLayer empty;
+	return empty;
+}
+
 } // Namespace GGE

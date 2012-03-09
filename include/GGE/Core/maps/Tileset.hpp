@@ -18,13 +18,6 @@ public:
 	~Tileset();
 
 	/**
-	 * Registers the application described by theApp.
-	 * 
-	 * @param [in,out]	theApp	If non-null, the application.
-	 */
-	void RegisterApp(App* theApp);
-
-	/**
 	 * Inicializa el tileset.
 	 *
 	 * @param [in,out]	TheTmx	Puntero al archivo tmx.
@@ -38,6 +31,20 @@ public:
 	 * @param	thePos 	Vector con la posición en la que se dibujará.
 	 */
 	void Draw(int theIndx, sf::Vector2i thePos);
+
+	/**
+	 * Devuelve el Rect de un tile del tileset
+	 *
+	 * @param	theIndx	el indice del tile a devolver.
+	 */
+	sf::IntRect GetRect(const int theIndx);
+
+	/**
+	 * Devuelve un actor con la imagen de un tileset
+	 *
+	 * @param	theIndx	el indice del tile a devolver.
+	 */
+	GGE::Actor* GetImage(const int theIndx);
 
 private:
 	/// Puntero a APP

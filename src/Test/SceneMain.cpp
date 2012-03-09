@@ -13,6 +13,7 @@ SceneMain::~SceneMain()
 
 void SceneMain::Init()
 {
+	AM = GGE::AssetManager::Instance();
 	mApp->mAssetManager->AddDirectory("Data/");
 	hero.SetImage(mApp->mAssetManager->GetImage("sprite.png"));
 	hero.SetGrid(4, 4);
@@ -24,13 +25,16 @@ void SceneMain::Init()
 	this->AddActor(&hero);
 	this->SetBackgroundColor(sf::Color(200, 200, 200));
 	this->AddMap(&mapa);
-	GGE::TmxMap& tmx = mApp->mAssetManager->GetTmxMap("plat.tmx");
-	joya = new GGE::Actor();
-	joya->SetImage(mApp->mAssetManager->GetImage("tileset_platformer.png"));
-	joya->AddRects(sf::IntRect(120, 64, 160, 96));
-	joya->SelectRect(0);
-	joya->SetPosition(200, 200);
-	this->AddActor(joya);
+
+	std::vector<GGE::Actor*> joyas = mapa.LayerToActors("diamantes");
+	this->AddActors(joyas);
+	cir = sf::Shape::Circle(100, 100, 50, sf::Color(0,0,0,0), -1, sf::Color(0,255,0));
+
+	GGE::FloatCircle m = GGE::FloatCircle(sf::Vector2f(20, 20), 50.0f);
+	m.Offset(50, 35.4f);
+	std::cout << m.Center.x << ", " << m.Center.y << std::endl;
+	std::cout << m.Radius << std::endl;
+	std::cout << m.GetDiameter() << std::endl;
 }
 
 void SceneMain::ReInit()
@@ -43,6 +47,8 @@ void SceneMain::Events(sf::Event theEvent)
 	{
 		if (theEvent.Key.Code == sf::Key::Escape)
 			mApp->Quit(GGE::StatusAppOK);
+		if (theEvent.Key.Code == sf::Key::Space)
+			this->QuitActor(&hero);
 	}
 }
 
@@ -53,5 +59,4 @@ void SceneMain::Update()
 
 void SceneMain::Cleanup()
 {
-	delete joya;
 }

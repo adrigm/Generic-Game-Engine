@@ -6,20 +6,16 @@ namespace GGE
 
 Tileset::Tileset()
 {
+	mApp = GGE::App::Instance();
 }
 
 Tileset::~Tileset()
 {
 }
 
-void Tileset::RegisterApp(App* theApp)
-{
-	mApp = theApp;
-}
-
 void Tileset::Init(TmxMap* TheTmx)
 {
-	// Insertamos un rect vacio en los Rects ya que se empieza a contar en el 1 el 0 es sin tile
+	// Insertamos un Rect vacio en los Rects ya que se empieza a contar en el 1 el 0 es sin tile
 	mRects.push_back(sf::IntRect(0, 0, 0, 0));
 
 	int numTilesets = TheTmx->mTilesets.size();
@@ -35,7 +31,7 @@ void Tileset::Init(TmxMap* TheTmx)
 		// Almacenamos el Primer tile del tileset
 		mFirstgid.push_back(TheTmx->mTilesets[i].GetFirstGid());
 
-		// Almacenamos los rects de diferentes tiles
+		// Almacenamos los Rects de diferentes tiles
 		int width = TheTmx->mTilesets[i].GetWidth();
 		int height = TheTmx->mTilesets[i].GetHeight();
 		int tileWidth = TheTmx->mTilesets[i].GetTileWidth();
@@ -51,8 +47,8 @@ void Tileset::Init(TmxMap* TheTmx)
 				unsigned int y1 = r * tileHeight;
 				unsigned int x2 = x1 + tileWidth;
 				unsigned int y2 = y1 + tileHeight;
-				sf::IntRect rect(x1, y1, x2, y2);
-				mRects.push_back(rect);
+				sf::IntRect Rect(x1, y1, x2, y2);
+				mRects.push_back(Rect);
 			}
 		}
 	}
@@ -83,6 +79,31 @@ int Tileset::GetNumTileset(int theIndx) const
 		}
 	}
 	return -1;
+}
+
+sf::IntRect Tileset::GetRect(int theIndx)
+{
+	// Numero del tileset del indice indicado
+	int numTileset = this->GetNumTileset(theIndx);
+	if (numTileset != -1 && theIndx != 0)
+	{
+		return mRects[theIndx];
+	}
+	// Devolvemos un Rect vacío
+	return mRects[0];
+}
+
+GGE::Actor* Tileset::GetImage(const int theIndx)
+{
+	// Numero del tileset del indice indicado
+	int numTileset = this->GetNumTileset(theIndx);
+	if (numTileset != -1 && theIndx != 0)
+	{
+		return mImages[numTileset];
+	}
+	// Devolvemos una imagen al prime
+	GGE::Actor* actor = new GGE::Actor();
+	return actor;
 }
 
 } // Namespace GGE

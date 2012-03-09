@@ -100,21 +100,22 @@ void Scene::Draw(void)
 	}
 
 	// Recorremos la lista de Actores de la escena para dibujarla
-	std::vector<GGE::Actor*>::const_iterator element;
+	std::list<GGE::Actor*>::const_iterator element;
 	for(element = mActors.begin(); element != mActors.end(); element++)
 	{
 		GGE::Actor& actor = **element;
 
 		if (actor.IsVisible())
 		{
-			// Obtenemos un rect con las posiciones del Actor
+			// Obtenemos un Rect con las posiciones del Actor
 			sf::FloatRect pos;
 			pos.Top = actor.GetPosition().y - actor.GetCenter().y;
 			pos.Bottom = actor.GetPosition().y + actor.GetHeight() - actor.GetCenter().y;
 			pos.Left = actor.GetPosition().x - actor.GetCenter().x;
 			pos.Right = actor.GetPosition().x + actor.GetWidth() - actor.GetCenter().x;
+
 		
-			// Obtenemos el rect de la camara
+			// Obtenemos el Rect de la camara
 			sf::FloatRect camera = mApp->mCamera->mView.GetRect();
 
 			// Dibujamos solo los Actores que estén dentro de la cámara
@@ -127,12 +128,62 @@ void Scene::Draw(void)
 
 void Scene::AddActor(GGE::Actor* theActor)
 {
-	// Comprobamos que el Actor no esté añadido ya a la escena
-	std::vector<GGE::Actor*>::iterator element;
-	element = std::find(mActors.begin(), mActors.end(), theActor);
-	if (element == mActors.end())
+	if (mActors.empty())
+	{
 		mActors.push_back(theActor);
+		return;
+	}
+
+	std::list<GGE::Actor*>::iterator it;
+	for (it = mActors.begin(); it != mActors.end(); it++)
+	{
+		if (theActor->mZOrder < (*it)->mZOrder)
+		{
+			mActors.insert(it, theActor);
+			mActors.unique();
+			return;
+		}
+	}
+	mActors.push_back(theActor);
+	mActors.unique();
 }
+
+void Scene::AddActors(std::vector<GGE::Actor*> theList)
+{
+	for (int i = 0; i < theList.size(); i++)
+	{
+		AddActor(theList[i]);
+	}
+}
+
+void Scene::QuitActor(GGE::Actor* theActor)
+{
+	mActors.remove(theActor);
+}
+
+void Scene::QuitActors(std::vector<GGE::Actor*> theList)
+{
+	for (int i = 0; i < theList.size(); i++)
+	{
+		QuitActor(theList[i]);
+	}
+}
+
+
+void Scene::DeleteActor(GGE::Actor* theActor)
+{
+	mActors.remove(theActor);
+	delete theActor;
+}
+
+void Scene::DeleteActors(std::vector<GGE::Actor*> theList)
+{
+	for (int i = 0; i < theList.size(); i++)
+	{
+		DeleteActor(theList[i]);
+	}
+}
+
 
 void Scene::SetBackgroundColor(sf::Color theColor)
 {
@@ -142,6 +193,11 @@ void Scene::SetBackgroundColor(sf::Color theColor)
 void Scene::AddMap(GGE::Map* theMap)
 {
 	mMap = theMap;
+}
+
+void Scene::QuitMap()
+{
+	mMap = NULL;
 }
 
 } // Namespace GGE

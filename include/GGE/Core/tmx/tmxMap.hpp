@@ -36,6 +36,8 @@ public:
 	GGE::Uint32 GetHeight() const;
 	GGE::Uint32 GetTileWidth() const;
 	GGE::Uint32 GetTileHeight() const;
+
+	GGE::TmxLayer GetTmxLayerbyName(const std::string theName) const;
 	
 
 private:

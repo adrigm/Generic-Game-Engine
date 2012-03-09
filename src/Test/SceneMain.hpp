@@ -1,6 +1,7 @@
 #ifndef SCENE_MAIN_HPP
 #define SCENE_MAIN_HPP
 
+#include <vector>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <GGE/Core.hpp>
@@ -24,9 +25,11 @@ public:
 	virtual void Cleanup();
 
 private:
+	GGE::AssetManager* AM;
 	Hero hero;
 	GGE::Map mapa;
-	GGE::Actor* joya;
+	std::vector<GGE::Actor*> joyas;
+	sf::Shape cir;
 };
 
 #endif // SCENE_MAIN_HPP

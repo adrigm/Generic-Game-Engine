@@ -5,8 +5,8 @@ namespace GGE
 {
 
 Map::Map() :
-	correctionX(0),
-	correctionY(0)
+	corRectionX(0),
+	corRectionY(0)
 {
 	mApp = GGE::App::Instance();
 }
@@ -20,7 +20,6 @@ bool Map::Load(TmxMap& theTmx)
 {
 	mTmx = &theTmx;
 	mTileset = new Tileset();
-	mTileset->RegisterApp(mApp);
 	mTileset->Init(mTmx);
 	mWidth = mTmx->GetWidth();
 	mHeight = mTmx->GetHeight();
@@ -48,14 +47,14 @@ void Map::Draw()
 
 	// Comprobamos si tenemos que añadir una linea mas de tiles al final de filas y columnas
 	if (limit_right.x >= mWidth)
-		correctionX = 0;
+		corRectionX = 0;
 	else
-		correctionX = 1;
+		corRectionX = 1;
 
 	if (limit_bottom.y >= mHeight)
-		correctionY = 0;
+		corRectionY = 0;
 	else
-		correctionY = 1;
+		corRectionY = 1;
 
 	// Dibujamos los tilesets
 	for(int l = 0; l < mData.size(); l++)
@@ -63,9 +62,9 @@ void Map::Draw()
 		// Comprobamos que la capa sea visible
 		if (mTmx->mLayers[l].GetVisible())
 		{
-			for(int r = initial.y; r < limit_bottom.y+correctionY; r++)
+			for(int r = initial.y; r < limit_bottom.y+corRectionY; r++)
 			{
-				for (int c = initial.x; c < limit_right.x+correctionX; c++)
+				for (int c = initial.x; c < limit_right.x+corRectionX; c++)
 				{
 					if (r >= 0 && c >= 0 && r < mHeight && c < mWidth && mData[l][r][c] != 0)
 						mTileset->Draw(mData[l][r][c], Plot(c, r));
@@ -121,6 +120,30 @@ GGE::Uint32 Map::GetTileWidth() const
 GGE::Uint32 Map::GetTileHeight() const
 {
 	return mTileHeight;
+}
+
+std::vector<GGE::Actor*> Map::LayerToActors(const std::string theName)
+{
+	std::vector<GGE::Actor*> list;
+
+	GGE::TmxLayer& layer = mTmx->GetTmxLayerbyName(theName);
+	for (int r = 0; r < layer.mTiles.size(); r++)
+	{
+		for (int c = 0; c < layer.mTiles[0].size(); c++)
+		{
+			if (layer.mTiles[r][c] != 0)
+			{
+				GGE::Actor* actor = new Actor();
+				const sf::Image* image = mTileset->GetImage(layer.mTiles[r][c])->GetImage();
+				actor->SetImage(*image);
+				actor->AddRects(mTileset->GetRect(layer.mTiles[r][c]));
+				actor->SelectRect(0);
+				actor->SetPosition(c*mTileWidth, r*mTileHeight);
+				list.push_back(actor);
+			}
+		}
+	}
+	return list;
 }
 
 } // Namespace GGE

@@ -32,7 +32,9 @@
     <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxObjectgroup.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxPropertiesSet.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxTileset.hpp" />
+    <ClInclude Include="..\..\..\include\GGE\Core\utils\ActorsUtils.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\utils\base64.hpp" />
+    <ClInclude Include="..\..\..\include\GGE\Core\utils\Circle.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\utils\pugixml.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\utils\StringUtils.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\utils\zlib.hpp" />
@@ -55,10 +57,14 @@
     <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxObjectgroup.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxPropertiesSet.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxTileset.cpp" />
+    <ClCompile Include="..\..\..\src\GGE\Core\utils\ActorsUtils.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\utils\base64.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\utils\pugixml.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\utils\StringUtils.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\GGE\Core\utils\Circle.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8FB6900A-F27B-4617-BFEA-6CC955F6916C}</ProjectGuid>

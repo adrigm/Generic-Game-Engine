@@ -11,7 +11,7 @@
 #define SCENE_H
 
 #include <algorithm>
-#include <vector>
+#include <list>
 #include <SFML/Graphics.hpp>
 #include <GGE/Core/Core_types.hpp>
 #include <GGE/Core/App.hpp>
@@ -92,8 +92,15 @@ public:
 	void Draw(void);
 
 	void AddActor(GGE::Actor* theActor);
+	void QuitActor(GGE::Actor* theActor);
+	void DeleteActor(GGE::Actor* theActor);
+
+	void AddActors(std::vector<GGE::Actor*> theList);
+	void QuitActors(std::vector<GGE::Actor*> theList);
+	void DeleteActors(std::vector<GGE::Actor*> theList);
 
 	void AddMap(GGE::Map* theMap);
+	void QuitMap();
 
 	void SetBackgroundColor(sf::Color theColor);
 
@@ -119,7 +126,7 @@ private:
 	/// Comprueba si la escena está pausada
 	bool mPaused;
 	/// Lista de Actores a dibujar
-	std::vector<GGE::Actor*> mActors;
+	std::list<GGE::Actor*> mActors;
 	/// Color de fondo de la escena
 	sf::Color mColorBack;
 	/// Puntero al mapa de la escena si lo hay

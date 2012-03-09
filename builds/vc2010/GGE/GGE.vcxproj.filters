@@ -120,6 +120,12 @@
     <ClInclude Include="..\..\..\include\GGE\Core\Scene.hpp">
       <Filter>Archivos de encabezado\GGE\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\utils\ActorsUtils.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\utils\Circle.hpp">
+      <Filter>Archivos de encabezado\GGE\Core\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\GGE\Core\SceneManager.cpp">
@@ -185,5 +191,13 @@
     <ClCompile Include="..\..\..\src\GGE\Core\Scene.cpp">
       <Filter>Archivos de código fuente\GGE\Core</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\utils\ActorsUtils.cpp">
+      <Filter>Archivos de código fuente\GGE\Core\utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\include\GGE\Core\utils\Circle.inl">
+      <Filter>Archivos de encabezado\GGE\Core\utils</Filter>
+    </None>
   </ItemGroup>
 </Project>

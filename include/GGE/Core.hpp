@@ -15,6 +15,7 @@
 #include <GGE/Config.hpp>
 
 // GGE Core includes
+#include <GGE/Core/utils/Circle.hpp>
 #include <GGE/Core/App.hpp>
 #include <GGE/Core/Scene.hpp>
 #include <GGE/Core/AssetManager.hpp>

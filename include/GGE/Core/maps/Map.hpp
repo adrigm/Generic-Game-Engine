@@ -1,6 +1,7 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
+#include <vector>
 #include <GGE/Config.hpp>
 #include <GGE/Core/App.hpp>
 #include <GGE/Core/Actor.hpp>
@@ -20,8 +21,6 @@ public:
 	void Update();
 	void Draw();
 
-	void SetScrollParallax(GGE::Actor& thePlayer);
-
 	GGE::Uint32 GetTile(int theLayer, int theRow, int theCol);
 	void SetTile(int theLayer, int theRow, int theCol, int theValue);
 
@@ -33,6 +32,9 @@ public:
 
 	sf::Vector2i Plot(int TheCol, int TheRow);
 	sf::Vector2i MouseMap(int x, int y);
+
+	std::vector<GGE::Actor*> LayerToActors(const std::string theName);
+	std::vector<GGE::Actor*> LayerToActors(const int theNum);
 	
 private:
 	/// Puntero a la aplicacion
@@ -51,9 +53,11 @@ private:
 	Tileset* mTileset;
 	// Data
 	std::vector<std::vector<std::vector<GGE::Uint32> > > mData;
+	/// Vector de tiles del mapa
+	std::vector<std::vector<std::vector<GGE::Actor*> > > mTiles;
 
-	int correctionX;
-	int correctionY;
+	int corRectionX;
+	int corRectionY;
 };
 
 } // Namespace GGE
