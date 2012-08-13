@@ -10,7 +10,9 @@ Actor::Actor() :
 	mWidth(0),
 	mHeight(0),
 	mVisible(true),
-	mZOrder(2)
+	mZOrder(2),
+	mRectCollision(0, 0, 0, 0),
+	mDefineRectCollision(false)
 {
 }
 
@@ -23,6 +25,14 @@ void Actor::SetImage(const sf::Image& Img)
 	sf::Sprite::SetImage(Img);
 	mWidth = GetImage()->GetWidth();
 	mHeight = GetImage()->GetHeight();
+	
+	if (!mDefineRectCollision)
+	{
+		mRectCollision.Left = GetPosition().x;
+		mRectCollision.Right = GetPosition().x + mWidth;
+		mRectCollision.Top = GetPosition().y;
+		mRectCollision.Bottom = GetPosition().y + mHeight;
+	}
 }
 
 void Actor::SetGrid(const GGE::Uint32 theRows, const GGE::Uint32 theCols)
@@ -42,6 +52,15 @@ void Actor::SetGrid(const GGE::Uint32 theRows, const GGE::Uint32 theCols)
 		anCol.clear();
 	}
 	SetSubRect(mRects[0][0]); 
+	
+	if (!mDefineRectCollision)
+	{
+		mRectCollision.Left = GetPosition().x;
+		mRectCollision.Right = GetPosition().x + mWidth;
+		mRectCollision.Top = GetPosition().y;
+		mRectCollision.Bottom = GetPosition().y + mHeight;
+	}
+
 }
 
 void Actor::SelectGid(const GGE::Uint32 theRow, const GGE::Uint32 theCol)
@@ -66,6 +85,13 @@ void Actor::SelectRect(const GGE::Uint32 theNumRect)
 	if (theNumRect < mListRects.size())
 	{
 		SetSubRect(mListRects[theNumRect]);
+		mWidth = mListRects[theNumRect].Right - mListRects[theNumRect].Left;
+		mHeight = mListRects[theNumRect].Bottom - mListRects[theNumRect].Top;
+
+		mRectCollision.Left = GetPosition().x;
+		mRectCollision.Right = GetPosition().x + mWidth;
+		mRectCollision.Top = GetPosition().y;
+		mRectCollision.Bottom = GetPosition().y + mHeight;
 	}
 }
 
@@ -93,5 +119,72 @@ void Actor::Hide()
 {
 	mVisible = false;
 }
+
+sf::FloatRect Actor::GetRectCollision() const
+{
+	return mRectCollision;
+}
+
+void Actor::SetRectCollision(const sf::FloatRect theRect)
+{
+	mRectCollision = theRect;
+	mDefineRectCollision = true;
+}
+
+void Actor::SetPosition(float X, float Y)
+{
+	sf::Sprite::SetPosition(X, Y);
+
+	mRectCollision.Left = this->GetPosition().x - this->GetCenter().x + mRectCollision.Left;
+	mRectCollision.Right = this->GetPosition().x - this->GetCenter().x + mRectCollision.Right;
+	mRectCollision.Top =  this->GetPosition().y - this->GetCenter().y + mRectCollision.Top;
+	mRectCollision.Bottom = this->GetPosition().y - this->GetCenter().y + mRectCollision.Bottom;
+	
+	/*mRectCollision.Left = X - this->GetCenter().x;
+	mRectCollision.Top = Y - this->GetCenter().y;
+	mRectCollision.Right = mRectCollision.Left + mWidth;
+	mRectCollision.Bottom = mRectCollision.Top + mHeight;*/
+}
+
+void Actor::SetPosition(const sf::Vector2f& Position)
+{
+	sf::Sprite::SetPosition(Position);
+
+	mRectCollision.Left = this->GetPosition().x - this->GetCenter().x + mRectCollision.Left;
+	mRectCollision.Right = this->GetPosition().x - this->GetCenter().x + mRectCollision.Right;
+	mRectCollision.Top =  this->GetPosition().y - this->GetCenter().y + mRectCollision.Top;
+	mRectCollision.Bottom = this->GetPosition().y - this->GetCenter().y + mRectCollision.Bottom;
+
+	/*mRectCollision.Left = Position.x - this->GetCenter().x;
+	mRectCollision.Top = Position.y - this->GetCenter().y;
+	mRectCollision.Right = mRectCollision.Left + mWidth;
+	mRectCollision.Bottom = mRectCollision.Top + mHeight;*/
+}
+
+ void Actor::SetX(float X)
+ {
+	sf::Sprite::SetX(X);
+	mRectCollision.Left = X - this->GetCenter().x;
+	mRectCollision.Right = mRectCollision.Left + mWidth;
+ }
+
+ void Actor::SetY(float Y)
+ {
+	sf::Sprite::SetY(Y);
+	mRectCollision.Top = Y - this->GetCenter().y;
+	mRectCollision.Bottom = mRectCollision.Top + mHeight;
+ }
+
+ void Actor::Move(float OffsetX, float OffsetY)
+ {
+	sf::Sprite::Move(OffsetX, OffsetY);
+	mRectCollision.Offset(OffsetX, OffsetY);
+ }
+
+ void Actor::Move(const sf::Vector2f& Offset)
+ {
+	sf::Sprite::Move(Offset);
+	mRectCollision.Offset(Offset.x, Offset.y);
+ }
 
 } // Namespace GGE

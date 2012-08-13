@@ -206,6 +206,14 @@ void App::Loop()
 			case sf::Event::LostFocus:		// La ventana pierde el foco
 				mSceneManager->PauseScene();
 				break;
+#ifndef NDEBUG // Modo colisiones solo debug
+			case sf::Event::KeyPressed:
+				if (event.Key.Code == sf::Key::F9)
+					if (mSceneManager->IsVisibleCollisionAreaScene())
+						mSceneManager->VisibleCollision(false);
+					else
+						mSceneManager->VisibleCollision(true);
+#endif
 			default:	// Otros eventos se los pasamos a la ecena activa
 				mSceneManager->EventScene(event);
 			} // switch (event.Type)

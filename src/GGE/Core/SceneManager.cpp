@@ -187,4 +187,14 @@ bool SceneManager::HandleChangeScene()
 	return true;
 }
 
+bool SceneManager::IsVisibleCollisionAreaScene() const
+{
+	return mActiveScene->IsVisibleCollision();
+}
+
+void SceneManager::VisibleCollision(bool vis)
+{
+	mActiveScene->VisibleCollision(vis);
+}
+
 } // Namespace GGE

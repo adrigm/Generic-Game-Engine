@@ -269,8 +269,12 @@ bool TmxMap::LoadFromFile(std::string theFilename)
 						std::string value = Layerprop.attribute("value").value();
 						object.mProperties.SetProperty(name, value);
 					}
+
+					anObjectGroup.mObjects.push_back(object);
 				}
 			}
+
+			this->mObjectGroups.push_back(anObjectGroup);
 		}
 	}
 }
@@ -313,6 +317,17 @@ GGE::TmxLayer TmxMap::GetTmxLayerbyName(const std::string theName) const
 			return mLayers[layer];
 	}
 	GGE::TmxLayer empty;
+	return empty;
+}
+
+GGE::TmxObjectGroup TmxMap::GetTmxObjetGroupbyName(const std::string theName) const
+{
+	for (int layer = 0; layer != mObjectGroups.size(); layer++)
+	{
+		if (mObjectGroups[layer].GetName() == theName)
+			return mObjectGroups[layer];
+	}
+	GGE::TmxObjectGroup empty;
 	return empty;
 }
 

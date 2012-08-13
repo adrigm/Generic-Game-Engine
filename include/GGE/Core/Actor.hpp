@@ -4,6 +4,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include <GGE/Config.hpp>
+#include <GGE/Core/utils/Circle.hpp>
 
 namespace GGE
 {
@@ -33,6 +34,18 @@ public:
 	GGE::Uint32 GetWidth() const;
 	GGE::Uint32 GetHeight() const;
 
+	sf::FloatRect GetRectCollision() const;
+	void SetRectCollision(const sf::FloatRect theRect);
+
+	void SetPosition(float X, float Y);
+	void SetPosition(const sf::Vector2f& Position);
+
+	void SetX(float X);
+	void SetY(float Y);
+
+	void Move(float OffsetX, float OffsetY);
+	void Move(const sf::Vector2f& Offset);
+
 private:
 	/// Filas del Actor
 	GGE::Uint32 mRows;
@@ -48,6 +61,10 @@ private:
 	std::vector<sf::IntRect> mListRects;
 	/// Si el Actor es visible o no
 	bool mVisible;
+	/// Rectángulo de colision
+	sf::FloatRect mRectCollision;
+	/// Comprueba si se ha establecido el RectCollision
+	bool mDefineRectCollision;
 	
 
 }; // Class Actor

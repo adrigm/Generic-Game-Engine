@@ -13,13 +13,17 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\Test\Hero.cpp" />
     <ClCompile Include="..\..\..\src\Test\main.cpp" />
+    <ClCompile Include="..\..\..\src\Test\Player.cpp" />
     <ClCompile Include="..\..\..\src\Test\SceneMain.cpp" />
     <ClCompile Include="..\..\..\src\Test\SceneMenu.cpp" />
+    <ClCompile Include="..\..\..\src\Test\ScenePlatform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\Test\Hero.hpp" />
+    <ClInclude Include="..\..\..\src\Test\Player.hpp" />
     <ClInclude Include="..\..\..\src\Test\SceneMain.hpp" />
     <ClInclude Include="..\..\..\src\Test\SceneMenu.hpp" />
+    <ClInclude Include="..\..\..\src\Test\ScenePlatform.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4DF7704E-4654-49CA-86C4-A095ADB1D915}</ProjectGuid>

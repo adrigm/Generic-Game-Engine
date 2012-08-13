@@ -11,7 +11,8 @@ Scene::Scene(SceneID theID) :
 	mPaused(false),
 	mCleanup(false),
 	mColorBack(0, 0, 0),
-	mMap(NULL)
+	mMap(NULL),
+	mShowCollision(false)
 {
 	mApp = GGE::App::Instance();
 }
@@ -121,7 +122,18 @@ void Scene::Draw(void)
 			// Dibujamos solo los Actores que estén dentro de la cámara
 			if (pos.Top <= camera.Bottom && pos.Bottom >= camera.Top)
 				if (pos.Left <= camera.Right && pos.Right >= camera.Left)
+				{
 					mApp->mWindow.Draw(actor);
+					// Comprobamos si debemos dibujar las colisiones
+					if (mShowCollision)
+					{
+						sf::Shape rect = sf::Shape::Rectangle(actor.GetRectCollision().Left,
+							actor.GetRectCollision().Top, actor.GetRectCollision().Right,
+							actor.GetRectCollision().Bottom, sf::Color(0,0,0,0), -1.0f,
+							sf::Color(0,255,0));
+						mApp->mWindow.Draw(rect);
+					}
+				}
 		}
 	}
 }
@@ -198,6 +210,16 @@ void Scene::AddMap(GGE::Map* theMap)
 void Scene::QuitMap()
 {
 	mMap = NULL;
+}
+
+bool Scene::IsVisibleCollision() const
+{
+	return mShowCollision;
+}
+
+void Scene::VisibleCollision(bool visibility)
+{
+	mShowCollision = visibility;
 }
 
 } // Namespace GGE

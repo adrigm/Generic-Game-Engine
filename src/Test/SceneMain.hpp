@@ -29,7 +29,9 @@ private:
 	Hero hero;
 	GGE::Map mapa;
 	std::vector<GGE::Actor*> joyas;
+	std::vector<GGE::Actor*> plat;
 	sf::Shape cir;
+	GGE::Actor suelo;
 };
 
 #endif // SCENE_MAIN_HPP

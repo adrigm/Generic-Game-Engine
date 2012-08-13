@@ -7,7 +7,7 @@
  */
 
 #include <GGE/Core/App.hpp>
-#include "SceneMain.hpp"
+#include "ScenePlatform.hpp"
 
 int main(int argc, char* argv[])
 {	
@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 	anApp->ProcessArguments(argc, argv);
 
 	// Establecemos la escena inicial del juego
-	anApp->SetFirstScene(new SceneMain("Main"));
+	anApp->SetFirstScene(new ScenePlatform("Platform"));
 	
 	// Ejecutamos la aplicación
 	anExitCode = anApp->Run();

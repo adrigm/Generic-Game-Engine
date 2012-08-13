@@ -80,6 +80,9 @@ public:
 
 	bool HandleChangeScene();
 
+	bool IsVisibleCollisionAreaScene() const;
+	void VisibleCollision(bool vis); 
+
 protected:
 	// Puntero a la aplicación
 	App* mApp;

@@ -24,6 +24,8 @@ public:
 	std::vector<TmxTileset> mTilesets;
 	/// Lista de capas
 	std::vector<TmxLayer> mLayers;
+	/// Lista de objetos
+	std::vector <TmxObjectGroup> mObjectGroups;
 
 	TmxMap();
 	~TmxMap();
@@ -38,6 +40,7 @@ public:
 	GGE::Uint32 GetTileHeight() const;
 
 	GGE::TmxLayer GetTmxLayerbyName(const std::string theName) const;
+	GGE::TmxObjectGroup GetTmxObjetGroupbyName(const std::string theName) const;
 	
 
 private:

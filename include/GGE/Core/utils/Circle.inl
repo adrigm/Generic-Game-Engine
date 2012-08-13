@@ -40,3 +40,20 @@ void Circle<T>::Offset(T OffsetX, T OffsetY)
     Center.x   += OffsetX;
     Center.y    += OffsetY;
 }
+
+template <typename T>
+bool Circle<T>::Contains(T X, T Y)
+{
+	if (abs(Center.x - X) <= Radius && abs(Center.y - Y) <= Radius)
+		return true;
+	return false;
+}
+
+template <typename T>
+bool Circle<T>::Intersects(const Circle<T> Circle)
+{
+	T dis = pow(abs(Center.x - Circle.Center.x), 2) + pow(abs(Center.y - Circle.Center.y), 2);
+	if (dis <= pow(Radius + Circle.Radius, 2))
+		return true;
+	return false;
+}

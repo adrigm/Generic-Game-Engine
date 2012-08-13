@@ -41,7 +41,7 @@ void AssetManager::Release()
 	ms_instance = 0;
 }
 
-void AssetManager::AddDirectory( const std::string& directory )
+void AssetManager::AddDirectory(const std::string& directory)
 {
 	// Check whether the path already exists
 	for( std::vector<std::string>::iterator it  = mDirectories.begin();
@@ -52,6 +52,8 @@ void AssetManager::AddDirectory( const std::string& directory )
 		if( directory == (*it) )
 			return;
 	}
+	
+	// TODO: Comprobar si el último caracter del directorio es / o \
 
 	// insert the directory
 	mDirectories.push_back( directory );

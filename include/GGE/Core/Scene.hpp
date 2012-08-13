@@ -104,6 +104,9 @@ public:
 
 	void SetBackgroundColor(sf::Color theColor);
 
+	bool IsVisibleCollision() const;
+	void VisibleCollision(bool visibility);
+
 protected:
 	/// Puntero a la aplicación padre
 	App* mApp;
@@ -131,6 +134,8 @@ private:
 	sf::Color mColorBack;
 	/// Puntero al mapa de la escena si lo hay
 	GGE::Map* mMap;
+	/// Controla si el área de colision es visible
+	bool mShowCollision;
 
 	/**
 	 * Our copy constructor is private because we do not allow copies of
