@@ -125,7 +125,7 @@
       <AdditionalDependencies>sfml-system-s-d;sfml-window-s-d;sfml-graphics-s-d;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>libboost_system-vc100-mt-gd-1_51.lib;libboost_filesystem-vc100-mt-gd-1_51.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-graphics-s-d.lib;sfml-audio-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libboost_system-vc100-mt-gd-1_52.lib;libboost_filesystem-vc100-mt-gd-1_52.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-graphics-s-d.lib;sfml-audio-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\..\..\extlibs\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>

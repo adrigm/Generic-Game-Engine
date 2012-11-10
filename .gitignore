@@ -26,7 +26,6 @@
 *.unsuccessfulbuild
 ipch/
 obj/
-[Bb]in
 [Dd]ebug*/
 [Rr]elease*/
 Ankh.NoLoad
@@ -62,7 +61,6 @@ packages/
 
 #Test files
 *.testsettings
-*.txt
 [Tt]humbs.db
 
 *.o
@@ -72,8 +70,8 @@ packages/
 *.tags
 *.mk
 *.session
-*.txt
-.build-debug
+.buil
+d-debug
 .build-release
 *.dll
 *.exe
@@ -101,7 +99,6 @@ Thumbs.db
 *.bak
 *.cache
 *.log
-[Bb]in
 [Dd]ebug*/
 *.lib
 *.sbr
@@ -109,10 +106,11 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-/bin/
 *.cd
 *.sdf
 *.ipch
 /ipch/
 *.exp
-
+boost/
+SFML/
+log.txt
