@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <GGE/Core.hpp>
 #include "Hero.hpp"
 
@@ -25,13 +24,9 @@ public:
 	virtual void Cleanup();
 
 private:
-	GGE::AssetManager* AM;
-	Hero hero;
-	GGE::Map mapa;
-	std::vector<GGE::Actor*> joyas;
-	std::vector<GGE::Actor*> plat;
-	sf::Shape cir;
-	GGE::Actor suelo;
+	GGE::App* app;
+	sf::Texture* tex;
+	Hero* heroe;
 };
 
 #endif // SCENE_MAIN_HPP

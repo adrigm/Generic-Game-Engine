@@ -14,7 +14,7 @@ public:
 	~Clock();
 	
 	void Reset();
-	float GetElapsedTime() const;
+	sf::Time GetElapsedTime() const;
 	
 private:
 	sf::Clock clock;

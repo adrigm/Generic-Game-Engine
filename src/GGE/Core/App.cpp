@@ -1,5 +1,11 @@
+#include <boost/filesystem.hpp>
 #include <GGE/Core/App.hpp>
 #include <GGE/Core/ConfigReader.hpp>
+#include <GGE/Core/Scene.hpp>
+#include <GGE/Core/SceneManager.hpp>
+#include <GGE/Core/AssetManager.hpp>
+#include <GGE/Core/Camera.hpp>
+#include <iostream>
 
 namespace GGE
 {
@@ -10,17 +16,17 @@ App::App(const std::string TheTitle) :
 	mTitle(TheTitle),
 	mVideoMode(DEFAULT_VIDEO_WIDTH, DEFAULT_VIDEO_HEIGHT, DEFAULT_VIDEO_BPP),
 	mWindow(),
-	mWindowSettings(),
+	mContextSettings(),
 	mWindowStyle(sf::Style::Close | sf::Style::Resize),
-	mInput(mWindow.GetInput()),
 	mExitCode(GGE::StatusNoError),
 	mRunning(false),
 	mUpdateClock(),
-	mUpdateTime(0.0f),
+	mUpdateTime(),
 	mScene(NULL)
 {
 	// Creamos el archivo de log
-	mLogFile.assign(this->GetExecutableDir() + "log.txt");
+	boost::filesystem::path path(boost::filesystem::current_path() / "log.txt");
+	mLogFile.assign(path.string());
 	mLog.open(mLogFile.c_str());
 	mLog << "LogFile: " << mLogFile << std::endl;
 
@@ -30,13 +36,12 @@ App::App(const std::string TheTitle) :
 
 App::~App()
 {
-	// Escribimos en el log el cÃ³digo de salida
-	mLog << "App::Run() terminado con codigo: " << mExitCode << std::endl;
 }
 
 App* App::Instance()
 {
-	if(ms_instance == 0){
+	if(ms_instance == 0)
+	{
 		ms_instance = new App();
 	}
 	return ms_instance;
@@ -44,7 +49,8 @@ App* App::Instance()
 
 void App::Release()
 {
-	if(ms_instance){
+	if(ms_instance)
+	{
 		delete ms_instance;
 	}
 	ms_instance = 0;
@@ -77,20 +83,20 @@ int App::Run()
 	mRunning = true;
 
 	// PreInit() Se encarga de 2 cosas:
-	// 1) Abrir el archivo de configuraciÃ³n
+	// 1) Abrir el archivo de configuración
 	// 2) Crear la ventana con los valores obtenidos del archivo
 	PreInit();
 
 	// Init() Se encarga de crear el SceneManager y cargar la primera escena
 	Init();
-	
-	// Loop() Implementa el bucle de la aplicaciÃ³n
+
+	// Loop() Implementa el bucle de la aplicación
 	Loop();
-	
+
 	// Cleanup() Se encarga de eliminar todos los objetos creados
 	Cleanup();
 
-	// CÃ³digo de salida de la aplicaciÃ³n
+	// Código de salida de la aplicación
 	return mExitCode;
 }
 
@@ -101,7 +107,7 @@ bool App::IsRunning() const
 
 float App::GetUpdateTime() const
 {
-	return mUpdateTime;
+	return mUpdateTime.asSeconds();
 }
 
 void App::Quit(int the_exit_code)
@@ -117,7 +123,7 @@ std::string App::GetExecutableDir() const
 
 void App::PreInit()
 {
-	ConfigReader anConfig; // For reading .INI style files
+	GGE::ConfigReader anConfig; // For reading .INI style files
  
 	// Use our default configuration file to obtain the initial window settings
 	anConfig.Read(this->GetExecutableDir() + "window.cfg"); // Read in our window settings
@@ -127,25 +133,25 @@ void App::PreInit()
 	{
 	  mWindowStyle = sf::Style::Fullscreen;
 	}
- 
+
 	// What size window does the user want?
-	mVideoMode.Width = anConfig.GetUint32("window","width",DEFAULT_VIDEO_WIDTH);
-	mVideoMode.Height = anConfig.GetUint32("window","height",DEFAULT_VIDEO_HEIGHT);
-	mVideoMode.BitsPerPixel = anConfig.GetUint32("window","depth",DEFAULT_VIDEO_BPP);
+	mVideoMode.width = anConfig.GetUint32("window","width",DEFAULT_VIDEO_WIDTH);
+	mVideoMode.height = anConfig.GetUint32("window","height",DEFAULT_VIDEO_HEIGHT);
+	mVideoMode.bitsPerPixel = anConfig.GetUint32("window","depth",DEFAULT_VIDEO_BPP);
  
 	// For Fullscreen, verify valid VideoMode, otherwise revert to defaults for Fullscreen
-	if(sf::Style::Fullscreen == mWindowStyle && false == mVideoMode.IsValid())
+	if(sf::Style::Fullscreen == mWindowStyle && false == mVideoMode.isValid())
 	{
-	  mVideoMode.Width = DEFAULT_VIDEO_WIDTH;
-	  mVideoMode.Height = DEFAULT_VIDEO_HEIGHT;
-	  mVideoMode.BitsPerPixel = DEFAULT_VIDEO_BPP;
+	  mVideoMode.width = DEFAULT_VIDEO_WIDTH;
+	  mVideoMode.height = DEFAULT_VIDEO_HEIGHT;
+	  mVideoMode.bitsPerPixel = DEFAULT_VIDEO_BPP;
 	}
  
 	// Create a RenderWindow object using VideoMode object above
-	mWindow.Create(mVideoMode, mTitle, mWindowStyle, mWindowSettings);
+	mWindow.create(mVideoMode, mTitle, mWindowStyle, mContextSettings);
 
 	// Activamos VSync
-	mWindow.UseVerticalSync(true);
+	mWindow.setVerticalSyncEnabled(true);
 
 	mLog << "App::PreInit() Completado" << std::endl;
 }
@@ -158,13 +164,13 @@ void App::Init()
 	// Creamos el AssetManager
 	mAssetManager = GGE::AssetManager::Instance();
 
-	// Creamos la CÃ¡mara
-	mCamera = new Camera();
+	// Creamos la Cámara
+	mCamera = new GGE::Camera();
 
 	// Comprobamos que se haya establecido escena inicial
 	if (mScene != NULL)
 	{
-		// AÃ±adimos la primera escena
+		// Añadimos la primera escena
 		mSceneManager->AddScene(mScene);
 
 		mSceneManager->SetActiveScene(mScene->GetID());
@@ -177,8 +183,8 @@ void App::Init()
 		// Escribimos el error en el log
 		mLog << "ERROR: App::Init() No se ha establecido escena inicial"
 			<< std::endl;
-			
-		// Salimos con cÃ³digo -2
+
+		// Salimos con código -2
 		Quit(StatusAppInitFailed);
 	}
 
@@ -188,14 +194,14 @@ void App::Init()
 
 void App::Loop()
 {
-	// Bucle mientras se estÃ© ejecutando y la ventana estÃ© abierta
-	while (IsRunning() && mWindow.IsOpened())
+	// Bucle mientras se esté ejecutando y la ventana esté abierta
+	while (IsRunning() && mWindow.isOpen())
 	{
 		// Manejamos los eventos de la ventana
 		sf::Event event;
-		while (mWindow.GetEvent(event))
+		while (mWindow.pollEvent(event))
 		{
-			switch (event.Type)
+			switch (event.type)
 			{
 			case sf::Event::Closed:			// La ventana es cerrada
 				Quit(StatusAppOK);
@@ -206,39 +212,30 @@ void App::Loop()
 			case sf::Event::LostFocus:		// La ventana pierde el foco
 				mSceneManager->PauseScene();
 				break;
-#ifndef NDEBUG // Modo colisiones solo debug
-			case sf::Event::KeyPressed:
-				if (event.Key.Code == sf::Key::F9)
-					if (mSceneManager->IsVisibleCollisionAreaScene())
-						mSceneManager->VisibleCollision(false);
-					else
-						mSceneManager->VisibleCollision(true);
-#endif
 			default:	// Otros eventos se los pasamos a la ecena activa
 				mSceneManager->EventScene(event);
 			} // switch (event.Type)
 		} // while (window.GetEvent(event))
-		
-		// Obtenemos el tiempo pasado en cada ciclo
-		mUpdateTime = mUpdateClock.GetElapsedTime();
-		mUpdateClock.Reset();
 
-		// Llamamos al mÃ©todo Update() de la escena activa
+		// Obtenemos el tiempo pasado en cada ciclo
+		mUpdateTime = mUpdateClock.restart();
+
+		// Llamamos al método Update() de la escena activa
 		mSceneManager->UpdateScene();
 
-		// Actualizamos la cÃ¡mara
+		// Actualizamos la cámara
 		mCamera->Update();
 
-		// Llamamos al mÃ©todo Draw() de la escena activa
+		// Llamamos al método Draw() de la escena activa
 		mSceneManager->DrawScene();
 
 		// Actualizamos la ventana
-		mWindow.Display();
+		mWindow.display();
 
 		// Comprobamos cambios de escena
 		if (mSceneManager->HandleChangeScene())
 		{
-			// Restablecemos la cÃ¡mara por defecto antes de cambiar de escena
+			// Restablecemos la cámara por defecto antes de cambiar de escena
 			mCamera->SetDefaultCamera();
 			// Cambiamos el puntero de la escena activa
 			mSceneManager->ChangeScene(mSceneManager->mNextScene);
@@ -252,22 +249,13 @@ void App::Cleanup()
 	// Eliminamos todas las escenas del SceneManager
 	mSceneManager->RemoveAllScene();
 
-	// Eliminamos todos los recursos
-	mAssetManager->Cleanup();
-
 	// Eliminamos el SceneManager
 	GGE::SceneManager::Release();
-
-	// Eliminamos el AssetManager
-	GGE::AssetManager::Release();
-
-	// Eliminamos la CÃ¡mara
-	delete mCamera;
 
 	mLog << "App::Cleanup() Completado" << std::endl;
 }
 
-void App::SetFirstScene(Scene* theScene)
+void App::SetFirstScene(GGE::Scene* theScene)
 {
 	if (mScene == NULL)
 	{

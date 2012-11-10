@@ -1,22 +1,11 @@
-/**
- * Contiene la clase App base del engine, pone en funcionamiento el juego.
- *
- * @file App.hpp
- * @author Adri√°n Guerra Marrero
- * @date 20110422
- */
-
 #ifndef APP_HPP
 #define APP_HPP
 
 #include <string>
 #include <fstream>
 #include <SFML/Graphics.hpp>
+#include <GGE/Config.hpp>
 #include <GGE/Core/Core_types.hpp>
-#include <GGE/Core/Scene.hpp>
-#include <GGE/Core/SceneManager.hpp>
-#include <GGE/Core/AssetManager.hpp>
-#include <GGE/Core/Camera.hpp>
 
 namespace GGE
 {
@@ -33,52 +22,48 @@ public:
 
 	// Variables
 	///////////////////////////////////////////////////////////////////////////
-	/// T√≠tulo de la ventana
+	/// TÌtulo de la ventana
 	std::string mTitle;
-	/// Ventana de la aplicaci√≥n
+	/// Ventana de la aplicaciÛn
 	sf::RenderWindow mWindow;
 	/// Modo de video (Width, Height, Bpp)
 	sf::VideoMode mVideoMode;
 	/// Opciones de la ventana
-	sf::WindowSettings mWindowSettings;
+	sf::ContextSettings mContextSettings;
 	/// Estilo de la ventana
 	unsigned long mWindowStyle;
-	/// Input manager de la ventana
-	const sf::Input& mInput;
-	/// Log de la aplicaci√≥n
+	/// Log de la aplicaciÛn
 	std::ofstream mLog;
-	/// Puntero a Scene inicial
-	Scene* mScene;
 	/// Puntero al SceneManager
-	SceneManager* mSceneManager;
+	GGE::SceneManager* mSceneManager;
 	/// Puntero al AssetManager
-	AssetManager* mAssetManager;
-	/// Camara por defecto
-	Camera* mCamera;
+	GGE::AssetManager* mAssetManager;
+	/// C·mara por defecto
+	GGE::Camera* mCamera;
 
 	static App* Instance();
 	static void Release();
 
 	/**
-	 * Procesa los par√°metros pasados por l√≠nea de comandos
+	 * Procesa los par·metros pasados por lÌnea de comandos
 	 *
-	 * @param argc N√∫mero de par√°metros
-	 * @param argv[] Lista de par√°metros
+	 * @param argc N˙mero de par·metros
+	 * @param argv[] Lista de par·metros
 	 */
 	virtual void ProcessArguments(int argc, char* argv[]);
 
 	/**
-	 * Pone en funcionamiento la aplicaci√≥n. Se encarga de llamar a los m√©todos
+	 * Pone en funcionamiento la aplicaciÛn. Se encarga de llamar a los mÈtodos
 	 * Preinit, Init, loop y CleanUp
 	 *
-	 * @return Devuelve el c√≥digo de salida de la aplicaci√≥n
+	 * @return Devuelve el cÛdigo de salida de la aplicaciÛn
 	 */
 	int Run(void);
 
 	/**
-	 * Devuelve verdadero si la aplicaci√≥n se est√° ejecutando
+	 * Devuelve verdadero si la aplicaciÛn se est· ejecutando
 	 *
-	 * @return true si la apicaci√≥n se est√° ejecutando
+	 * @return true si la apicaciÛn se est· ejecutando
 	 */
 	bool IsRunning(void) const;
 
@@ -87,13 +72,12 @@ public:
 	 *
 	 * @return	The update time.
 	 */
-
 	float GetUpdateTime(void) const;
 
 	/**
-	 * Detiene la aplicacion con el c√≥digo de salida indicado
+	 * Detiene la aplicacion con el cÛdigo de salida indicado
 	 *
-	 * @param the_exit_code C√≥digo de salida de la aplicaci√≥n
+	 * @param the_exit_code CÛdigo de salida de la aplicaciÛn
 	 */
 	void Quit(int the_exit_code);
 
@@ -104,47 +88,49 @@ public:
 	 */
 	std::string GetExecutableDir(void) const;
 
-	void SetFirstScene(Scene* theScene);
+	void SetFirstScene(GGE::Scene* theScene);
 
 protected:
 	/**
-	 * M√©todo llamado antes del Init() se encarga de establecer configuraciones
-	 * de la aplicaci√≥n
+	 * MÈtodo llamado antes del Init() se encarga de establecer configuraciones
+	 * de la aplicaciÛn
 	 */
 	void PreInit(void);
-	
+
 	/**
-	 * Se encarga de inicializar la aplicaci√≥n
+	 * Se encarga de inicializar la aplicaciÛn
 	 */
 	virtual void Init(void);
-	
+
 	/**
-	 * Lleva el bucle de la aplicaci√≥n se encarga de mantenerla en ejecuci√≥n
+	 * Lleva el bucle de la aplicaciÛn se encarga de mantenerla en ejecuciÛn
 	 */
 	virtual void Loop(void);
-	
+
 	/**
 	 * Se encarga de la limpieza andes de salir de la aplicacion
 	 */
 	virtual void Cleanup(void);
-	
+
 private:
-	/// C√≥digo de salida de la aplicaci√≥n
-	int mExitCode;
-	/// Verdadero si la aplicaci√≥n se est√° ejecutando
+	/// CÛdigo de salida de la aplicaciÛn
+	GGE::Int16 mExitCode;
+	/// Verdadero si la aplicaciÛn se est· ejecutando
 	bool mRunning;
-	/// Archivo de log de la aplicaci√≥n
+	/// Archivo de log de la aplicaciÛn
 	std::string mLogFile;
 	/// Reloj que obtiene el tiempo pasado en cada loop
 	sf::Clock mUpdateClock;
 	/// Almacena el tiempo pasado en cada bucle
-	float mUpdateTime;
+	sf::Time mUpdateTime;
 	/// Almacena la ruta del ejecutable
 	std::string mExecutableDir;
+	/// Puntero a la escena inicial
+	GGE::Scene* mScene;
 
 	App(const std::string TheTitle = "GGE Application");
 	virtual ~App();
 
 }; // Class App
 } // namespace GGE
-#endif // APP_H
+#endif // APP_HPP

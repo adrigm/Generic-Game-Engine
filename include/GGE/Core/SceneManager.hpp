@@ -1,16 +1,16 @@
-#ifndef SCENEMANAGER_H
-#define SCENEMANAGER_H
+#ifndef SCENEMANAGER_HPP
+#define SCENEMANAGER_HPP
 
 #include <map>
+#include <SFML/Window.hpp>
 #include <GGE/Core/Core_types.hpp>
-#include <GGE/Core/Scene.hpp>
 
 namespace GGE
 {
 
 class SceneManager
 {
-	// Puntero a la instancia Ãºnica
+	// Puntero a la instancia única
 	static SceneManager* ms_instance;
 
 public:
@@ -18,11 +18,11 @@ public:
 	static void Release();
 
 	/**
-	 * AÃ±ade una escena a la pila de escenas inactivas
+	 * Añade una escena a la pila de escenas inactivas
 	 *
-	 * Solo aÃ±ade una escena a la pila, no la inicializa
+	 * Solo añade una escena a la pila, no la inicializa
 	 *
-	 * @param a_scene Puntero a la escena que vamos a aÃ±adir
+	 * @param theScene Puntero a la escena que vamos a añadir
 	 */
 	void AddScene(Scene* theScene);
 
@@ -33,16 +33,16 @@ public:
 	 * Establece la escena como activa si se encuentra en la pila y llama a su
 	 * Init() si no ha sido llamado. Cambia la escena al final del ciclo
 	 *
-	 * @param id_scene Cadena Ãºnica que identifica a la escena
+	 * @param id_scene Cadena única que identifica a la escena
 	 */
 	void SetActiveScene(SceneID theSceneID);
 
 	/**
 	 * Elimina una escena de la pila, no puede ser la escena activa
 	 *
-	 * Se encarga de llamar a su mÃ©todo Cleanup y de eliminarla de la memoria
+	 * Se encarga de llamar a su método Cleanup y de eliminarla de la memoria
 	 *
-	 * @param id_scene Cadena Ãºnica que identifica a la escena
+	 * @param id_scene Cadena única que identifica a la escena
 	 */
 	void RemoveScene(SceneID theSceneID);
 
@@ -52,47 +52,44 @@ public:
 	void RemoveAllInactiveScene();
 
 	/**
-	 * Llama el mÃ©todo Event() de la escena activa
+	 * Llama el método Event() de la escena activa
 	 *
 	 * @param a_event representa a un evento del sistema
 	 */
 	void EventScene(sf::Event theEvent);
 
 	/**
-	 * Llama el mÃ©todo Draw() de la escena activa
+	 * Llama el método Draw() de la escena activa
 	 */
 	void DrawScene();
 
 	/**
-	 * Llama al mÃ©todo Update() de la escena activa
+	 * Llama al método Update() de la escena activa
 	 */
 	void UpdateScene();
 
 	/**
-	 * Llama al mÃ©todo Resume de la escena activa
+	 * Llama al método Resume de la escena activa
 	 */
 	void ResumeScene();
 
 	/**
-	 * Llama al mÃ©todo Pause de la escena activa
+	 * Llama al método Pause de la escena activa
 	 */
 	void PauseScene();
 
-	bool HandleChangeScene();
-
-	bool IsVisibleCollisionAreaScene() const;
-	void VisibleCollision(bool vis); 
+	bool HandleChangeScene(); 
 
 protected:
-	// Puntero a la aplicaciÃ³n
-	App* mApp;
+	// Puntero a la aplicación
+	GGE::App* mApp;
 
 private:
 	// Declaramos la clase App friend
 	friend class App;
 	/// Escena actualmente activa
 	Scene* mActiveScene;
-	/// PrÃ³xima escena actica
+	/// Próxima escena activa
 	SceneID mNextScene;
 	// Lista de escenas inacticas
 	std::map<SceneID, Scene*> mInactivesScenes;
@@ -109,7 +106,7 @@ private:
 	 * Elimina todas las escenas de la pila.
 	 *
 	 * Elimina todas las escenas incluso la escena activa, se encarga de llamar
-	 * a los mÃ©todos Cleanup() de las escenas y de eleminarlas de la memoria
+	 * a los métodos Cleanup() de las escenas y de eleminarlas de la memoria
 	 */
 	void RemoveAllScene();
 
@@ -120,4 +117,4 @@ private:
 
 } // Namespace GGE
 
-#endif // SCENEMANAGER_H
+#endif // SCENEMANAGER_HPP

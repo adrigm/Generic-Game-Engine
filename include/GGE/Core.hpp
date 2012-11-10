@@ -15,17 +15,14 @@
 #include <GGE/Config.hpp>
 
 // GGE Core includes
-#include <GGE/Core/utils/Circle.hpp>
-#include <GGE/Core/utils/Collision.hpp>
+#include <GGE/Core/Core_types.hpp>
 #include <GGE/Core/App.hpp>
-#include <GGE/Core/Scene.hpp>
-#include <GGE/Core/AssetManager.hpp>
-#include <GGE/Core/SceneManager.hpp>
 #include <GGE/Core/ConfigReader.hpp>
+#include <GGE/Core/Scene.hpp>
+#include <GGE/Core/SceneManager.hpp>
+#include <GGE/Core/AssetManager.hpp>
 #include <GGE/Core/tmx/tmx.hpp>
-#include <GGE/Core/maps/Tileset.hpp>
-#include <GGE/Core/maps/Map.hpp>
 #include <GGE/Core/Camera.hpp>
-#include <GGE/Core/Actor.hpp>
+#include <GGE/Core/Clock.hpp>
 
 #endif // GGE_CORE_HPP_INCLUDED

@@ -6,7 +6,7 @@ namespace GGE
 Clock::Clock() :
 	clock()
 {
-	clock.Reset();
+	clock.restart();
 }
 
 Clock::~Clock()
@@ -15,12 +15,12 @@ Clock::~Clock()
 
 void Clock::Reset()
 {
-	clock.Reset();
+	clock.restart();
 }
 
-float Clock::GetElapsedTime() const
+sf::Time Clock::GetElapsedTime() const
 {
-	return clock.GetElapsedTime();
+	return clock.getElapsedTime();
 }
 
 }

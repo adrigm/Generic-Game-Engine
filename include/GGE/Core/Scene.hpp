@@ -7,16 +7,13 @@
  * @date 20110422 - Initial Release
  */
 
-#ifndef SCENE_H
-#define SCENE_H
+#ifndef SCENE_HPP
+#define SCENE_HPP
 
 #include <algorithm>
 #include <list>
 #include <SFML/Graphics.hpp>
 #include <GGE/Core/Core_types.hpp>
-#include <GGE/Core/App.hpp>
-#include <GGE/Core/Actor.hpp>
-#include <GGE/Core/maps/Map.hpp>
 
 namespace GGE
 {
@@ -99,13 +96,9 @@ public:
 	void QuitActors(std::vector<GGE::Actor*> theList);
 	void DeleteActors(std::vector<GGE::Actor*> theList);
 
-	void AddMap(GGE::Map* theMap);
-	void QuitMap();
 
 	void SetBackgroundColor(sf::Color theColor);
 
-	bool IsVisibleCollision() const;
-	void VisibleCollision(bool visibility);
 
 protected:
 	/// Puntero a la aplicación padre
@@ -115,7 +108,6 @@ protected:
 	 * Constructor de la escena
 	 * 
 	 * @param m_id Cadena de texto que establece un identificador único
-	 * @param p_app Puntero a la aplicación App
 	 */
 	Scene(SceneID theID);
 
@@ -132,10 +124,6 @@ private:
 	std::list<GGE::Actor*> mActors;
 	/// Color de fondo de la escena
 	sf::Color mColorBack;
-	/// Puntero al mapa de la escena si lo hay
-	GGE::Map* mMap;
-	/// Controla si el área de colision es visible
-	bool mShowCollision;
 
 	/**
 	 * Our copy constructor is private because we do not allow copies of
@@ -153,4 +141,4 @@ private:
 }; // class Scene
 } // Namespace GGE
 
-#endif // SCENE_H
+#endif // SCENE_HPP

@@ -1,4 +1,6 @@
 #include <GGE/Core/SceneManager.hpp>
+#include <GGE/Core/App.hpp>
+#include <GGE/Core/Scene.hpp>
 
 
 namespace GGE
@@ -185,16 +187,6 @@ bool SceneManager::HandleChangeScene()
 		return false;
 	}
 	return true;
-}
-
-bool SceneManager::IsVisibleCollisionAreaScene() const
-{
-	return mActiveScene->IsVisibleCollision();
-}
-
-void SceneManager::VisibleCollision(bool vis)
-{
-	mActiveScene->VisibleCollision(vis);
 }
 
 } // Namespace GGE

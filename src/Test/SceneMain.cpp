@@ -13,32 +13,24 @@ SceneMain::~SceneMain()
 
 void SceneMain::Init()
 {
-	AM = GGE::AssetManager::Instance();
+	app = GGE::App::Instance();
+	this->SetBackgroundColor(sf::Color(200, 220, 255));
 	mApp->mAssetManager->AddDirectory("Data/");
-	hero.SetImage(mApp->mAssetManager->GetImage("sprite.png"));
-	hero.SetGrid(4, 4);
-	hero.SetCenter(hero.GetWidth()/2, hero.GetHeight());
-	hero.SetPosition(160, 320);
-	mapa.Load(mApp->mAssetManager->GetTmxMap("plat.tmx"));
-	mApp->mCamera->ConnectToSprite(hero);
-	mApp->mCamera->LockToMap(mapa);
-	this->AddActor(&hero);
-	this->SetBackgroundColor(sf::Color(200, 200, 200));
-	this->AddMap(&mapa);
+	tex = mApp->mAssetManager->GetTexture("indiana.png");
+	heroe = new Hero();
+	heroe->setTexture(*tex);
+	this->AddActor(heroe);
 
-	joyas = mapa.LayerToActors("diamantes");
-	this->AddActors(joyas);
+	heroe->SetFramesByNum(4, 12);
+	heroe->SelectFrame(1);
 
-	//std::vector<GGE::Actor*> plat = mapa.LayerToActors("Tile Layer 1");
-	//this->AddActors(plat);
-	
-	suelo.SetImage(AM->GetImage("blank.png"));
-	suelo.SetPosition(0, 416);
-	suelo.AddRects(sf::IntRect(0, 416, 1600, 480));
-	suelo.SelectRect(0);
-	//std::cout << suelo.GetRectCollision().Left << ", " << suelo.GetRectCollision().Right << std::endl;
-	this->AddActor(&suelo);
-	//this->DeleteActor(&hero);
+	GGE::Animation Walk_left;
+	Walk_left.fps = 24;
+	Walk_left.firstFrame = 2;
+	Walk_left.lastFrame = 11;
+
+	heroe->AddAnimation("walk", Walk_left);
+	heroe->SetActiveAnimation("walk");
 }
 
 void SceneMain::ReInit()
@@ -47,18 +39,14 @@ void SceneMain::ReInit()
 
 void SceneMain::Events(sf::Event theEvent)
 {
-	if (theEvent.Type == sf::Event::KeyPressed)
+	if (theEvent.type == sf::Event::KeyPressed && theEvent.key.code == sf::Keyboard::Space)
 	{
-		if (theEvent.Key.Code == sf::Key::Escape)
-			mApp->Quit(GGE::StatusAppOK);
-		if (theEvent.Key.Code == sf::Key::Space)
-			this->QuitActor(&hero);
 	}
 }
 
 void SceneMain::Update()
 {
-	hero.Update();
+	heroe->Update();
 }
 
 void SceneMain::Cleanup()

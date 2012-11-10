@@ -2,9 +2,8 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
-#include <zlib/zlib.h>
-
-#include  <GGE/Core/utils/zlib.hpp>
+#include <GGE/Core/utils/zlib/zlib.h>
+#include <GGE/Core/utils/zlib.hpp>
 
 /**
  * Inflates either zlib or gzip deflated memory. The inflated memory is

@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2012 Laurent Gomila (laurent.gom@gmail.com)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -29,289 +29,162 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <SFML/Config.hpp>
+#include <SFML/Window/Joystick.hpp>
+#include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Mouse.hpp>
 
 
 namespace sf
 {
 ////////////////////////////////////////////////////////////
-/// Definition of key codes for keyboard events
-////////////////////////////////////////////////////////////
-namespace Key
-{
-    enum Code
-    {
-        A = 'a',
-        B = 'b',
-        C = 'c',
-        D = 'd',
-        E = 'e',
-        F = 'f',
-        G = 'g',
-        H = 'h',
-        I = 'i',
-        J = 'j',
-        K = 'k',
-        L = 'l',
-        M = 'm',
-        N = 'n',
-        O = 'o',
-        P = 'p',
-        Q = 'q',
-        R = 'r',
-        S = 's',
-        T = 't',
-        U = 'u',
-        V = 'v',
-        W = 'w',
-        X = 'x',
-        Y = 'y',
-        Z = 'z',
-        Num0 = '0',
-        Num1 = '1',
-        Num2 = '2',
-        Num3 = '3',
-        Num4 = '4',
-        Num5 = '5',
-        Num6 = '6',
-        Num7 = '7',
-        Num8 = '8',
-        Num9 = '9', 
-        Escape = 256,
-        LControl,
-        LShift,
-        LAlt,
-        LSystem,      ///< OS specific key (left side) : windows (Win and Linux), apple (MacOS), ...
-        RControl,
-        RShift,
-        RAlt,
-        RSystem,      ///< OS specific key (right side) : windows (Win and Linux), apple (MacOS), ...
-        Menu,
-        LBracket,     ///< [
-        RBracket,     ///< ]
-        SemiColon,    ///< ;
-        Comma,        ///< ,
-        Period,       ///< .
-        Quote,        ///< '
-        Slash,        ///< /
-        BackSlash,
-        Tilde,        ///< ~
-        Equal,        ///< =
-        Dash,         ///< -
-        Space,
-        Return,
-        Back,
-        Tab,
-        PageUp,
-        PageDown,
-        End,
-        Home,
-        Insert,
-        Delete,
-        Add,          ///< +
-        Subtract,     ///< -
-        Multiply,     ///< *
-        Divide,       ///< /
-        Left,         ///< Left arrow
-        Right,        ///< Right arrow
-        Up,           ///< Up arrow
-        Down,         ///< Down arrow
-        Numpad0,
-        Numpad1,
-        Numpad2,
-        Numpad3,
-        Numpad4,
-        Numpad5,
-        Numpad6,
-        Numpad7,
-        Numpad8,
-        Numpad9,
-        F1,
-        F2,
-        F3,
-        F4,
-        F5,
-        F6,
-        F7,
-        F8,
-        F9,
-        F10,
-        F11,
-        F12,
-        F13,
-        F14,
-        F15,
-        Pause,
-
-        Count // Keep last -- total number of keyboard keys
-    };
-}
-
-
-////////////////////////////////////////////////////////////
-/// Definition of button codes for mouse events
-////////////////////////////////////////////////////////////
-namespace Mouse
-{
-    enum Button
-    {
-        Left,
-        Right,
-        Middle,
-        XButton1,
-        XButton2,
-
-        ButtonCount // Keep last -- total number of mouse buttons
-    };
-}
-
-
-////////////////////////////////////////////////////////////
-/// Definition of joystick axis for joystick events
-////////////////////////////////////////////////////////////
-namespace Joy
-{
-    enum Axis
-    {
-        AxisX,
-        AxisY,
-        AxisZ,
-        AxisR,
-        AxisU,
-        AxisV,
-        AxisPOV,
-
-        AxisCount // Keep last -- total number of joystick axis
-    };
-
-    enum
-    {
-        Count       = 4, ///< Total number of supported joysticks
-        ButtonCount = 32 ///< Total number of supported joystick buttons
-    };
-}
-
-
-////////////////////////////////////////////////////////////
-/// Event defines a system event and its parameters
+/// \brief Defines a system event and its parameters
+///
 ////////////////////////////////////////////////////////////
 class Event
 {
 public :
 
     ////////////////////////////////////////////////////////////
-    /// Keyboard event parameters
-    ////////////////////////////////////////////////////////////
-    struct KeyEvent
-    {
-        Key::Code Code;
-        bool      Alt;
-        bool      Control;
-        bool      Shift;
-    };
-
-    ////////////////////////////////////////////////////////////
-    /// Text event parameters
-    ////////////////////////////////////////////////////////////
-    struct TextEvent
-    {
-        Uint32 Unicode;
-    };
-
-    ////////////////////////////////////////////////////////////
-    /// Mouse move event parameters
-    ////////////////////////////////////////////////////////////
-    struct MouseMoveEvent
-    {
-        int X;
-        int Y;
-    };
-
-    ////////////////////////////////////////////////////////////
-    /// Mouse buttons events parameters
-    ////////////////////////////////////////////////////////////
-    struct MouseButtonEvent
-    {
-        Mouse::Button Button;
-        int           X;
-        int           Y;
-    };
-
-    ////////////////////////////////////////////////////////////
-    /// Mouse wheel events parameters
-    ////////////////////////////////////////////////////////////
-    struct MouseWheelEvent
-    {
-        int Delta;
-    };
-
-    ////////////////////////////////////////////////////////////
-    /// Joystick axis move event parameters
-    ////////////////////////////////////////////////////////////
-    struct JoyMoveEvent
-    {
-        unsigned int JoystickId;
-        Joy::Axis    Axis;
-        float        Position;
-    };
-
-    ////////////////////////////////////////////////////////////
-    /// Joystick buttons events parameters
-    ////////////////////////////////////////////////////////////
-    struct JoyButtonEvent
-    {
-        unsigned int JoystickId;
-        unsigned int Button;
-    };
-
-    ////////////////////////////////////////////////////////////
-    /// Size events parameters
+    /// \brief Size events parameters (Resized)
+    ///
     ////////////////////////////////////////////////////////////
     struct SizeEvent
     {
-        unsigned int Width;
-        unsigned int Height;
+        unsigned int width;  ///< New width, in pixels
+        unsigned int height; ///< New height, in pixels
     };
 
     ////////////////////////////////////////////////////////////
-    /// Enumeration of the different types of events
+    /// \brief Keyboard event parameters (KeyPressed, KeyReleased)
+    ///
+    ////////////////////////////////////////////////////////////
+    struct KeyEvent
+    {
+        Keyboard::Key code;    ///< Code of the key that has been pressed
+        bool          alt;     ///< Is the Alt key pressed?
+        bool          control; ///< Is the Control key pressed?
+        bool          shift;   ///< Is the Shift key pressed?
+        bool          system;  ///< Is the System key pressed?
+    };
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Text event parameters (TextEntered)
+    ///
+    ////////////////////////////////////////////////////////////
+    struct TextEvent
+    {
+        Uint32 unicode; ///< UTF-32 unicode value of the character
+    };
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Mouse move event parameters (MouseMoved)
+    ///
+    ////////////////////////////////////////////////////////////
+    struct MouseMoveEvent
+    {
+        int x; ///< X position of the mouse pointer, relative to the left of the owner window
+        int y; ///< Y position of the mouse pointer, relative to the top of the owner window
+    };
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Mouse buttons events parameters
+    ///        (MouseButtonPressed, MouseButtonReleased)
+    ///
+    ////////////////////////////////////////////////////////////
+    struct MouseButtonEvent
+    {
+        Mouse::Button button; ///< Code of the button that has been pressed
+        int           x;      ///< X position of the mouse pointer, relative to the left of the owner window
+        int           y;      ///< Y position of the mouse pointer, relative to the top of the owner window
+    };
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Mouse wheel events parameters (MouseWheelMoved)
+    ///
+    ////////////////////////////////////////////////////////////
+    struct MouseWheelEvent
+    {
+        int delta; ///< Number of ticks the wheel has moved (positive is up, negative is down)
+        int x;     ///< X position of the mouse pointer, relative to the left of the owner window
+        int y;     ///< Y position of the mouse pointer, relative to the top of the owner window
+    };
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Joystick connection events parameters
+    ///        (JoystickConnected, JoystickDisconnected)
+    ///
+    ////////////////////////////////////////////////////////////
+    struct JoystickConnectEvent
+    {
+        unsigned int joystickId; ///< Index of the joystick (in range [0 .. Joystick::Count - 1])
+    };
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Joystick axis move event parameters (JoystickMoved)
+    ///
+    ////////////////////////////////////////////////////////////
+    struct JoystickMoveEvent
+    {
+        unsigned int   joystickId; ///< Index of the joystick (in range [0 .. Joystick::Count - 1])
+        Joystick::Axis axis;       ///< Axis on which the joystick moved
+        float          position;   ///< New position on the axis (in range [-100 .. 100])
+    };
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Joystick buttons events parameters
+    ///        (JoystickButtonPressed, JoystickButtonReleased)
+    ///
+    ////////////////////////////////////////////////////////////
+    struct JoystickButtonEvent
+    {
+        unsigned int joystickId; ///< Index of the joystick (in range [0 .. Joystick::Count - 1])
+        unsigned int button;     ///< Index of the button that has been pressed (in range [0 .. Joystick::ButtonCount - 1])
+    };
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Enumeration of the different types of events
+    ///
     ////////////////////////////////////////////////////////////
     enum EventType
     {
-        Closed,
-        Resized,
-        LostFocus,
-        GainedFocus,
-        TextEntered,
-        KeyPressed,
-        KeyReleased,
-        MouseWheelMoved,
-        MouseButtonPressed,
-        MouseButtonReleased,
-        MouseMoved,
-        MouseEntered,
-        MouseLeft,
-        JoyButtonPressed,
-        JoyButtonReleased,
-        JoyMoved,
+        Closed,                 ///< The window requested to be closed
+        Resized,                ///< The window was resized
+        LostFocus,              ///< The window lost the focus
+        GainedFocus,            ///< The window gained the focus
+        TextEntered,            ///< A character was entered
+        KeyPressed,             ///< A key was pressed
+        KeyReleased,            ///< A key was released
+        MouseWheelMoved,        ///< The mouse wheel was scrolled
+        MouseButtonPressed,     ///< A mouse button was pressed
+        MouseButtonReleased,    ///< A mouse button was released
+        MouseMoved,             ///< The mouse cursor moved
+        MouseEntered,           ///< The mouse cursor entered the area of the window
+        MouseLeft,              ///< The mouse cursor left the area of the window
+        JoystickButtonPressed,  ///< A joystick button was pressed
+        JoystickButtonReleased, ///< A joystick button was released
+        JoystickMoved,          ///< The joystick moved along an axis
+        JoystickConnected,      ///< A joystick was connected
+        JoystickDisconnected,   ///< A joystick was disconnected
 
-        Count // Keep last -- total number of event types
+        Count                   ///< Keep last -- the total number of event types
     };
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    EventType Type; ///< Type of the event
+    EventType type; ///< Type of the event
 
     union
     {
-        KeyEvent         Key;
-        TextEvent        Text;
-        MouseMoveEvent   MouseMove;
-        MouseButtonEvent MouseButton;
-        MouseWheelEvent  MouseWheel;
-        JoyMoveEvent     JoyMove;
-        JoyButtonEvent   JoyButton;
-        SizeEvent        Size;
+        SizeEvent            size;            ///< Size event parameters
+        KeyEvent             key;             ///< Key event parameters
+        TextEvent            text;            ///< Text event parameters
+        MouseMoveEvent       mouseMove;       ///< Mouse move event parameters
+        MouseButtonEvent     mouseButton;     ///< Mouse button event parameters
+        MouseWheelEvent      mouseWheel;      ///< Mouse wheel event parameters
+        JoystickMoveEvent    joystickMove;    ///< Joystick move event parameters
+        JoystickButtonEvent  joystickButton;  ///< Joystick button event parameters
+        JoystickConnectEvent joystickConnect; ///< Joystick (dis)connect event parameters
     };
 };
 
@@ -319,3 +192,46 @@ public :
 
 
 #endif // SFML_EVENT_HPP
+
+
+////////////////////////////////////////////////////////////
+/// \class sf::Event
+/// \ingroup window
+///
+/// sf::Event holds all the informations about a system event
+/// that just happened. Events are retrieved using the
+/// sf::Window::pollEvent and sf::Window::waitEvent functions.
+///
+/// A sf::Event instance contains the type of the event
+/// (mouse moved, key pressed, window closed, ...) as well
+/// as the details about this particular event. Please note that
+/// the event parameters are defined in a union, which means that
+/// only the member matching the type of the event will be properly
+/// filled; all other members will have undefined values and must not
+/// be read if the type of the event doesn't match. For example,
+/// if you received a KeyPressed event, then you must read the
+/// event.key member, all other members such as event.MouseMove
+/// or event.text will have undefined values.
+///
+/// Usage example:
+/// \code
+/// sf::Event event;
+/// while (window.pollEvent(event))
+/// {
+///     // Request for closing the window
+///     if (event.type == sf::Event::Closed)
+///         window.close();
+///
+///     // The escape key was pressed
+///     if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+///         window.close();
+///
+///     // The window was resized
+///     if (event.type == sf::Event::Resized)
+///         doSomethingWithTheNewSize(event.size.width, event.size.height);
+///
+///     // etc ...
+/// }
+/// \endcode
+///
+////////////////////////////////////////////////////////////

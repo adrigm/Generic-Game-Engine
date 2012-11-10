@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="40" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="pueblo" tilewidth="32" tileheight="32">
+  <image source="pueblo.png" trans="ff00ff" width="256" height="960"/>
+ </tileset>
+ <tileset firstgid="241" name="config" tilewidth="32" tileheight="32">
+  <image source="config.png" width="256" height="160"/>
+ </tileset>
+ <layer name="Capa de Patrones 1" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0TkOgCAURVHciqU7cSqcCnX/+5CSkEiUIDyTW9yKn8D51MaYOkGV02SbnRbvPLbQ/U2icjie3p+qrxy5w6EVDq1waIUjf62tu2nwHGNgthfbeWyl/woHDhw4cODA8X/HbjtuWr23boHZs7DjzV+V3jkOHErh0AqHVji0wqEVDq1wxHcBUUGH4w==
+  </data>
+ </layer>
+ <layer name="Capa de patrones 2" width="50" height="40">
+  <properties>
+   <property name="zindex" value="0"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmctOFFEQhk94A2QlroSV+kCwEIQEVBJFXCAgFwW8izcE9VXQxAAmBiSR2wp5Gf/J9Ek6RdWpOhcGFvzJl/Q0dS5VPTWnqplzzj0BT11Ys2AuYNsFusGIML5x/2pll4rXOHgEJsBkde8FeAleKX48V2yvgxvgoTC+cf9aZZeKFxfT9+AD+AjWwHfCj8ruHbE9LYX24MXF9Av4Cr6BDbBJ+FXZrRJbSYOR96lCe/DSYmqZw+sm6AP95H4oP7Sx1j1oMY3xYwgMg9vkfig/tLGxe5C0Df4QdgTbe+A+GI1cQxsbswdJ++CAcBg5h5QH02BGGdteaA9H4B/hOHIOKT8WwTNl7GXjHrjzg6qNYFH9GUj58RYsMfYpe+DOD+pXih/SM6jrM1gx2mt74M4P6leMH1PgsWs+A39dyj60Pnd+cLWGNEcP6K19ngcLzLWkWHtJ3PkRU2vcAgPGtSy5yInGyipLreF1B9w1zqvVx5KkWKXGhdMDMFb7fAl0CLZafSyNlWJljYulzqTqBFeEv2m1nDSWxspLi4tXibqmLmt9bJW1b7D4QXMw9L3SJI2V8twaF4sfNAdD3ytN0tj6Gj/dye/6ujKvpc6M+b1KVX2N3+5kbLeU8ZY6U8pBa69nsa+vkeJHSq37GrxxzXrJX5e0T/HDK6Y+/ASWXbNe8teh/pyzD+kv2CXsGfcW4wcnS3/OiTuvc3qqXD8s/Tkn7rwu0de1WqHzOje2KUp9fxU6ry1+lKohvVLzI7eOSamtQ0rNj1xZ31OfF0l9SOl3z7nvdzVJfUjJ2rqh1Pzw0vo+ax+Sq9z80Pq+Vv3/IldavEv3Z5Jy8+O8xDs3P1oVb01ndX5ciNdpnx+S/gNUYzCB
+  </data>
+ </layer>
+ <layer name="Capa de patrones 3" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmLkOAjEMRLehoqICKvhJjoaj4Wg4Go5yK6BAggIJPo9JtxKKSbK2s4g8aaQ0jKzgMcFZlkjokscuIOOp4cLgURaJGnpQHxpAQwF/LUbQGJpA07ilfOVqORtm0BxaQEvBGm6F8z3Q42E5G1bQGtpA20B/F56F80vAfwftoQN0FPA31IR8E4lEwod67AJ+mDx2AUxU4a1bBZpQK3YRDHSgLoNPHvAZ8749Qefs860bi5D+pt66id+nweBB/a/Tos3gIdnr/7Zv4OirslB37rpvoPpK6zul7pxj36C1Q6Lu3HXfQPWV1g6J486pvtLaIUnveKT8XXPnk88Y88o1dz755Pgd9MU1dxz5lJy5rrnzyaetryRnrmvufPJp6yutmSuN1syVRmLmvgForVxa
+  </data>
+ </layer>
+ <layer name="Capa de patrones 4" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzjENAAAIA7D594FPRIyEp1XQBAAAAABozHcAAAA4scR1AKY=
+  </data>
+ </layer>
+ <objectgroup name="events" width="50" height="40">
+  <object name="jugador" type="player" x="752" y="719">
+   <properties>
+    <property name="col" value="4"/>
+    <property name="fil" value="4"/>
+    <property name="image" value="chara.png"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="Tile Layer 5" width="50" height="40" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt0jEKwCAQRUHvf1tDWiGNRZAkjcVmlxn42O4DWwMAvhxzZ/Qhm6p0VDfmshvLMlobdMR5aqjUQm39Zdn026sjXqV/peM/qnQAAMCuC/lERwU=
+  </data>
+ </layer>
+</map>

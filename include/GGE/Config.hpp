@@ -6,12 +6,6 @@
  * @author Ryan Lindeman
  * @date 20110127 - Initial Release
  * @date 20110131 - Added define documentation
- * @date 20110218 - Next minor release of GGE
- * @date 20110318 - Next minor release of GGE
- * @date 20110611 - Next minor release of GGE
- * @date 20110618 - Next minor release of GGE
- * @date 20110627 - Next minor release of GGE
- * @date 20110831 - Next minor release of GGE
  */
 #ifndef GGE_CONFIG_HPP
 #define GGE_CONFIG_HPP
@@ -23,7 +17,7 @@
 /// Define the GGE Major version number
 #define GGE_VERSION_MAJOR 0
 /// Define the GGE Minor version number
-#define GGE_VERSION_MINOR 1
+#define GGE_VERSION_MINOR 2
 
 
 ////////////////////////////////////////////////////////////

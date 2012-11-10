@@ -1,108 +1,23 @@
+#include <GGE/Core/App.hpp>
 #include <GGE/Core/Actor.hpp>
-#include <iostream>
+#include <iostream> // Quitar
 
 namespace GGE
 {
 
 Actor::Actor() :
-	mRows(1),
-	mCols(1),
-	mWidth(0),
-	mHeight(0),
-	mVisible(true),
 	mZOrder(2),
-	mRectCollision(0, 0, 0, 0),
-	mDefineRectCollision(false)
+	mVisible(true),
+	mSelectFrame(1),
+	mSelectFrameAnimation(0),
+	mElapsedTime(0.0f),
+	myIsFlippedX(false)
 {
+	mApp = GGE::App::Instance();
 }
 
 Actor::~Actor()
 {
-}
-
-void Actor::SetImage(const sf::Image& Img)
-{
-	sf::Sprite::SetImage(Img);
-	mWidth = GetImage()->GetWidth();
-	mHeight = GetImage()->GetHeight();
-	
-	if (!mDefineRectCollision)
-	{
-		mRectCollision.Left = GetPosition().x;
-		mRectCollision.Right = GetPosition().x + mWidth;
-		mRectCollision.Top = GetPosition().y;
-		mRectCollision.Bottom = GetPosition().y + mHeight;
-	}
-}
-
-void Actor::SetGrid(const GGE::Uint32 theRows, const GGE::Uint32 theCols)
-{
-	mRows = theRows;
-	mCols = theCols;
-	mWidth = this->GetImage()->GetWidth() / theCols;
-	mHeight = this->GetImage()->GetHeight() / theRows;
-	for (int r = 0; r <theRows; r++)
-	{
-		std::vector<sf::IntRect> anCol;
-		for (int c = 0; c < theCols; c++)
-		{
-			anCol.push_back(sf::IntRect(mWidth*c, mHeight*r, mWidth*c+mWidth, mHeight*r+mHeight));
-		}
-		mRects.push_back(anCol);
-		anCol.clear();
-	}
-	SetSubRect(mRects[0][0]); 
-	
-	if (!mDefineRectCollision)
-	{
-		mRectCollision.Left = GetPosition().x;
-		mRectCollision.Right = GetPosition().x + mWidth;
-		mRectCollision.Top = GetPosition().y;
-		mRectCollision.Bottom = GetPosition().y + mHeight;
-	}
-
-}
-
-void Actor::SelectGid(const GGE::Uint32 theRow, const GGE::Uint32 theCol)
-{
-	if (theRow <= mRects.size() && theRow > 0)
-		if (theCol <= mRects[0].size() && theCol > 0)
-			SetSubRect(mRects[theRow-1][theCol-1]);
-}
-
-void Actor::AddRects(const std::vector<sf::IntRect> theListRects)
-{
-	mListRects.insert(mListRects.end(), theListRects.begin(), theListRects.end());
-}
-
-void Actor::AddRects(const sf::IntRect theRect)
-{
-	mListRects.push_back(theRect);
-}
-
-void Actor::SelectRect(const GGE::Uint32 theNumRect)
-{
-	if (theNumRect < mListRects.size())
-	{
-		SetSubRect(mListRects[theNumRect]);
-		mWidth = mListRects[theNumRect].Right - mListRects[theNumRect].Left;
-		mHeight = mListRects[theNumRect].Bottom - mListRects[theNumRect].Top;
-
-		mRectCollision.Left = GetPosition().x;
-		mRectCollision.Right = GetPosition().x + mWidth;
-		mRectCollision.Top = GetPosition().y;
-		mRectCollision.Bottom = GetPosition().y + mHeight;
-	}
-}
-
-GGE::Uint32 Actor::GetWidth() const
-{
-	return mWidth;
-}
-
-GGE::Uint32 Actor::GetHeight() const
-{
-	return mHeight;
 }
 
 bool Actor::IsVisible() const
@@ -120,71 +35,107 @@ void Actor::Hide()
 	mVisible = false;
 }
 
-sf::FloatRect Actor::GetRectCollision() const
+void Actor::SetFramesBySize(GGE::Uint32 theWidth, GGE::Uint32 theHeight)
 {
-	return mRectCollision;
+	mRectsList.clear();
+
+	GGE::Uint32 cols = this->getTexture()->getSize().x / theWidth;
+	GGE::Uint32 rows = this->getTexture()->getSize().y / theHeight;
+
+	for (int r = 0; r < rows; r++)
+		for (int c = 0; c < cols; c++)
+			mRectsList.push_back(sf::IntRect(c*theWidth, r*theHeight, theWidth, theHeight));
+
+	this->setTextureRect(mRectsList[0]);
+
+	this->SelectFrame(1);
 }
 
-void Actor::SetRectCollision(const sf::FloatRect theRect)
+void Actor::SetFramesByNum(GGE::Uint32 theRows, GGE::Uint32 theCols)
 {
-	mRectCollision = theRect;
-	mDefineRectCollision = true;
+	mRectsList.clear();
+
+	GGE::Uint32 width = this->getTexture()->getSize().x / theCols;
+	GGE::Uint32 height = this->getTexture()->getSize().y / theRows;
+
+	for (int r = 0; r < theRows; r++)
+	{
+		for (int c = 0; c < theCols; c++)
+		{
+			mRectsList.push_back(sf::IntRect(c*width, r*height, width, height));
+		}
+	}
+
+	this->SelectFrame(1);
 }
 
-void Actor::SetPosition(float X, float Y)
+bool Actor::SelectFrame(GGE::Uint32 theFrame)
 {
-	sf::Sprite::SetPosition(X, Y);
-
-	mRectCollision.Left = this->GetPosition().x - this->GetCenter().x + mRectCollision.Left;
-	mRectCollision.Right = this->GetPosition().x - this->GetCenter().x + mRectCollision.Right;
-	mRectCollision.Top =  this->GetPosition().y - this->GetCenter().y + mRectCollision.Top;
-	mRectCollision.Bottom = this->GetPosition().y - this->GetCenter().y + mRectCollision.Bottom;
-	
-	/*mRectCollision.Left = X - this->GetCenter().x;
-	mRectCollision.Top = Y - this->GetCenter().y;
-	mRectCollision.Right = mRectCollision.Left + mWidth;
-	mRectCollision.Bottom = mRectCollision.Top + mHeight;*/
+	if (theFrame < 1 || theFrame > mRectsList.size())
+	{
+		mApp->mLog << "Actor::SelectFrame() Frame fuera de rango: " << theFrame << std::endl;
+		return false;
+	}
+	else
+	{
+		this->setTextureRect(mRectsList[theFrame-1]);
+		this->mSelectFrame = theFrame;
+		return true;
+	}
 }
 
-void Actor::SetPosition(const sf::Vector2f& Position)
+GGE::Uint32 Actor::GetSelectFrame() const
 {
-	sf::Sprite::SetPosition(Position);
-
-	mRectCollision.Left = this->GetPosition().x - this->GetCenter().x + mRectCollision.Left;
-	mRectCollision.Right = this->GetPosition().x - this->GetCenter().x + mRectCollision.Right;
-	mRectCollision.Top =  this->GetPosition().y - this->GetCenter().y + mRectCollision.Top;
-	mRectCollision.Bottom = this->GetPosition().y - this->GetCenter().y + mRectCollision.Bottom;
-
-	/*mRectCollision.Left = Position.x - this->GetCenter().x;
-	mRectCollision.Top = Position.y - this->GetCenter().y;
-	mRectCollision.Right = mRectCollision.Left + mWidth;
-	mRectCollision.Bottom = mRectCollision.Top + mHeight;*/
+	return this->mSelectFrame;
 }
 
- void Actor::SetX(float X)
- {
-	sf::Sprite::SetX(X);
-	mRectCollision.Left = X - this->GetCenter().x;
-	mRectCollision.Right = mRectCollision.Left + mWidth;
- }
+void Actor::AddAnimation(const std::string theName, const GGE::Animation theAnim)
+{
+	mListAnim[theName] = theAnim;
+}
 
- void Actor::SetY(float Y)
- {
-	sf::Sprite::SetY(Y);
-	mRectCollision.Top = Y - this->GetCenter().y;
-	mRectCollision.Bottom = mRectCollision.Top + mHeight;
- }
 
- void Actor::Move(float OffsetX, float OffsetY)
- {
-	sf::Sprite::Move(OffsetX, OffsetY);
-	mRectCollision.Offset(OffsetX, OffsetY);
- }
+GGE::Animation Actor::GetAnimation(std::string theName) const
+{
+	return mListAnim.find(theName)->second;
+}
 
- void Actor::Move(const sf::Vector2f& Offset)
- {
-	sf::Sprite::Move(Offset);
-	mRectCollision.Offset(Offset.x, Offset.y);
- }
+void Actor::SetActiveAnimation(const std::string theName, bool reset)
+{
+	mActiveAnimation = mListAnim.find(theName)->second;
+	this->SelectFrame(this->GetActiveAnimation().firstFrame);
+	mSelectFrameAnimation = this->GetSelectFrame();
+}
+
+GGE::Animation Actor::GetActiveAnimation() const
+{
+	return mActiveAnimation;
+}
+
+void Actor::Animate()
+{
+	mElapsedTime += mApp->GetUpdateTime();
+
+	if (mElapsedTime >= 1.0f / this->GetActiveAnimation().fps)
+	{
+		mElapsedTime = 0.0f;
+
+		this->SelectFrame(mSelectFrameAnimation);
+
+		if (this->GetSelectFrame() < this->GetActiveAnimation().lastFrame)
+		{
+			mSelectFrameAnimation++;
+		}
+		else
+		{
+			mSelectFrameAnimation = this->GetActiveAnimation().firstFrame;
+		}
+	}
+}
+
+void Actor::FlipX(bool flipped)
+{
+	myIsFlippedX = flipped;
+}
 
 } // Namespace GGE

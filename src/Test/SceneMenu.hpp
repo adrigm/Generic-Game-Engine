@@ -1,8 +1,9 @@
 #ifndef SCENE_MENU_HPP
 #define SCENE_MENU_HPP
 
+#include <vector>
 #include <SFML/Graphics.hpp>
-#include <GGE/Core/Scene.hpp>
+#include <GGE/Core.hpp>
 
 class SceneMenu : public GGE::Scene
 {
@@ -19,9 +20,10 @@ public:
 
 	virtual void Update();
 
-	virtual void Draw();
-
 	virtual void Cleanup();
+
+private:
+	GGE::App* app;
 };
 
 #endif // SCENE_MENU_HPP

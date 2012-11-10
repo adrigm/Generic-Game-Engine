@@ -42,23 +42,34 @@ enum StatusType {
 // Forward declare GGE classes provided
 class App;
 class ConfigReader;
-class AssetManager;
-class SceneManager;
 class Scene;
-class Actor;
+class SceneManager;
+class AssetManager;
 class Camera;
+class Clock;
+class Actor;
 
 /// Foward declare TmxMap
-class TmxProperties;
-class TmxTileset;
+class TmxMap;
 class TmxLayer;
 class TmxObject;
 class TmxObjectGroup;
-class TmxMap;
+class TmxProperties;
+class TmxTileset;
 
 // Foward declare Map
-class Tileset;
-class Map;
+
+
+/// Animaciones
+struct Animation
+{
+	GGE::Uint32 fps;
+	GGE::Uint32 firstFrame;
+	GGE::Uint32 lastFrame;
+	bool flipX;
+	bool flipY;
+	Animation() { fps = 20; firstFrame = 1; lastFrame = 1; flipX = false; flipY = false; }
+};
  
 /// Declare Action ID typedef which is used for identifying Action objects
 typedef std::string typeActionID;

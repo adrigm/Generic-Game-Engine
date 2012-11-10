@@ -1,33 +1,27 @@
 #include <GGE/Core/AssetManager.hpp>
 
- 
 namespace GGE
 {
 
 AssetManager* AssetManager::ms_instance = 0;
 
 AssetManager::AssetManager() :
-	mApp(NULL),
-	mDirectories(),
-	mImages(),
-	mConfigFiles()
+	mApp(NULL)
 {
 	mApp = GGE::App::Instance();
-	mApp->mLog << "AssetManager::ctor()" << std::endl;
+	mApp->mLog << "AssetManager::ctor() Constructor llmado" << std::endl;
 }
 
 AssetManager::~AssetManager()
 {
-	mImages.clear();
-	mConfigFiles.clear();
 	mDirectories.clear();
-
-	mApp->mLog << "AssetManager::dtor()" << std::endl;
+	mApp->mLog << "AssetManager::dtor() Destructor llamado" << std::endl;
 }
 
 AssetManager* AssetManager::Instance()
 {
-	if(ms_instance == 0){
+	if(ms_instance == 0)
+	{
 		ms_instance = new AssetManager();
 	}
 	return ms_instance;
@@ -35,7 +29,8 @@ AssetManager* AssetManager::Instance()
 
 void AssetManager::Release()
 {
-	if(ms_instance){
+	if(ms_instance)
+	{
 		delete ms_instance;
 	}
 	ms_instance = 0;
@@ -43,245 +38,290 @@ void AssetManager::Release()
 
 void AssetManager::AddDirectory(const std::string& directory)
 {
-	// Check whether the path already exists
-	for( std::vector<std::string>::iterator it  = mDirectories.begin();
-		 it != mDirectories.end();
-		++it )
+	// Comprobamos si existe el directorio
+	for(std::vector<std::string>::iterator it  = mDirectories.begin();
+		 it != mDirectories.end(); ++it)
 	{
-		// The path exists. So it isn't necessary to add id once more.
-		if( directory == (*it) )
+		// Si existe no es necesario hacer nada más
+		if(directory == (*it))
 			return;
 	}
-	
+
 	// TODO: Comprobar si el último caracter del directorio es / o \
 
-	// insert the directory
+	// Añadimos el directorio a la lista
 	mDirectories.push_back( directory );
 	mApp->mLog << "AssetManager::AddDirectory() Dir=" << directory << std::endl;
 }
 
-void AssetManager::RemoveDirectory( const std::string& directory )
+void AssetManager::RemoveDirectory(const std::string& directory)
 {
-	for( std::vector<std::string>::iterator it  = mDirectories.begin();
-		 it != mDirectories.end(); )
+	for(std::vector<std::string>::iterator it  = mDirectories.begin();
+		 it != mDirectories.end(); ++it)
 	{
 		// The path exists. So it isn't necessary to add id once more.
-		if( directory == (*it) )
-			it = mDirectories.erase( it );
-		else
-			++it;
-	}
-}
-
-sf::Image& AssetManager::GetImage( const std::string& theFilename )
-{
-	// Check, whether the image already exists
-	for( std::map<std::string, sf::Image>::iterator it = mImages.begin();
-		 it != mImages.end(); 
-		 ++it)
-	{
-		if(theFilename == it->first)
+		if(directory == (*it))
 		{
-			mApp->mLog << "AssetManager::GetImage() " << theFilename << " using existing image.\n";
-			return it->second;
-		}
-	}
-	
-	// The image doesen't exists. Create it and save it.
-	sf::Image image;
-
-	// Search project's main directory
-	if( image.LoadFromFile(mApp->GetExecutableDir() + theFilename ) )
-	{
-		mImages[theFilename] = image;
-		mApp->mLog << "AssetManager::GetImage() " << theFilename << " loading image.\n";
-		return mImages[theFilename];
-	}
-
-	// If the image has still not been found, search all registered directories
-	for( std::vector< std::string >::iterator it = mDirectories.begin();
-		 it != mDirectories.end();
-		 ++it )
-	{
-		if( image.LoadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
-		{
-			mImages[theFilename] = image;
-			mApp->mLog << "AssetManager::GetImage() " << theFilename << " loading image.\n";
-			return mImages[theFilename];
-		}
-
-	}
-
-	mApp->mLog << "AssetManager::GetImage(): Image was not found. It is filled with an empty image.\n";
-	mImages[theFilename] = image;
-	return mImages[theFilename];
-}
-
-void AssetManager::DeleteImage( const sf::Image& image )
-{
-	for(std::map<std::string, sf::Image>::iterator it = mImages.begin();
-		 it != mImages.end(); 
-		 ++it)
-	{
-		if( &image == &it->second )
-		{
-			mImages.erase(it);
+			it = mDirectories.erase(it);
+			mApp->mLog << "AssetManager::RemoveDirectory() Dir=" << directory << std::endl;
 			return;
 		}
 	}
+	mApp->mLog << "AssetManager::RemoveDirectory() No existe el directorio " << directory << std::endl;
 }
 
-void AssetManager::DeleteImage(const std::string& theFilename)
+sf::Texture* AssetManager::GetTexture(const std::string& theFilename)
 {
-	std::map<std::string, sf::Image>::iterator it = mImages.find( theFilename );
-	if( it != mImages.end() )
-		mImages.erase( it );
-}
-
-sf::Font& AssetManager::GetFont(const std::string& theFilename)
-{
-	// Check, whether the image already exists
-	for( std::map<std::string, sf::Font>::iterator it = mFonts.begin();
-		 it != mFonts.end(); 
-		 ++it)
+	// Comprobamos si existe el recurso
+	for (std::map<std::string, sf::Texture*>::iterator it = mTextures.begin();
+		it != mTextures.end(); it++)
 	{
-		if(theFilename == it->first)
+		if (it->first == theFilename)
 		{
-			mApp->mLog << "AssetManager::GetFont() " << theFilename << " using existing Font.\n";
+			mApp->mLog << "AssetManager::GetTexture() " << theFilename << " usando textura existente" << std::endl;
 			return it->second;
 		}
 	}
-	
-	// The image doesen't exists. Create it and save it.
-	sf::Font font;
 
-	// Search project's main directory
-	if( font.LoadFromFile(mApp->GetExecutableDir() + theFilename ) )
+	// Si no existe lo cargamos
+	sf::Texture* anTexture = new sf::Texture();
+
+	// Buscamos en la lista de directorios
+	for (std::vector< std::string >::iterator it = mDirectories.begin();
+		 it != mDirectories.end(); ++it)
 	{
-		mFonts[theFilename] = font;
-		mApp->mLog << "AssetManager::GetFont() " << theFilename << " loading Font.\n";
-		return mFonts[theFilename];
+		if(anTexture->loadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
+		{
+			mTextures[theFilename] = anTexture;
+			mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+			return mTextures[theFilename];
+		}
+
 	}
 
-	// If the image has still not been found, search all registered directories
-	for( std::vector< std::string >::iterator it = mDirectories.begin();
-		 it != mDirectories.end();
-		 ++it )
+	// Buscamos en el directorio del ejecutable
+	if (anTexture->loadFromFile(mApp->GetExecutableDir() + theFilename))
 	{
-		if( font.LoadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
+		mTextures[theFilename] = anTexture;
+		mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+		return mTextures[theFilename];
+	}
+
+	// Si no se encuentra la textura devolvemos la dirección de una vacía
+	mApp->mLog << "AssetManager::GetTexture() No existe el archivo " << theFilename << ". Se devuelve una textura vacía" << std::endl;
+	return anTexture;
+}
+
+void AssetManager::DeleteTexture(const std::string& theFilename)
+{
+	std::map<std::string, sf::Texture*>::iterator it = mTextures.find(theFilename);
+	if(it != mTextures.end())
+	{
+		mApp->mLog << "AssetManager::DeleteTexture() Eliminada textura: " << it->first << std::endl;
+		delete it->second;
+		mTextures.erase(it); 
+	}
+}
+
+sf::Font* AssetManager::GetFont(const std::string& theFilename)
+{
+	// Comprobamos si existe el recurso
+	for (std::map<std::string, sf::Font*>::iterator it = mFonts.begin();
+		it != mFonts.end(); it++)
+	{
+		if (it->first == theFilename)
 		{
-			mFonts[theFilename] = font;
-			mApp->mLog << "AssetManager::GetFont() " << theFilename << " loading Font.\n";
+			mApp->mLog << "AssetManager::GetFont() " << theFilename << " usando textura existente" << std::endl;
+			return it->second;
+		}
+	}
+
+	// Si no existe lo cargamos
+	sf::Font* anFont = new sf::Font();
+
+	// Buscamos en la lista de directorios
+	for (std::vector< std::string >::iterator it = mDirectories.begin();
+		 it != mDirectories.end(); ++it)
+	{
+		if(anFont->loadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
+		{
+			mFonts[theFilename] = anFont;
+			mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
 			return mFonts[theFilename];
 		}
 
 	}
 
-	mApp->mLog << "AssetManager::GetFont(): Font was not found. It is filled with an empty image.\n";
-	mFonts[theFilename] = sf::Font::GetDefaultFont();
-	return mFonts[theFilename];
+	// Buscamos en el directorio del ejecutable
+	if (anFont->loadFromFile(mApp->GetExecutableDir() + theFilename))
+	{
+		mFonts[theFilename] = anFont;
+		mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+		return mFonts[theFilename];
+	}
+
+	// Si no se encuentra la textura devolvemos la dirección de una vacía
+	mApp->mLog << "AssetManager::GetFont() No existe el archivo " << theFilename << ". Se devuelve una textura vacía" << std::endl;
+	return anFont;
 }
 
 void AssetManager::DeleteFont(const std::string& theFilename)
 {
-	std::map<std::string, sf::Font>::iterator it = mFonts.find( theFilename );
-	if( it != mFonts.end() )
-		mFonts.erase( it );
+	std::map<std::string, sf::Font*>::iterator it = mFonts.find(theFilename);
+	if(it != mFonts.end())
+	{
+		mApp->mLog << "AssetManager::DeleteFont() Eliminada textura: " << it->first << std::endl;
+		delete it->second;
+		mFonts.erase(it); 
+	}
 }
 
-sf::SoundBuffer& AssetManager::GetSoundBuffer(const std::string& theFilename)
+sf::SoundBuffer* AssetManager::GetSoundBuffer(const std::string& theFilename)
 {
-	// Check, whether the image already exists
-	for( std::map<std::string, sf::SoundBuffer>::iterator it = mSounds.begin();
-		 it != mSounds.end(); 
-		 ++it)
+	// Comprobamos si existe el recurso
+	for (std::map<std::string, sf::SoundBuffer*>::iterator it = mSoundBuffers.begin();
+		it != mSoundBuffers.end(); it++)
 	{
-		if(theFilename == it->first)
+		if (it->first == theFilename)
 		{
-			mApp->mLog << "AssetManager::GetFont() " << theFilename << " using existing Font.\n";
+			mApp->mLog << "AssetManager::GetSoundBuffer() " << theFilename << " usando textura existente" << std::endl;
 			return it->second;
 		}
 	}
-	
-	// The image doesen't exists. Create it and save it.
-	sf::SoundBuffer sound;
 
-	// Search project's main directory
-	if( sound.LoadFromFile(mApp->GetExecutableDir() + theFilename ) )
-	{
-		mSounds[theFilename] = sound;
-		mApp->mLog << "AssetManager::GetFont() " << theFilename << " loading Font.\n";
-		return mSounds[theFilename];
-	}
+	// Si no existe lo cargamos
+	sf::SoundBuffer* anSoundBuffer = new sf::SoundBuffer();
 
-	// If the image has still not been found, search all registered directories
-	for( std::vector< std::string >::iterator it = mDirectories.begin();
-		 it != mDirectories.end();
-		 ++it )
+	// Buscamos en la lista de directorios
+	for (std::vector< std::string >::iterator it = mDirectories.begin();
+		 it != mDirectories.end(); ++it)
 	{
-		if( sound.LoadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
+		if(anSoundBuffer->loadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
 		{
-			mSounds[theFilename] = sound;
-			mApp->mLog << "AssetManager::GetFont() " << theFilename << " loading Font.\n";
-			return mSounds[theFilename];
+			mSoundBuffers[theFilename] = anSoundBuffer;
+			mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+			return mSoundBuffers[theFilename];
 		}
 
 	}
 
-	mApp->mLog << "AssetManager::GetFont(): Font was not found. It is filled with an empty image.\n";
-	mSounds[theFilename] = sound;
-	return mSounds[theFilename];
+	// Buscamos en el directorio del ejecutable
+	if (anSoundBuffer->loadFromFile(mApp->GetExecutableDir() + theFilename))
+	{
+		mSoundBuffers[theFilename] = anSoundBuffer;
+		mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+		return mSoundBuffers[theFilename];
+	}
+
+	// Si no se encuentra la textura devolvemos la dirección de una vacía
+	mApp->mLog << "AssetManager::GetSoundBuffer() No existe el archivo " << theFilename << ". Se devuelve una textura vacía" << std::endl;
+	return anSoundBuffer;
 }
 
 void AssetManager::DeleteSoundBuffer(const std::string& theFilename)
 {
-	std::map<std::string, sf::SoundBuffer>::iterator it = mSounds.find( theFilename );
-	if( it != mSounds.end() )
-		mSounds.erase( it );
+	std::map<std::string, sf::SoundBuffer*>::iterator it = mSoundBuffers.find(theFilename);
+	if(it != mSoundBuffers.end())
+	{
+		mApp->mLog << "AssetManager::DeleteSoundBuffer() Eliminada textura: " << it->first << std::endl;
+		delete it->second;
+		mSoundBuffers.erase(it); 
+	}
+}
+
+GGE::ConfigReader* AssetManager::GetConfig(const std::string& theFilename)
+{
+	// Comprobamos si existe el recurso
+	for (std::map<std::string, GGE::ConfigReader*>::iterator it = mConfigFiles.begin();
+		it != mConfigFiles.end(); it++)
+	{
+		if (it->first == theFilename)
+		{
+			mApp->mLog << "AssetManager::GetConfig() " << theFilename << " usando archivo existente" << std::endl;
+			return it->second;
+		}
+	}
+
+	// Si no existe lo cargamos
+	GGE::ConfigReader* anConfig = new GGE::ConfigReader();
+
+	// Buscamos en la lista de directorios
+	for (std::vector< std::string >::iterator it = mDirectories.begin();
+		 it != mDirectories.end(); ++it)
+	{
+		if(anConfig->Read(mApp->GetExecutableDir() + (*it) + theFilename))
+		{
+			mConfigFiles[theFilename] = anConfig;
+			mApp->mLog << "AssetManager::GetImage() " << theFilename << " archivo cargado.\n";
+			return mConfigFiles[theFilename];
+		}
+
+	}
+
+	// Buscamos en el directorio del ejecutable
+	if (anConfig->Read(mApp->GetExecutableDir() + theFilename))
+	{
+		mConfigFiles[theFilename] = anConfig;
+		mApp->mLog << "AssetManager::GetConfig() " << theFilename << " archivo cargado.\n";
+		return mConfigFiles[theFilename];
+	}
+
+	// Si no se encuentra la textura devolvemos la dirección de una vacía
+	mApp->mLog << "AssetManager::GetTexture() No existe el archivo " << theFilename << ". Se devuelve una textura vacía" << std::endl;
+	return anConfig;
+}
+
+void AssetManager::DeleteConfig(const std::string& theFilename)
+{
+	std::map<std::string, GGE::ConfigReader*>::iterator it = mConfigFiles.find(theFilename);
+	if(it != mConfigFiles.end())
+	{
+		mApp->mLog << "AssetManager::DeleteConfig() Eliminada textura: " << it->first << std::endl;
+		delete it->second;
+		mConfigFiles.erase(it); 
+	}
 }
 
 sf::Music* AssetManager::GetMusic(const std::string& theFilename)
 {
-	// Check, whether the image already exists
-	for( std::map<std::string, sf::Music*>::iterator it = mMusic.begin();
-		 it != mMusic.end(); 
-		 ++it)
+	// Comprobamos si existe el recurso
+	for (std::map<std::string, sf::Music*>::iterator it = mMusic.begin();
+		it != mMusic.end(); it++)
 	{
-		if(theFilename == it->first)
+		if (it->first == theFilename)
 		{
-			mApp->mLog << "AssetManager::GetMusic() " << theFilename << " using existing Music.\n";
+			mApp->mLog << "AssetManager::GetMusic() " << theFilename << " usando archivo existente" << std::endl;
 			return it->second;
 		}
 	}
-	
-	// The image doesen't exists. Create it and save it.
-	sf::Music* music = new sf::Music();
 
-	// Search project's main directory
-	if( music->OpenFromFile(mApp->GetExecutableDir() + theFilename ) )
-	{
-		mMusic[theFilename] = music;
-		mApp->mLog << "AssetManager::GetMusic() " << theFilename << " loading Music.\n";
-		return mMusic[theFilename];
-	}
+	// Si no existe lo cargamos
+	sf::Music* anMusic = new sf::Music();
 
-	// If the image has still not been found, search all registered directories
-	for( std::vector< std::string >::iterator it = mDirectories.begin();
-		 it != mDirectories.end();
-		 ++it )
+	// Buscamos en la lista de directorios
+	for (std::vector<std::string>::iterator it = mDirectories.begin();
+		 it != mDirectories.end(); ++it)
 	{
-		if( music->OpenFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
+		if(anMusic->openFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
 		{
-			mMusic[theFilename] = music;
-			mApp->mLog << "AssetManager::GetMusic() " << theFilename << " loading Music.\n";
+			mMusic[theFilename] = anMusic;
+			mApp->mLog << "AssetManager::GetMusic() " << theFilename << " archivo cargado.\n";
 			return mMusic[theFilename];
 		}
 
 	}
 
-	mApp->mLog << "AssetManager::GetMusic(): Font was not found. It is filled with an empty music.\n";
-	mMusic[theFilename] = music;
-	return mMusic[theFilename];
+	// Buscamos en el directorio del ejecutable
+	if (anMusic->openFromFile(mApp->GetExecutableDir() + theFilename))
+	{
+		mMusic[theFilename] = anMusic;
+		mApp->mLog << "AssetManager::GetMusic() " << theFilename << " archivo cargado.\n";
+		return mMusic[theFilename];
+	}
+
+	// Si no se encuentra la textura devolvemos la dirección de una vacía
+	mApp->mLog << "AssetManager::GetMusic() No existe el archivo " << theFilename << ". Se devuelve una textura vacía" << std::endl;
+	return anMusic;
 }
 
 void AssetManager::DeleteMusic(const std::string& theFilename)
@@ -289,167 +329,63 @@ void AssetManager::DeleteMusic(const std::string& theFilename)
 	std::map<std::string, sf::Music*>::iterator it = mMusic.find(theFilename);
 	if(it != mMusic.end())
 	{
+		mApp->mLog << "AssetManager::DeleteMusic() Eliminada textura: " << it->first << std::endl;
 		delete it->second;
-		mMusic.erase(it);
-		mApp->mLog << "AssetManager::DeleteConfigFile() ID=" << theFilename << std::endl;
+		mMusic.erase(it); 
 	}
 }
 
-ConfigReader& AssetManager::GetConfigFile(const std::string& theFilename)
+GGE::TmxMap* AssetManager::GetTmxMap(const std::string& theFilename)
 {
-	// Check, whether the image already exists
-	for( std::map<std::string, ConfigReader*>::iterator it = mConfigFiles.begin();
-		 it != mConfigFiles.end(); 
-		 ++it)
+	// Comprobamos si existe el recurso
+	for (std::map<std::string, GGE::TmxMap*>::iterator it = mTmxMaps.begin();
+		it != mTmxMaps.end(); it++)
 	{
-		if( theFilename == it->first )
+		if (it->first == theFilename)
 		{
-			mApp->mLog << "AssetManager::GetConfigFile() ID=" << theFilename << " ya existe" << std::endl;
-			return *it->second;
-		}
-	}
-	
-	// The image doesen't exists. Create it and save it.
-	ConfigReader* anConfigFile = new ConfigReader();
-
-	// Search project's main directory
-	if( anConfigFile->Read(mApp->GetExecutableDir() + theFilename))
-	{
-		mConfigFiles[theFilename] = anConfigFile;
-		mApp->mLog << "AssetManager::GetConfigFile() ID=" << theFilename << std::endl;
-		return *mConfigFiles[theFilename];
-	}
-
-	// If the image has still not been found, search all registered directories
-	for( std::vector< std::string >::iterator it = mDirectories.begin();
-		 it != mDirectories.end();
-		 ++it )
-	{
-		if( anConfigFile->Read(mApp->GetExecutableDir() + (*it) + theFilename ) )
-		{
-			mConfigFiles[theFilename] = anConfigFile;
-			mApp->mLog << "AssetManager::GetConfigFile() ID=" << theFilename << std::endl;
-			return *mConfigFiles[theFilename];
-		}
-
-	}
-
-	mApp->mLog << "AssetManager::GetConfigFile() ID="<< theFilename 
-		<< " No Encontrado, se crea uno vacío" << std::endl;
-	mConfigFiles[theFilename] = anConfigFile;
-	return *mConfigFiles[theFilename];
-}
-
-void AssetManager::DeleteConfigFile(const std::string& theFilename)
-{
-	std::map<std::string, ConfigReader*>::iterator it = mConfigFiles.find(theFilename);
-	if(it != mConfigFiles.end())
-	{
-		delete it->second;
-		mConfigFiles.erase(it);
-		mApp->mLog << "AssetManager::DeleteConfigFile() ID=" << theFilename << std::endl;
-	}
-}
-
-void AssetManager::Cleanup()
-{
-	// Eliminamos todas las imagenes
-	std::map<std::string, sf::Image>::iterator itImages = mImages.begin();
-	while (itImages != mImages.end())
-	{
-		mApp->mLog << "AssetManager::Cleanup() Eliminada imagen con ID=" << itImages->first << std::endl;
-		mImages.erase(itImages++);
-	}
-
-	// Eliminamos todas las tipografias
-	std::map<std::string, sf::Font>::iterator itFonts = mFonts.begin();
-	while (itFonts != mFonts.end())
-	{
-		mApp->mLog << "AssetManager::Cleanup() Eliminada Font con ID=" << itFonts->first << std::endl;
-		mFonts.erase(itFonts++);
-	}
-
-	// Eliminamos todos los sonidos
-	std::map<std::string, sf::SoundBuffer>::iterator itSounds = mSounds.begin();
-	while (itSounds != mSounds.end())
-	{
-		mApp->mLog << "AssetManager::Cleanup() Eliminado Sonido con ID=" << itSounds->first << std::endl;
-		mSounds.erase(itSounds++);
-	}
-
-	// Eliminamos todas las Configuraciones
-	std::map<std::string, ConfigReader*>::iterator itConfig = mConfigFiles.begin();
-	while (itConfig != mConfigFiles.end())
-	{
-		//delete itConfig->second;
-		mApp->mLog << "AssetManager::Cleanup() Eliminado ConfigFile con ID=" 
-			<< itConfig->first << std::endl;
-		mConfigFiles.erase(itConfig++);
-	}
-
-	// Eliminamos todas la Musica
-	std::map<std::string, sf::Music*>::iterator itMusic = mMusic.begin();
-	while (itMusic != mMusic.end())
-	{
-		//delete itConfig->second;
-		mApp->mLog << "AssetManager::Cleanup() Eliminado ConfigFile con ID=" 
-			<< itMusic->first << std::endl;
-		mMusic.erase(itMusic++);
-	}
-
-	mApp->mLog << "AssetManager::Cleanup() Terminado" << std::endl;
-}
-
-GGE::TmxMap& AssetManager::GetTmxMap(const std::string& theFilename)
-{
-	// Check, whether the image already exists
-	for( std::map<std::string, GGE::TmxMap>::iterator it = mTmxMap.begin();
-		 it != mTmxMap.end(); 
-		 ++it)
-	{
-		if(theFilename == it->first)
-		{
-			mApp->mLog << "AssetManager::GetTmxMap() " << theFilename << " using existing TmxMap.\n";
+			mApp->mLog << "AssetManager::GetTmxMap() " << theFilename << " usando textura existente" << std::endl;
 			return it->second;
 		}
 	}
-	
-	// The image doesen't exists. Create it and save it.
-	GGE::TmxMap map;
 
-	// Search project's main directory
-	if( map.LoadFromFile(mApp->GetExecutableDir() + theFilename ) )
-	{
-		mTmxMap[theFilename] = map;
-		mApp->mLog << "AssetManager::GetTmxMap() " << theFilename << " loading TmxMap.\n";
-		return mTmxMap[theFilename];
-	}
+	// Si no existe lo cargamos
+	GGE::TmxMap* anTmxMap = new GGE::TmxMap();
 
-	// If the image has still not been found, search all registered directories
-	for( std::vector< std::string >::iterator it = mDirectories.begin();
-		 it != mDirectories.end();
-		 ++it )
+	// Buscamos en la lista de directorios
+	for (std::vector< std::string >::iterator it = mDirectories.begin();
+		 it != mDirectories.end(); ++it)
 	{
-		if( map.LoadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
+		if(anTmxMap->LoadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
 		{
-			mTmxMap[theFilename] = map;
-			mApp->mLog << "AssetManager::GetTmxMap() " << theFilename << " loading TmxMap.\n";
-			return mTmxMap[theFilename];
+			mTmxMaps[theFilename] = anTmxMap;
+			mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+			return mTmxMaps[theFilename];
 		}
 
 	}
 
-	mApp->mLog << "AssetManager::GetTmxMap(): TmxMap was not found. It is filled with an empty image.\n";
-	mTmxMap[theFilename] = map;
-	return mTmxMap[theFilename];
+	// Buscamos en el directorio del ejecutable
+	if (anTmxMap->LoadFromFile(mApp->GetExecutableDir() + theFilename))
+	{
+		mTmxMaps[theFilename] = anTmxMap;
+		mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+		return mTmxMaps[theFilename];
+	}
+
+	// Si no se encuentra la textura devolvemos la dirección de una vacía
+	mApp->mLog << "AssetManager::GetTmxMap() No existe el archivo " << theFilename << ". Se devuelve una textura vacía" << std::endl;
+	return anTmxMap;
 }
 
 void AssetManager::DeleteTmxMap(const std::string& theFilename)
 {
-	std::map<std::string, GGE::TmxMap>::iterator it = mTmxMap.find( theFilename );
-	if( it != mTmxMap.end() )
-		mTmxMap.erase( it );
+	std::map<std::string, GGE::TmxMap*>::iterator it = mTmxMaps.find(theFilename);
+	if(it != mTmxMaps.end())
+	{
+		mApp->mLog << "AssetManager::DeleteTmxMap() Eliminada textura: " << it->first << std::endl;
+		delete it->second;
+		mTmxMaps.erase(it); 
+	}
 }
 
-
-} // namespace GGE
+} // Namespace GGE

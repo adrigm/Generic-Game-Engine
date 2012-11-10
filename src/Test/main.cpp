@@ -1,35 +1,27 @@
-/**
- * Archivo de entrada al proyecto, carga y da el control al engine GGE
- * 
- * @file main.cpp
- * @author Adri谩n Guerra Marrero
- * @date 20110422 - Initial Release
- */
-
-#include <GGE/Core/App.hpp>
-#include "ScenePlatform.hpp"
+#include <GGE/Core.hpp>
+#include "SceneMain.hpp"
 
 int main(int argc, char* argv[])
-{	
-	// Establecemos el c贸digo de salida por defecto
-	int anExitCode = GGE::StatusNoError;
-	
-	// Creamos la aplicaci贸n
-	GGE::App* anApp = GGE::App::Instance();
-	
-	// Procesamos par谩metros pasados por l铆nea de comandos
+{
+	// Establecemos el c骴igo de salida por defecto
+	GGE::Int16 anExitCode = GGE::StatusNoError;
+
+	// Creamos la aplicaci髇
+	GGE::App *anApp = GGE::App::Instance();
+
+	// Procesamos los argumentos
 	anApp->ProcessArguments(argc, argv);
 
-	// Establecemos la escena inicial del juego
-	anApp->SetFirstScene(new ScenePlatform("Platform"));
-	
-	// Ejecutamos la aplicaci贸n
+	// Establecemos la escena inicial
+	anApp->SetFirstScene(new SceneMain("Main"));
+
+	//Ejecutamos la aplicaci髇
 	anExitCode = anApp->Run();
-	
-	// Eliminamos la aplicaci贸n
+
+	// Eliminamos la aplicaci髇
 	GGE::App::Release();
 	anApp = 0;
-	
-	// Devolvemos el c贸digo de salida
+
+	// Devolvemos el c骴igo de salida
 	return anExitCode;
 }

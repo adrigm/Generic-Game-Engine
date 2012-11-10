@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2009 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2012 Laurent Gomila (laurent.gom@gmail.com)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -28,95 +28,157 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Config.hpp>
+#include <SFML/Audio/Export.hpp>
 #include <SFML/System/Vector3.hpp>
 
 
 namespace sf
 {
 ////////////////////////////////////////////////////////////
-/// Listener is a global interface for defining the audio
-/// listener properties ; the audio listener is the point in
-/// the scene from where all the sounds are heard
+/// \brief The audio listener is the point in the scene
+///        from where all the sounds are heard
+///
 ////////////////////////////////////////////////////////////
-class SFML_API Listener
+class SFML_AUDIO_API Listener
 {
 public :
 
     ////////////////////////////////////////////////////////////
-    /// Change the global volume of all the sounds.
-    /// The default volume is 100
+    /// \brief Change the global volume of all the sounds and musics
     ///
-    /// \param Volume : New global volume, in the range [0, 100]
+    /// The volume is a number between 0 and 100; it is combined with
+    /// the individual volume of each sound / music.
+    /// The default value for the volume is 100 (maximum).
+    ///
+    /// \param volume New global volume, in the range [0, 100]
+    ///
+    /// \see getGlobalVolume
     ///
     ////////////////////////////////////////////////////////////
-    static void SetGlobalVolume(float Volume);
+    static void setGlobalVolume(float volume);
 
     ////////////////////////////////////////////////////////////
-    /// Get the current value of the global volume of all the sounds
+    /// \brief Get the current value of the global volume
     ///
     /// \return Current global volume, in the range [0, 100]
     ///
+    /// \see setGlobalVolume
+    ///
     ////////////////////////////////////////////////////////////
-    static float GetGlobalVolume();
+    static float getGlobalVolume();
 
     ////////////////////////////////////////////////////////////
-    /// Change the position of the listener (take 3 values).
-    /// The default position is (0, 0, 0)
+    /// \brief Set the position of the listener in the scene
     ///
-    /// \param X, Y, Z : Position of the listener in the world
+    /// The default listener's position is (0, 0, 0).
+    ///
+    /// \param x X coordinate of the listener's position
+    /// \param y Y coordinate of the listener's position
+    /// \param z Z coordinate of the listener's position
+    ///
+    /// \see getPosition, setDirection
     ///
     ////////////////////////////////////////////////////////////
-    static void SetPosition(float X, float Y, float Z);
+    static void setPosition(float x, float y, float z);
 
     ////////////////////////////////////////////////////////////
-    /// Change the position of the listener (take a 3D vector).
-    /// The default position is (0, 0, 0)
+    /// \brief Set the position of the listener in the scene
     ///
-    /// \param Position : Position of the listener in the world
+    /// The default listener's position is (0, 0, 0).
+    ///
+    /// \param position New listener's position
+    ///
+    /// \see getPosition, setDirection
     ///
     ////////////////////////////////////////////////////////////
-    static void SetPosition(const Vector3f& Position);
+    static void setPosition(const Vector3f& position);
 
     ////////////////////////////////////////////////////////////
-    /// Get the current position of the listener
+    /// \brief Get the current position of the listener in the scene
     ///
-    /// \return Position of the listener in the world
+    /// \return Listener's position
+    ///
+    /// \see setPosition
     ///
     ////////////////////////////////////////////////////////////
-    static Vector3f GetPosition();
+    static Vector3f getPosition();
 
     ////////////////////////////////////////////////////////////
-    /// Change the orientation of the listener (the point
-    /// he must look at) (take 3 values).
-    /// The default target is (0, 0, -1)
+    /// \brief Set the orientation of the listener in the scene
     ///
-    /// \param X, Y, Z : Position of the point the listener must look at
+    /// The orientation defines the 3D axes of the listener
+    /// (left, up, front) in the scene. The orientation vector
+    /// doesn't have to be normalized.
+    /// The default listener's orientation is (0, 0, -1).
+    ///
+    /// \param x X coordinate of the listener's orientation
+    /// \param y Y coordinate of the listener's orientation
+    /// \param z Z coordinate of the listener's orientation
+    ///
+    /// \see getDirection, setPosition
     ///
     ////////////////////////////////////////////////////////////
-    static void SetTarget(float X, float Y, float Z);
+    static void setDirection(float x, float y, float z);
 
     ////////////////////////////////////////////////////////////
-    /// Change the orientation of the listener (the point
-    /// he must look at) (take a 3D vector).
-    /// The default target is (0, 0, -1)
+    /// \brief Set the orientation of the listener in the scene
     ///
-    /// \param Target : Position of the point the listener must look at
+    /// The orientation defines the 3D axes of the listener
+    /// (left, up, front) in the scene. The orientation vector
+    /// doesn't have to be normalized.
+    /// The default listener's orientation is (0, 0, -1).
+    ///
+    /// \param direction New listener's orientation
+    ///
+    /// \see getDirection, setPosition
     ///
     ////////////////////////////////////////////////////////////
-    static void SetTarget(const Vector3f& Target);
+    static void setDirection(const Vector3f& direction);
 
     ////////////////////////////////////////////////////////////
-    /// Get the current orientation of the listener (the point
-    /// he's looking at)
+    /// \brief Get the current orientation of the listener in the scene
     ///
-    /// \return : Position of the point the listener is looking at
+    /// \return Listener's orientation
+    ///
+    /// \see setDirection
     ///
     ////////////////////////////////////////////////////////////
-    static Vector3f GetTarget();
+    static Vector3f getDirection();
 };
 
 } // namespace sf
 
 
 #endif // SFML_LISTENER_HPP
+
+
+////////////////////////////////////////////////////////////
+/// \class sf::Listener
+/// \ingroup audio
+///
+/// The audio listener defines the global properties of the
+/// audio environment, it defines where and how sounds and musics
+/// are heard. If sf::View is the eyes of the user, then sf::Listener
+/// is his ears (by the way, they are often linked together --
+/// same position, orientation, etc.). 
+///
+/// sf::Listener is a simple interface, which allows to setup the
+/// listener in the 3D audio environment (position and direction),
+/// and to adjust the global volume.
+///
+/// Because the listener is unique in the scene, sf::Listener only
+/// contains static functions and doesn't have to be instanciated.
+///
+/// Usage example:
+/// \code
+/// // Move the listener to the position (1, 0, -5)
+/// sf::Listener::setPosition(1, 0, -5);
+///
+/// // Make it face the right axis (1, 0, 0)
+/// sf::Listener::SetDirection(1, 0, 0);
+///
+/// // Reduce the global volume
+/// sf::Listener::SetGlobalVolume(50);
+/// \endcode
+///
+////////////////////////////////////////////////////////////
