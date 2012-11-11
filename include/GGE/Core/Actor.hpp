@@ -79,7 +79,17 @@ public:
 	virtual void Animate();
 
 	void FlipX(bool flipped);
-	void FlipY();
+	void FlipY(bool flipped);
+
+	void SetLeftPosition(float x);
+	void SetTopPosition(float y);
+	void SetRightPosition(float x);
+	void SetBottomPosition(float y);
+
+	float GetLeftPosition() const;
+	float GetTopPosition() const;
+	float GetRightPosition() const;
+	float GetBottomPosition() const;
 
 private:
 	/// Puntero a App
@@ -97,8 +107,10 @@ private:
 	GGE::Animation mActiveAnimation;
 	/// Tiempo que transcurre entre cada frame
 	float mElapsedTime;
-	// Flip
-	bool myIsFlippedX;
+	/// Verdadero si la imagen tiene Flip en el eje X
+	bool mIsFlippedX;
+	/// Verdadero si la imagen tiene Flip en el eje Y
+	bool mIsFlippedY;
 
 }; // Class Actor
 

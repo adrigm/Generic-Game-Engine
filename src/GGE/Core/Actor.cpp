@@ -11,7 +11,8 @@ Actor::Actor() :
 	mSelectFrame(1),
 	mSelectFrameAnimation(0),
 	mElapsedTime(0.0f),
-	myIsFlippedX(false)
+	mIsFlippedX(false),
+	mIsFlippedY(false)
 {
 	mApp = GGE::App::Instance();
 }
@@ -135,7 +136,60 @@ void Actor::Animate()
 
 void Actor::FlipX(bool flipped)
 {
-	myIsFlippedX = flipped;
+	mIsFlippedX = flipped;
+	if (flipped)
+		this->setScale(sf::Vector2f(-1.0f, 1.0f));
+	else
+		this->setScale(sf::Vector2f(1.0f, 1.0f));
+}
+
+void Actor::FlipY(bool flipped)
+{
+	mIsFlippedY = flipped;
+	if (flipped)
+		this->setScale(sf::Vector2f(1.0f, -1.0f));
+	else
+		this->setScale(sf::Vector2f(1.0f, 1.0f));
+}
+
+void Actor::SetLeftPosition(float x)
+{
+	this->setPosition(x + this->getOrigin().x, this->getPosition().y);
+}
+
+
+void Actor::SetTopPosition(float y)
+{
+	this->setPosition(this->getPosition().x, y + this->getOrigin().y);
+}
+
+void Actor::SetRightPosition(float x)
+{
+	this->setPosition(x - this->getOrigin().x, this->getPosition().y);
+}
+
+void Actor::SetBottomPosition(float y)
+{
+	this->setPosition(this->getPosition().x, y - this->getOrigin().y);
+}
+
+float Actor::GetLeftPosition() const
+{
+	return this->getGlobalBounds().left;
+}
+
+float Actor::GetTopPosition() const
+{
+	return this->getGlobalBounds().top;
+}
+float Actor::GetRightPosition() const
+{
+	return this->getGlobalBounds().left + this->getGlobalBounds().width;
+}
+
+float Actor::GetBottomPosition() const
+{
+	return this->getGlobalBounds().top + this->getGlobalBounds().height;
 }
 
 } // Namespace GGE

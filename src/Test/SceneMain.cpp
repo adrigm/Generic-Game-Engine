@@ -29,6 +29,18 @@ void SceneMain::Init()
 	Walk_left.firstFrame = 2;
 	Walk_left.lastFrame = 11;
 
+	heroe->setOrigin(heroe->getLocalBounds().width/2, heroe->getLocalBounds().height/2);
+	heroe->SetTopPosition(0);
+	heroe->SetLeftPosition(0);
+	heroe->FlipX(true);
+	
+	std::cout << heroe->getGlobalBounds().left << std::endl;
+	std::cout << heroe->getGlobalBounds().top << std::endl;
+	std::cout << heroe->getGlobalBounds().width << std::endl;
+	std::cout << heroe->getGlobalBounds().height << std::endl;
+
+	std::cout << heroe->getPosition().x << std::endl;
+
 	heroe->AddAnimation("walk", Walk_left);
 	heroe->SetActiveAnimation("walk");
 }
