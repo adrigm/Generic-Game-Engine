@@ -18,6 +18,7 @@
     <ClInclude Include="..\..\..\include\GGE\Core\AssetManager.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\Camera.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\Clock.hpp" />
+    <ClInclude Include="..\..\..\include\GGE\Core\collision\RectCollision.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\ConfigReader.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\Core_types.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\Scene.hpp" />
@@ -52,6 +53,7 @@
     <ClCompile Include="..\..\..\src\GGE\Core\AssetManager.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\Camera.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\Clock.cpp" />
+    <ClCompile Include="..\..\..\src\GGE\Core\collision\RectCollision.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\ConfigReader.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\Scene.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\SceneManager.cpp" />

@@ -24,5 +24,6 @@
 #include <GGE/Core/tmx/tmx.hpp>
 #include <GGE/Core/Camera.hpp>
 #include <GGE/Core/Clock.hpp>
+#include <GGE/Core/collision/RectCollision.hpp>
 
 #endif // GGE_CORE_HPP_INCLUDED

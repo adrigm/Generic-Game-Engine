@@ -34,15 +34,24 @@ void SceneMain::Init()
 	heroe->SetLeftPosition(0);
 	heroe->FlipX(true);
 	
-	std::cout << heroe->getGlobalBounds().left << std::endl;
+	/*std::cout << heroe->getGlobalBounds().left << std::endl;
 	std::cout << heroe->getGlobalBounds().top << std::endl;
 	std::cout << heroe->getGlobalBounds().width << std::endl;
 	std::cout << heroe->getGlobalBounds().height << std::endl;
 
-	std::cout << heroe->getPosition().x << std::endl;
+	std::cout << heroe->GetBottomPosition() << std::endl;*/
 
 	heroe->AddAnimation("walk", Walk_left);
 	heroe->SetActiveAnimation("walk");
+
+	GGE::RectCollision rect(25, 25, 50, 50);
+
+	r = new sf::RectangleShape();
+	r->setPosition(rect.left, rect.top);
+	r->setSize(sf::Vector2f(rect.width, rect.height));
+	r->setFillColor(sf::Color(0, 0, 0, 0));
+	r->setOutlineColor(sf::Color(255, 0, 255));
+	r->setOutlineThickness(1.0f);
 }
 
 void SceneMain::ReInit()
@@ -59,6 +68,7 @@ void SceneMain::Events(sf::Event theEvent)
 void SceneMain::Update()
 {
 	heroe->Update();
+	mApp->mWindow.draw(*r);
 }
 
 void SceneMain::Cleanup()

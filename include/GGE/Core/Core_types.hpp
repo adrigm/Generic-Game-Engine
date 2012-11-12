@@ -48,6 +48,7 @@ class AssetManager;
 class Camera;
 class Clock;
 class Actor;
+class RectCollision;
 
 /// Foward declare TmxMap
 class TmxMap;

@@ -7,6 +7,14 @@
 namespace GGE
 {
 
+struct ActorComparator
+{
+	bool operator()(const GGE::Actor* o1, const GGE::Actor* o2) const
+    {
+		return o1->mZOrder < o2->mZOrder;
+    }
+};
+
 Scene::Scene(SceneID theID) :
 	mApp(NULL),
 	mID(theID),
@@ -120,31 +128,22 @@ void Scene::Draw(void)
 
 void Scene::AddActor(GGE::Actor* theActor)
 {
-	if (mActors.empty())
-	{
-		mActors.push_back(theActor);
-		return;
-	}
-
-	std::list<GGE::Actor*>::iterator it;
-	for (it = mActors.begin(); it != mActors.end(); it++)
-	{
-		if (theActor->mZOrder < (*it)->mZOrder)
-		{
-			mActors.insert(it, theActor);
-			mActors.unique();
-			return;
-		}
-	}
+	// Añadimos un nuevo Actor a la escena
 	mActors.push_back(theActor);
+	// Ordenamos los elementos de la escena
+	mActors.sort();
+	// Eliminamos los elementos repetidos
 	mActors.unique();
+	// Ordenamos en base a su Z
+	mActors.sort(ActorComparator());
 }
 
-void Scene::AddActors(std::vector<GGE::Actor*> theList)
+void Scene::AddActors(const std::vector<GGE::Actor*> &theList)
 {
-	for (int i = 0; i < theList.size(); i++)
+	std::vector<GGE::Actor*>::const_iterator it;
+	for (it = theList.begin(); it != theList.end(); it++)
 	{
-		AddActor(theList[i]);
+		AddActor(*it);
 	}
 }
 
@@ -153,11 +152,12 @@ void Scene::QuitActor(GGE::Actor* theActor)
 	mActors.remove(theActor);
 }
 
-void Scene::QuitActors(std::vector<GGE::Actor*> theList)
+void Scene::QuitActors(const std::vector<GGE::Actor*> &theList)
 {
-	for (int i = 0; i < theList.size(); i++)
+	std::vector<GGE::Actor*>::const_iterator it;
+	for (it = theList.begin(); it != theList.end(); it++)
 	{
-		QuitActor(theList[i]);
+		QuitActor(*it);
 	}
 }
 
@@ -168,15 +168,16 @@ void Scene::DeleteActor(GGE::Actor* theActor)
 	delete theActor;
 }
 
-void Scene::DeleteActors(std::vector<GGE::Actor*> theList)
+void Scene::DeleteActors(const std::vector<GGE::Actor*> &theList)
 {
-	for (int i = 0; i < theList.size(); i++)
+	std::vector<GGE::Actor*>::const_iterator it;
+	for (it = theList.begin(); it != theList.end(); it++)
 	{
-		DeleteActor(theList[i]);
+		DeleteActor(*it);
 	}
 }
 
-void Scene::SetBackgroundColor(sf::Color theColor)
+void Scene::SetBackgroundColor(const sf::Color &theColor)
 {
 	mColorBack = theColor;
 }

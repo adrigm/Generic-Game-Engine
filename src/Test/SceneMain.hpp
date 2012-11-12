@@ -27,6 +27,8 @@ private:
 	GGE::App* app;
 	sf::Texture* tex;
 	Hero* heroe;
+
+	sf::RectangleShape* r;
 };
 
 #endif // SCENE_MAIN_HPP

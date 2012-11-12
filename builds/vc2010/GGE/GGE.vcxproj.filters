@@ -37,6 +37,12 @@
     <Filter Include="Archivos de encabezado\Core\maps">
       <UniqueIdentifier>{ab620b6c-afdd-4bb2-bcba-9df8a215f8d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de código fuente\Core\collision">
+      <UniqueIdentifier>{2fb1f605-19e4-4bf4-9fb0-c7cbfcccc8cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Core\collision">
+      <UniqueIdentifier>{26566730-b6fb-4799-83a6-7967aa64764a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\GGE\Config.hpp">
@@ -141,6 +147,9 @@
     <ClInclude Include="..\..\..\include\GGE\Core\Actor.hpp">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\collision\RectCollision.hpp">
+      <Filter>Archivos de encabezado\Core\collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\GGE\Core\App.cpp">
@@ -244,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\GGE\Core\Actor.cpp">
       <Filter>Archivos de código fuente\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\collision\RectCollision.cpp">
+      <Filter>Archivos de código fuente\Core\collision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

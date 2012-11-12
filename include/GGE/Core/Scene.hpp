@@ -92,12 +92,12 @@ public:
 	void QuitActor(GGE::Actor* theActor);
 	void DeleteActor(GGE::Actor* theActor);
 
-	void AddActors(std::vector<GGE::Actor*> theList);
-	void QuitActors(std::vector<GGE::Actor*> theList);
-	void DeleteActors(std::vector<GGE::Actor*> theList);
+	void AddActors(const std::vector<GGE::Actor*> &theList);
+	void QuitActors(const std::vector<GGE::Actor*> &theList);
+	void DeleteActors(const std::vector<GGE::Actor*> &theList);
 
 
-	void SetBackgroundColor(sf::Color theColor);
+	void SetBackgroundColor(const sf::Color &theColor);
 
 
 protected:
