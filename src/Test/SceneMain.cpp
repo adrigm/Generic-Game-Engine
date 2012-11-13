@@ -69,6 +69,24 @@ void SceneMain::Update()
 {
 	heroe->Update();
 	mApp->mWindow.draw(*r);
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		mApp->mCamera->mView.move(-5, 0);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		mApp->mCamera->mView.move(5, 0);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		mApp->mCamera->mView.move(0, -5);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		mApp->mCamera->mView.move(0, 5);
+	}
+	sf::FloatRect c = mApp->mCamera->GetRect();
 }
 
 void SceneMain::Cleanup()

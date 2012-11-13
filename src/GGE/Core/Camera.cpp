@@ -47,4 +47,14 @@ void Camera::SetDefaultCamera()
 	mView = mApp->mWindow.getDefaultView();
 }
 
+sf::FloatRect Camera::GetRect() const
+{
+	sf::FloatRect rect;
+	rect.left = this->mView.getCenter().x - this->mView.getSize().x / 2.0f;
+	rect.top = this->mView.getCenter().y - this->mView.getSize().y / 2.0f;
+	rect.width = this->mView.getSize().x;
+	rect.height = this->mView.getSize().y;
+	return rect;
+}
+
 } // Namespace GGE

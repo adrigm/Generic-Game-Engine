@@ -220,11 +220,11 @@ void App::Loop()
 		// Obtenemos el tiempo pasado en cada ciclo
 		mUpdateTime = mUpdateClock.restart();
 
-		// Llamamos al método Update() de la escena activa
-		mSceneManager->UpdateScene();
-
 		// Actualizamos la cámara
 		mCamera->Update();
+
+		// Llamamos al método Update() de la escena activa
+		mSceneManager->UpdateScene();
 
 		// Llamamos al método Draw() de la escena activa
 		mSceneManager->DrawScene();

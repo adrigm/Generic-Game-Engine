@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <list>
 #include <GGE/Core/App.hpp>
 #include <GGE/Core/Camera.hpp>
 #include <GGE/Core/Scene.hpp>
@@ -110,17 +112,8 @@ void Scene::Draw(void)
 	{
 		GGE::Actor* actor = *element;
 
-		if (actor->IsVisible())
+		if (actor->IsVisible() && mApp->mCamera->GetRect().intersects(actor->getGlobalBounds()))
 		{
-			//mApp->mCamera->mView.getViewport().left;
-
-			// Obtenemos un rect de la posición del actor
-			sf::IntRect rect;
-			rect.left = actor->getPosition().x - actor->getOrigin().x;
-			rect.top = actor->getPosition().y - actor->getOrigin().y;
-			rect.width = actor->getTextureRect().width;
-			rect.height = actor->getTextureRect().height;
-
 			mApp->mWindow.draw(*actor);
 		}
 	}
@@ -128,6 +121,7 @@ void Scene::Draw(void)
 
 void Scene::AddActor(GGE::Actor* theActor)
 {
+	// FIX: Optimizar - No ordenar lista dos veces
 	// Añadimos un nuevo Actor a la escena
 	mActors.push_back(theActor);
 	// Ordenamos los elementos de la escena

@@ -26,6 +26,8 @@ public:
 
 	void SetDefaultCamera();
 
+	sf::FloatRect GetRect() const;
+
 private:
 	/// Puntero a App
 	App* mApp;
@@ -35,7 +37,7 @@ private:
 	GGE::Map* mMap;
 	/// Dice si la Cámara está conectada a un Sprite
 	bool mConectToSprite;
-	/// Dice si la Cámara está atada a un mapa
+	/// Dice si la Cámara está conectada a un mapa
 	bool mConectToMap;
 
 }; // Class Camera
