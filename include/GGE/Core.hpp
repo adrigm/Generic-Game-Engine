@@ -25,5 +25,7 @@
 #include <GGE/Core/Camera.hpp>
 #include <GGE/Core/Clock.hpp>
 #include <GGE/Core/collision/RectCollision.hpp>
+#include <GGE/Core/Sprite.hpp>
+#include <GGE/Core/Actor.hpp>
 
 #endif // GGE_CORE_HPP_INCLUDED

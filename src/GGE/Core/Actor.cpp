@@ -7,7 +7,6 @@ namespace GGE
 
 Actor::Actor() :
 	mZOrder(2),
-	mVisible(true),
 	mSelectFrame(1),
 	mSelectFrameAnimation(0),
 	mElapsedTime(0.0f),
@@ -19,21 +18,6 @@ Actor::Actor() :
 
 Actor::~Actor()
 {
-}
-
-bool Actor::IsVisible() const
-{
-	return mVisible;
-}
-
-void Actor::Show()
-{
-	mVisible = true;
-}
-
-void Actor::Hide()
-{
-	mVisible = false;
 }
 
 void Actor::SetFramesBySize(GGE::Uint32 theWidth, GGE::Uint32 theHeight)

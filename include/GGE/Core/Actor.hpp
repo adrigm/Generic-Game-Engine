@@ -6,11 +6,12 @@
 #include <SFML/Graphics.hpp>
 #include <GGE/Config.hpp>
 #include <GGE/Core/Core_types.hpp>
+#include <GGE/Core/Sprite.hpp>
 
 namespace GGE
 {
 
-class Actor : public sf::Sprite
+class Actor : public GGE::Sprite
 {
 public:
 	/// Orden de prioridad de dibujado
@@ -18,24 +19,6 @@ public:
 
 	Actor();
 	virtual ~Actor();
-
-	/**
-	 * Devuelve true si el actor es visible y por tanto
-	 * se dibuja en pantalla
-	 *
-	 * @return true si es visible
-	 */
-	bool IsVisible() const;
-
-	/**
-	 * Hace visible al actor (se renderiza si está en pantalla)
-	 */
-	void Show();
-
-	/**
-	 * Oculta el actor (evita que se renderice en pantalla)
-	 */
-	void Hide();
 
 	/**
 	 * Define el número de frames del Actor en base al tamaño de cada
@@ -94,8 +77,6 @@ public:
 private:
 	/// Puntero a App
 	GGE::App* mApp;
-	/// Si el Actor es visible o no
-	bool mVisible;
 	/// Lista de rects del Sprite (frames)
 	std::vector<sf::IntRect> mRectsList;
 	/// Frame seleccionado (Rect)

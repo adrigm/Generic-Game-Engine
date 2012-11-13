@@ -88,13 +88,13 @@ public:
 	 */
 	void Draw(void);
 
-	void AddActor(GGE::Actor* theActor);
-	void QuitActor(GGE::Actor* theActor);
-	void DeleteActor(GGE::Actor* theActor);
+	void AddObject(GGE::ObjectScene* theObject);
+	void QuitObject(GGE::ObjectScene* theObject);
+	void DeleteObject(GGE::ObjectScene* theObject);
 
-	void AddActors(const std::vector<GGE::Actor*> &theList);
-	void QuitActors(const std::vector<GGE::Actor*> &theList);
-	void DeleteActors(const std::vector<GGE::Actor*> &theList);
+	void AddObjects(const std::vector<GGE::ObjectScene*> &theList);
+	void QuitObjects(const std::vector<GGE::ObjectScene*> &theList);
+	void DeleteObjects(const std::vector<GGE::ObjectScene*> &theList);
 
 
 	void SetBackgroundColor(const sf::Color &theColor);
@@ -121,7 +121,7 @@ private:
 	/// Comprueba si la escena está pausada
 	bool mPaused;
 	/// Lista de Actores a dibujar
-	std::list<GGE::Actor*> mActors;
+	std::list<GGE::ObjectScene*> mObjects;
 	/// Color de fondo de la escena
 	sf::Color mColorBack;
 

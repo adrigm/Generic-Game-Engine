@@ -19,7 +19,7 @@ void SceneMain::Init()
 	tex = mApp->mAssetManager->GetTexture("indiana.png");
 	heroe = new Hero();
 	heroe->setTexture(*tex);
-	this->AddActor(heroe);
+	this->AddObject(heroe);
 
 	heroe->SetFramesByNum(4, 12);
 	heroe->SelectFrame(1);
@@ -31,7 +31,7 @@ void SceneMain::Init()
 
 	heroe->setOrigin(heroe->getLocalBounds().width/2, heroe->getLocalBounds().height/2);
 	heroe->SetTopPosition(0);
-	heroe->SetLeftPosition(0);
+	heroe->SetLeftPosition(-0);
 	heroe->FlipX(true);
 	
 	/*std::cout << heroe->getGlobalBounds().left << std::endl;
@@ -86,7 +86,14 @@ void SceneMain::Update()
 	{
 		mApp->mCamera->mView.move(0, 5);
 	}
-	sf::FloatRect c = mApp->mCamera->GetRect();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	{
+		heroe->Show();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		heroe->Hide();
+	}
 }
 
 void SceneMain::Cleanup()

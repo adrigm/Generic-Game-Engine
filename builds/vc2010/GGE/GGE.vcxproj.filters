@@ -150,6 +150,12 @@
     <ClInclude Include="..\..\..\include\GGE\Core\collision\RectCollision.hpp">
       <Filter>Archivos de encabezado\Core\collision</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\ObjectScene.hpp">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\Sprite.hpp">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\GGE\Core\App.cpp">
@@ -256,6 +262,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\GGE\Core\collision\RectCollision.cpp">
       <Filter>Archivos de código fuente\Core\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\ObjectScene.cpp">
+      <Filter>Archivos de código fuente\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\Sprite.cpp">
+      <Filter>Archivos de código fuente\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

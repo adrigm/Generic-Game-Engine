@@ -11,9 +11,9 @@ namespace GGE
 
 struct ActorComparator
 {
-	bool operator()(const GGE::Actor* o1, const GGE::Actor* o2) const
+	bool operator()(const GGE::ObjectScene* o1, const GGE::ObjectScene* o2) const
     {
-		return o1->mZOrder < o2->mZOrder;
+		return o1->GetZOrder() < o2->GetZOrder();
     }
 };
 
@@ -107,67 +107,67 @@ void Scene::Draw(void)
 	mApp->mWindow.clear(mColorBack);
 
 	// Recorremos la lista de Actores de la escena para dibujarla
-	std::list<GGE::Actor*>::const_iterator element;
-	for(element = mActors.begin(); element != mActors.end(); element++)
+	std::list<GGE::ObjectScene*>::const_iterator element;
+	for(element = mObjects.begin(); element != mObjects.end(); element++)
 	{
-		GGE::Actor* actor = *element;
-
-		if (actor->IsVisible() && mApp->mCamera->GetRect().intersects(actor->getGlobalBounds()))
+		GGE::ObjectScene* object = *element;
+		
+		if (object->IsVisible() && mApp->mCamera->GetRect().intersects(object->getGlobalBounds()))
 		{
-			mApp->mWindow.draw(*actor);
+			mApp->mWindow.draw(*object);
 		}
 	}
 }
 
-void Scene::AddActor(GGE::Actor* theActor)
+void Scene::AddObject(GGE::ObjectScene* theObject)
 {
 	// FIX: Optimizar - No ordenar lista dos veces
 	// Añadimos un nuevo Actor a la escena
-	mActors.push_back(theActor);
+	mObjects.push_back(theObject);
 	// Ordenamos los elementos de la escena
-	mActors.sort();
+	mObjects.sort();
 	// Eliminamos los elementos repetidos
-	mActors.unique();
+	mObjects.unique();
 	// Ordenamos en base a su Z
-	mActors.sort(ActorComparator());
+	mObjects.sort(ActorComparator());
 }
 
-void Scene::AddActors(const std::vector<GGE::Actor*> &theList)
+void Scene::AddObjects(const std::vector<GGE::ObjectScene*> &theList)
 {
-	std::vector<GGE::Actor*>::const_iterator it;
+	std::vector<GGE::ObjectScene*>::const_iterator it;
 	for (it = theList.begin(); it != theList.end(); it++)
 	{
-		AddActor(*it);
+		AddObject(*it);
 	}
 }
 
-void Scene::QuitActor(GGE::Actor* theActor)
+void Scene::QuitObject(GGE::ObjectScene* theActor)
 {
-	mActors.remove(theActor);
+	mObjects.remove(theActor);
 }
 
-void Scene::QuitActors(const std::vector<GGE::Actor*> &theList)
+void Scene::QuitObjects(const std::vector<GGE::ObjectScene*> &theList)
 {
-	std::vector<GGE::Actor*>::const_iterator it;
+	std::vector<GGE::ObjectScene*>::const_iterator it;
 	for (it = theList.begin(); it != theList.end(); it++)
 	{
-		QuitActor(*it);
+		QuitObject(*it);
 	}
 }
 
 
-void Scene::DeleteActor(GGE::Actor* theActor)
+void Scene::DeleteObject(GGE::ObjectScene* theObject)
 {
-	mActors.remove(theActor);
-	delete theActor;
+	mObjects.remove(theObject);
+	delete theObject;
 }
 
-void Scene::DeleteActors(const std::vector<GGE::Actor*> &theList)
+void Scene::DeleteObjects(const std::vector<GGE::ObjectScene*> &theList)
 {
-	std::vector<GGE::Actor*>::const_iterator it;
+	std::vector<GGE::ObjectScene*>::const_iterator it;
 	for (it = theList.begin(); it != theList.end(); it++)
 	{
-		DeleteActor(*it);
+		DeleteObject(*it);
 	}
 }
 

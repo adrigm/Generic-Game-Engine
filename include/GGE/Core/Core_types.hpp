@@ -47,6 +47,8 @@ class SceneManager;
 class AssetManager;
 class Camera;
 class Clock;
+class ObjectScene;
+class Sprite;
 class Actor;
 class RectCollision;
 

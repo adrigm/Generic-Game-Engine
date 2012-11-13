@@ -21,8 +21,10 @@
     <ClInclude Include="..\..\..\include\GGE\Core\collision\RectCollision.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\ConfigReader.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\Core_types.hpp" />
+    <ClInclude Include="..\..\..\include\GGE\Core\ObjectScene.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\Scene.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\SceneManager.hpp" />
+    <ClInclude Include="..\..\..\include\GGE\Core\Sprite.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmx.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxLayer.hpp" />
     <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxMap.hpp" />
@@ -55,8 +57,10 @@
     <ClCompile Include="..\..\..\src\GGE\Core\Clock.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\collision\RectCollision.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\ConfigReader.cpp" />
+    <ClCompile Include="..\..\..\src\GGE\Core\ObjectScene.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\Scene.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\SceneManager.cpp" />
+    <ClCompile Include="..\..\..\src\GGE\Core\Sprite.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxLayer.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxMap.cpp" />
     <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxObject.cpp" />
