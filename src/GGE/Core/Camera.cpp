@@ -6,12 +6,10 @@ namespace GGE
 Camera::Camera()
 {
 	mApp = App::Instance();
-	// Establecemos la vista por defecto
-	mView = mApp->mWindow.getDefaultView();
+	this->SetDefaultCamera();
 	// Establecemos las conexiones como falsas
 	mConectToSprite = false;
 	mConectToMap = false;
-	mApp->mWindow.setView(mView);
 }
 
 Camera::~Camera()
@@ -20,7 +18,6 @@ Camera::~Camera()
 
 void Camera::Update()
 {
-	mApp->mWindow.setView(mView);
 }
 
 void Camera::ConnectToSprite(sf::Sprite& theSprite)
@@ -43,17 +40,17 @@ void Camera::LockToMap(GGE::Map& theMap)
 
 void Camera::SetDefaultCamera()
 {
+	this->reset(sf::FloatRect(0, 0, static_cast<float>(mApp->mWindow.getSize().x), static_cast<float>(mApp->mWindow.getSize().y)));
 	mConectToSprite = false;
-	mView = mApp->mWindow.getDefaultView();
 }
 
 sf::FloatRect Camera::GetRect() const
 {
 	sf::FloatRect rect;
-	rect.left = this->mView.getCenter().x - this->mView.getSize().x / 2.0f;
-	rect.top = this->mView.getCenter().y - this->mView.getSize().y / 2.0f;
-	rect.width = this->mView.getSize().x;
-	rect.height = this->mView.getSize().y;
+	rect.left = this->getCenter().x - this->getSize().x / 2.0f;
+	rect.top = this->getCenter().y - this->getSize().y / 2.0f;
+	rect.width = this->getSize().x;
+	rect.height = this->getSize().y;
 	return rect;
 }
 

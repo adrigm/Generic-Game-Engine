@@ -8,11 +8,9 @@
 namespace GGE
 {
 
-class Camera
+class Camera : public sf::View
 {
 public:
-	/// Visor de la Cámara
-	sf::View mView;
 
 	Camera();
 	~Camera();

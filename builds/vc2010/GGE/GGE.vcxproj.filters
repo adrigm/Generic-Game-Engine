@@ -156,6 +156,21 @@
     <ClInclude Include="..\..\..\include\GGE\Core\Sprite.hpp">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\CircleShape.hpp">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\ConvexShape.hpp">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\RectangleShape.hpp">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\Shape.hpp">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\Text.hpp">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\GGE\Core\App.cpp">
@@ -267,6 +282,21 @@
       <Filter>Archivos de código fuente\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\GGE\Core\Sprite.cpp">
+      <Filter>Archivos de código fuente\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\Text.cpp">
+      <Filter>Archivos de código fuente\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\Shape.cpp">
+      <Filter>Archivos de código fuente\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\RectangleShape.cpp">
+      <Filter>Archivos de código fuente\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\ConvexShape.cpp">
+      <Filter>Archivos de código fuente\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\GGE\Core\CircleShape.cpp">
       <Filter>Archivos de código fuente\Core</Filter>
     </ClCompile>
   </ItemGroup>

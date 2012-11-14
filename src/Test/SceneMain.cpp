@@ -44,6 +44,11 @@ void SceneMain::Init()
 	heroe->AddAnimation("walk", Walk_left);
 	heroe->SetActiveAnimation("walk");
 
+	fuente = mApp->mAssetManager->GetFont("segoeui.ttf");
+	texto = new GGE::Text("Hola Mundo", *fuente);
+	texto->setColor(sf::Color(255,0,0,128));
+	this->AddObject(new GGE::Text("Holaaaa!", *mApp->mAssetManager->GetFont("segoeui.ttf")));
+
 	GGE::RectCollision rect(25, 25, 50, 50);
 
 	r = new sf::RectangleShape();
@@ -72,19 +77,19 @@ void SceneMain::Update()
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		mApp->mCamera->mView.move(-5, 0);
+		mApp->mCamera->move(-5, 0);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		mApp->mCamera->mView.move(5, 0);
+		mApp->mCamera->move(5, 0);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		mApp->mCamera->mView.move(0, -5);
+		mApp->mCamera->move(0, -5);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		mApp->mCamera->mView.move(0, 5);
+		mApp->mCamera->move(0, 5);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
 	{

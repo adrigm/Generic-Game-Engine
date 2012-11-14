@@ -49,6 +49,11 @@ class Camera;
 class Clock;
 class ObjectScene;
 class Sprite;
+class Text;
+class Shape;
+class RectangleShape;
+class CircleShape;
+class ConvexShape;
 class Actor;
 class RectCollision;
 

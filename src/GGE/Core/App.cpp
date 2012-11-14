@@ -221,7 +221,7 @@ void App::Loop()
 		mUpdateTime = mUpdateClock.restart();
 
 		// Actualizamos la cámara
-		mCamera->Update();
+		this->mWindow.setView(*mCamera);
 
 		// Llamamos al método Update() de la escena activa
 		mSceneManager->UpdateScene();

@@ -27,7 +27,8 @@ private:
 	GGE::App* app;
 	sf::Texture* tex;
 	Hero* heroe;
-
+	sf::Font* fuente;
+	GGE::Text* texto;
 	sf::RectangleShape* r;
 };
 

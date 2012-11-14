@@ -27,5 +27,10 @@
 #include <GGE/Core/collision/RectCollision.hpp>
 #include <GGE/Core/Sprite.hpp>
 #include <GGE/Core/Actor.hpp>
+#include <GGE/Core/Text.hpp>
+#include <GGE/Core/Shape.hpp>
+#include <GGE/Core/RectangleShape.hpp>
+#include <GGE/Core/CircleShape.hpp>
+#include <GGE/Core/ConvexShape.hpp>
 
 #endif // GGE_CORE_HPP_INCLUDED

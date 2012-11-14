@@ -131,7 +131,7 @@ sf::Font* AssetManager::GetFont(const std::string& theFilename)
 	{
 		if (it->first == theFilename)
 		{
-			mApp->mLog << "AssetManager::GetFont() " << theFilename << " usando textura existente" << std::endl;
+			mApp->mLog << "AssetManager::GetFont() " << theFilename << " usando fuente existente" << std::endl;
 			return it->second;
 		}
 	}
@@ -146,7 +146,7 @@ sf::Font* AssetManager::GetFont(const std::string& theFilename)
 		if(anFont->loadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
 		{
 			mFonts[theFilename] = anFont;
-			mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+			mApp->mLog << "AssetManager::GetFont() " << theFilename << " fuente cargada.\n";
 			return mFonts[theFilename];
 		}
 
@@ -156,12 +156,12 @@ sf::Font* AssetManager::GetFont(const std::string& theFilename)
 	if (anFont->loadFromFile(mApp->GetExecutableDir() + theFilename))
 	{
 		mFonts[theFilename] = anFont;
-		mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+		mApp->mLog << "AssetManager::GetFont() " << theFilename << " fuente cargada.\n";
 		return mFonts[theFilename];
 	}
 
 	// Si no se encuentra la textura devolvemos la dirección de una vacía
-	mApp->mLog << "AssetManager::GetFont() No existe el archivo " << theFilename << ". Se devuelve una textura vacía" << std::endl;
+	mApp->mLog << "AssetManager::GetFont() No existe el archivo " << theFilename << ". Se devuelve la fuente por defecto" << std::endl;
 	return anFont;
 }
 
@@ -170,7 +170,7 @@ void AssetManager::DeleteFont(const std::string& theFilename)
 	std::map<std::string, sf::Font*>::iterator it = mFonts.find(theFilename);
 	if(it != mFonts.end())
 	{
-		mApp->mLog << "AssetManager::DeleteFont() Eliminada textura: " << it->first << std::endl;
+		mApp->mLog << "AssetManager::DeleteFont() Eliminada fuente: " << it->first << std::endl;
 		delete it->second;
 		mFonts.erase(it); 
 	}
@@ -184,7 +184,7 @@ sf::SoundBuffer* AssetManager::GetSoundBuffer(const std::string& theFilename)
 	{
 		if (it->first == theFilename)
 		{
-			mApp->mLog << "AssetManager::GetSoundBuffer() " << theFilename << " usando textura existente" << std::endl;
+			mApp->mLog << "AssetManager::GetSoundBuffer() " << theFilename << " usando sonido existente" << std::endl;
 			return it->second;
 		}
 	}
@@ -199,7 +199,7 @@ sf::SoundBuffer* AssetManager::GetSoundBuffer(const std::string& theFilename)
 		if(anSoundBuffer->loadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
 		{
 			mSoundBuffers[theFilename] = anSoundBuffer;
-			mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+			mApp->mLog << "AssetManager::GetSoundBuffer() " << theFilename << " sonido cargado.\n";
 			return mSoundBuffers[theFilename];
 		}
 
@@ -209,12 +209,12 @@ sf::SoundBuffer* AssetManager::GetSoundBuffer(const std::string& theFilename)
 	if (anSoundBuffer->loadFromFile(mApp->GetExecutableDir() + theFilename))
 	{
 		mSoundBuffers[theFilename] = anSoundBuffer;
-		mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+		mApp->mLog << "AssetManager::GetSoundBuffer() " << theFilename << " sonido cargado.\n";
 		return mSoundBuffers[theFilename];
 	}
 
 	// Si no se encuentra la textura devolvemos la dirección de una vacía
-	mApp->mLog << "AssetManager::GetSoundBuffer() No existe el archivo " << theFilename << ". Se devuelve una textura vacía" << std::endl;
+	mApp->mLog << "AssetManager::GetSoundBuffer() No existe el archivo " << theFilename << ". Se devuelve un sonido vacío" << std::endl;
 	return anSoundBuffer;
 }
 
@@ -223,7 +223,7 @@ void AssetManager::DeleteSoundBuffer(const std::string& theFilename)
 	std::map<std::string, sf::SoundBuffer*>::iterator it = mSoundBuffers.find(theFilename);
 	if(it != mSoundBuffers.end())
 	{
-		mApp->mLog << "AssetManager::DeleteSoundBuffer() Eliminada textura: " << it->first << std::endl;
+		mApp->mLog << "AssetManager::DeleteSoundBuffer() Eliminado sonido: " << it->first << std::endl;
 		delete it->second;
 		mSoundBuffers.erase(it); 
 	}
@@ -252,7 +252,7 @@ GGE::ConfigReader* AssetManager::GetConfig(const std::string& theFilename)
 		if(anConfig->Read(mApp->GetExecutableDir() + (*it) + theFilename))
 		{
 			mConfigFiles[theFilename] = anConfig;
-			mApp->mLog << "AssetManager::GetImage() " << theFilename << " archivo cargado.\n";
+			mApp->mLog << "AssetManager::GetConfig() " << theFilename << " archivo cargado.\n";
 			return mConfigFiles[theFilename];
 		}
 
@@ -267,7 +267,7 @@ GGE::ConfigReader* AssetManager::GetConfig(const std::string& theFilename)
 	}
 
 	// Si no se encuentra la textura devolvemos la dirección de una vacía
-	mApp->mLog << "AssetManager::GetTexture() No existe el archivo " << theFilename << ". Se devuelve una textura vacía" << std::endl;
+	mApp->mLog << "AssetManager::GetConfig() No existe el archivo " << theFilename << ". Se devuelve una archivo vacío" << std::endl;
 	return anConfig;
 }
 
@@ -276,7 +276,7 @@ void AssetManager::DeleteConfig(const std::string& theFilename)
 	std::map<std::string, GGE::ConfigReader*>::iterator it = mConfigFiles.find(theFilename);
 	if(it != mConfigFiles.end())
 	{
-		mApp->mLog << "AssetManager::DeleteConfig() Eliminada textura: " << it->first << std::endl;
+		mApp->mLog << "AssetManager::DeleteConfig() Eliminado archivo: " << it->first << std::endl;
 		delete it->second;
 		mConfigFiles.erase(it); 
 	}
@@ -320,7 +320,7 @@ sf::Music* AssetManager::GetMusic(const std::string& theFilename)
 	}
 
 	// Si no se encuentra la textura devolvemos la dirección de una vacía
-	mApp->mLog << "AssetManager::GetMusic() No existe el archivo " << theFilename << ". Se devuelve una textura vacía" << std::endl;
+	mApp->mLog << "AssetManager::GetMusic() No existe el archivo " << theFilename << ". Se devuelve uno vacío" << std::endl;
 	return anMusic;
 }
 
@@ -343,7 +343,7 @@ GGE::TmxMap* AssetManager::GetTmxMap(const std::string& theFilename)
 	{
 		if (it->first == theFilename)
 		{
-			mApp->mLog << "AssetManager::GetTmxMap() " << theFilename << " usando textura existente" << std::endl;
+			mApp->mLog << "AssetManager::GetTmxMap() " << theFilename << " usando tmx existente" << std::endl;
 			return it->second;
 		}
 	}
@@ -358,7 +358,7 @@ GGE::TmxMap* AssetManager::GetTmxMap(const std::string& theFilename)
 		if(anTmxMap->LoadFromFile(mApp->GetExecutableDir() + (*it) + theFilename))
 		{
 			mTmxMaps[theFilename] = anTmxMap;
-			mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+			mApp->mLog << "AssetManager::GetTmxMap() " << theFilename << " tmx cargado.\n";
 			return mTmxMaps[theFilename];
 		}
 
@@ -368,12 +368,12 @@ GGE::TmxMap* AssetManager::GetTmxMap(const std::string& theFilename)
 	if (anTmxMap->LoadFromFile(mApp->GetExecutableDir() + theFilename))
 	{
 		mTmxMaps[theFilename] = anTmxMap;
-		mApp->mLog << "AssetManager::GetImage() " << theFilename << " textura cargada.\n";
+		mApp->mLog << "AssetManager::GetTmxMap() " << theFilename << " tmx cargado.\n";
 		return mTmxMaps[theFilename];
 	}
 
 	// Si no se encuentra la textura devolvemos la dirección de una vacía
-	mApp->mLog << "AssetManager::GetTmxMap() No existe el archivo " << theFilename << ". Se devuelve una textura vacía" << std::endl;
+	mApp->mLog << "AssetManager::GetTmxMap() No existe el archivo " << theFilename << ". Se devuelve uno vacío" << std::endl;
 	return anTmxMap;
 }
 
@@ -382,7 +382,7 @@ void AssetManager::DeleteTmxMap(const std::string& theFilename)
 	std::map<std::string, GGE::TmxMap*>::iterator it = mTmxMaps.find(theFilename);
 	if(it != mTmxMaps.end())
 	{
-		mApp->mLog << "AssetManager::DeleteTmxMap() Eliminada textura: " << it->first << std::endl;
+		mApp->mLog << "AssetManager::DeleteTmxMap() Eliminado tmx: " << it->first << std::endl;
 		delete it->second;
 		mTmxMaps.erase(it); 
 	}
