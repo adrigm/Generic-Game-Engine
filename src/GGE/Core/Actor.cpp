@@ -108,6 +108,8 @@ void Actor::SetActiveAnimation(const std::string theName, bool reset)
 		mActiveAnimation = it->second;
 		this->SelectFrame(this->GetActiveAnimation().firstFrame);
 		mSelectFrameAnimation = this->GetSelectFrame();
+		this->FlipX(mActiveAnimation.flipX);
+		this->FlipY(mActiveAnimation.flipY);
 	}
 }
 

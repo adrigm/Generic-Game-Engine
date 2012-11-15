@@ -28,7 +28,7 @@ void SceneMain::Init()
 	this->AddObject(heroe);
 
 	heroe->LoadAnimationsFromConfig(AM->GetConfig("inidiana_animations.cfg"));
-	heroe->SetActiveAnimation("run_left");
+	heroe->SetActiveAnimation("run_right");
 }
 
 void SceneMain::ReInit()
