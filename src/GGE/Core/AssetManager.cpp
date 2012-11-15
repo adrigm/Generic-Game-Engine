@@ -85,6 +85,7 @@ sf::Texture* AssetManager::GetTexture(const std::string& theFilename)
 
 	// Si no existe lo cargamos
 	sf::Texture* anTexture = new sf::Texture();
+	anTexture->setRepeated(true);
 
 	// Buscamos en la lista de directorios
 	for (std::vector< std::string >::iterator it = mDirectories.begin();

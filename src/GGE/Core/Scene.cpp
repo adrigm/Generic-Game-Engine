@@ -9,7 +9,7 @@
 namespace GGE
 {
 
-struct ActorComparator
+struct ObjectZComparator
 {
 	bool operator()(const GGE::ObjectScene* o1, const GGE::ObjectScene* o2) const
     {
@@ -106,6 +106,9 @@ void Scene::Draw(void)
 	// Establecemos el color de fondo
 	mApp->mWindow.clear(mColorBack);
 
+	// Ordenamos la lista de objetos en base a su Z
+	mObjects.sort(ObjectZComparator());
+
 	// Recorremos la lista de Actores de la escena para dibujarla
 	std::list<GGE::ObjectScene*>::const_iterator element;
 	for(element = mObjects.begin(); element != mObjects.end(); element++)
@@ -121,15 +124,10 @@ void Scene::Draw(void)
 
 void Scene::AddObject(GGE::ObjectScene* theObject)
 {
-	// FIX: Optimizar - No ordenar lista dos veces
-	// Añadimos un nuevo Actor a la escena
-	mObjects.push_back(theObject);
-	// Ordenamos los elementos de la escena
-	mObjects.sort();
-	// Eliminamos los elementos repetidos
-	mObjects.unique();
-	// Ordenamos en base a su Z
-	mObjects.sort(ActorComparator());
+	std::list<GGE::ObjectScene*>::const_iterator it;
+	it = std::find(mObjects.begin(), mObjects.end(), theObject);
+	if (it == mObjects.end())
+		mObjects.push_back(theObject);
 }
 
 void Scene::AddObjects(const std::vector<GGE::ObjectScene*> &theList)

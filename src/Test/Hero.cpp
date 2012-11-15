@@ -5,7 +5,6 @@ Hero::Hero() :
 	mStatus(IDLE)
 {
 	mApp = GGE::App::Instance();
-	this->FlipX(true);
 }
 
 Hero::~Hero()

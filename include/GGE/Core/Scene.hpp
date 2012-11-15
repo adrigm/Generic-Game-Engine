@@ -99,7 +99,6 @@ public:
 
 	void SetBackgroundColor(const sf::Color &theColor);
 
-
 protected:
 	/// Puntero a la aplicación padre
 	App* mApp;
