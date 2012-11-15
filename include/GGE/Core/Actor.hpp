@@ -37,14 +37,14 @@ public:
 	 * @param theRows Filas de la imagen
 	 * @param theCols Columnas de la imagen
 	 */
-	void SetFramesByNum(GGE::Uint32 theRows, GGE::Uint32 theCols);
+	void SetFramesByGrid(GGE::Uint32 theRows, GGE::Uint32 theCols);
 
 	/**
 	 * Selecciona un frame del Actor
 	 *
 	 * @param theFrame numero del frame seleccionado (comienza en 1)
 	 */
-	bool SelectFrame(GGE::Uint32 theFrame);
+	void SelectFrame(GGE::Uint32 theFrame);
 
 	/**
 	 * Devuelve el frame seleccionado
@@ -61,8 +61,8 @@ public:
 
 	virtual void Animate();
 
-	void FlipX(bool flipped);
-	void FlipY(bool flipped);
+	void FlipX(bool flippedX);
+	void FlipY(bool flippedY);
 
 	void SetLeftPosition(float x);
 	void SetTopPosition(float y);
@@ -82,7 +82,7 @@ private:
 	/// Frame seleccionado (Rect)
 	GGE::Uint32 mSelectFrame;
 	GGE::Uint32 mSelectFrameAnimation;
-	/// Liste de animaciones
+	/// Lista de animaciones
 	std::map<std::string, GGE::Animation> mListAnim;
 	/// Animación activa
 	GGE::Animation mActiveAnimation;
