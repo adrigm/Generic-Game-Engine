@@ -132,6 +132,5 @@ private:
 	virtual ~App();
 
 }; // Class App
-
 } // namespace GGE
 #endif // APP_HPP

@@ -36,7 +36,7 @@ void Actor::SetFramesBySize(GGE::Uint32 theWidth, GGE::Uint32 theHeight)
 	this->SelectFrame(1);
 }
 
-void Actor::SetFramesByGrid(GGE::Uint32 theRows, GGE::Uint32 theCols)
+void Actor::SetFramesByNum(GGE::Uint32 theRows, GGE::Uint32 theCols)
 {
 	mRectsList.clear();
 
@@ -44,24 +44,28 @@ void Actor::SetFramesByGrid(GGE::Uint32 theRows, GGE::Uint32 theCols)
 	GGE::Uint32 height = this->getTexture()->getSize().y / theRows;
 
 	for (int r = 0; r < theRows; r++)
+	{
 		for (int c = 0; c < theCols; c++)
+		{
 			mRectsList.push_back(sf::IntRect(c*width, r*height, width, height));
+		}
+	}
 
 	this->SelectFrame(1);
 }
 
-void Actor::SelectFrame(GGE::Uint32 theFrame)
+bool Actor::SelectFrame(GGE::Uint32 theFrame)
 {
-	if (!mRectsList.empty())
+	if (theFrame < 1 || theFrame > mRectsList.size())
 	{
-		// Elegimos el frame de forma modular
-		this->setTextureRect(mRectsList[(theFrame - 1) % mRectsList.size()]);
-		// Le damos la vuelta al rect de la textura según los flips
-		if (mIsFlippedX)
-			this->setTextureRect(sf::IntRect(this->getTextureRect().left + this->getTextureRect().width, this->getTextureRect().top, -this->getTextureRect().width, this->getTextureRect().height));
-		if (mIsFlippedY)
-			this->setTextureRect(sf::IntRect(this->getTextureRect().left, this->getTextureRect().top + this->getTextureRect().height, this->getTextureRect().width, -this->getTextureRect().height));
+		mApp->mLog << "Actor::SelectFrame() Frame fuera de rango: " << theFrame << std::endl;
+		return false;
+	}
+	else
+	{
+		this->setTextureRect(mRectsList[theFrame-1]);
 		this->mSelectFrame = theFrame;
+		return true;
 	}
 }
 
@@ -72,8 +76,7 @@ GGE::Uint32 Actor::GetSelectFrame() const
 
 void Actor::AddAnimation(const std::string theName, const GGE::Animation theAnim)
 {
-	if (mListAnim.find(theName) == mListAnim.end())
-		this->mListAnim[theName] = theAnim;
+	mListAnim[theName] = theAnim;
 }
 
 
@@ -105,22 +108,32 @@ void Actor::Animate()
 		this->SelectFrame(mSelectFrameAnimation);
 
 		if (this->GetSelectFrame() < this->GetActiveAnimation().lastFrame)
+		{
 			mSelectFrameAnimation++;
+		}
 		else
+		{
 			mSelectFrameAnimation = this->GetActiveAnimation().firstFrame;
+		}
 	}
 }
 
-void Actor::FlipX(bool flippedX)
+void Actor::FlipX(bool flipped)
 {
-	mIsFlippedX = flippedX;
-	this->SelectFrame(this->GetSelectFrame());
+	mIsFlippedX = flipped;
+	if (flipped)
+		this->setScale(sf::Vector2f(-1.0f, 1.0f));
+	else
+		this->setScale(sf::Vector2f(1.0f, 1.0f));
 }
 
-void Actor::FlipY(bool flippedY)
+void Actor::FlipY(bool flipped)
 {
-	mIsFlippedY = flippedY;
-	this->SelectFrame(this->GetSelectFrame());
+	mIsFlippedY = flipped;
+	if (flipped)
+		this->setScale(sf::Vector2f(1.0f, -1.0f));
+	else
+		this->setScale(sf::Vector2f(1.0f, 1.0f));
 }
 
 void Actor::SetLeftPosition(float x)
@@ -136,12 +149,12 @@ void Actor::SetTopPosition(float y)
 
 void Actor::SetRightPosition(float x)
 {
-	this->setPosition(x - (this->getGlobalBounds().width - this->getOrigin().x), this->getPosition().y);
+	this->setPosition(x - this->getOrigin().x, this->getPosition().y);
 }
 
 void Actor::SetBottomPosition(float y)
 {
-	this->setPosition(this->getPosition().x, y - (this->getGlobalBounds().height - this->getOrigin().y));
+	this->setPosition(this->getPosition().x, y - this->getOrigin().y);
 }
 
 float Actor::GetLeftPosition() const
