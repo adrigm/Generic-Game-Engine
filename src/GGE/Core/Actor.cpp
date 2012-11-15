@@ -6,7 +6,6 @@ namespace GGE
 {
 
 Actor::Actor() :
-	mZOrder(2),
 	mSelectFrame(1),
 	mSelectFrameAnimation(0),
 	mElapsedTime(0.0f),
@@ -84,9 +83,14 @@ GGE::Animation Actor::GetAnimation(std::string theName) const
 
 void Actor::SetActiveAnimation(const std::string theName, bool reset)
 {
-	mActiveAnimation = mListAnim.find(theName)->second;
-	this->SelectFrame(this->GetActiveAnimation().firstFrame);
-	mSelectFrameAnimation = this->GetSelectFrame();
+	std::map<std::string, GGE::Animation>::const_iterator it;
+	it = mListAnim.find(theName);
+	if (it != mListAnim.end())
+	{
+		mActiveAnimation = it->second;
+		this->SelectFrame(this->GetActiveAnimation().firstFrame);
+		mSelectFrameAnimation = this->GetSelectFrame();
+	}
 }
 
 GGE::Animation Actor::GetActiveAnimation() const

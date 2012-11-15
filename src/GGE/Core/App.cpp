@@ -165,7 +165,7 @@ void App::Init()
 	mAssetManager = GGE::AssetManager::Instance();
 
 	// Creamos la Cámara
-	mCamera = new GGE::Camera();
+	mCamera = GGE::Camera::Instance();
 
 	// Comprobamos que se haya establecido escena inicial
 	if (mScene != NULL)

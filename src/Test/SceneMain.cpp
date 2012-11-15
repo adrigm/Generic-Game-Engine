@@ -24,17 +24,20 @@ void SceneMain::Init()
 
 	this->heroe = new Hero();
 	this->heroe->setTexture(*AM->GetTexture("indiana.png"));
-	//this->heroe->SetFramesBySize(64, 64);
+	this->heroe->SetFramesBySize(64, 64);
 	this->AddObject(heroe);
 
-	GGE::Animation Walk_left;
-	Walk_left.fps = 24;
-	Walk_left.firstFrame = 2;
-	Walk_left.lastFrame = 11;
+	GGE::ConfigReader* anim_file = AM->GetConfig("inidiana_animations.cfg");
+	GGE::Animation Run_left;
+	Run_left.fps = anim_file->GetUint32("run_left", "fps", 20);
+	Run_left.firstFrame = anim_file->GetUint32("run_left", "firstFrame", 1);
+	Run_left.lastFrame = anim_file->GetUint32("run_left", "lastFrame", 1);
+	std::vector<std::string> names = anim_file->GetAllNameSections();
+	std::cout << names[0] << std::endl;
 
 
-	//heroe->AddAnimation("walk", Walk_left);
-	//heroe->SetActiveAnimation("walk");
+	heroe->AddAnimation("run", Run_left);
+	heroe->SetActiveAnimation("run");
 }
 
 void SceneMain::ReInit()

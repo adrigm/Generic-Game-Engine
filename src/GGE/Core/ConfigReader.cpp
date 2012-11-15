@@ -22,6 +22,7 @@
 #include <sstream>
 #include <GGE/Core/App.hpp>
 #include <GGE/Core/ConfigReader.hpp>
+#include <iostream> // Quitar
 
 namespace GGE
 {
@@ -47,6 +48,18 @@ ConfigReader::~ConfigReader()
 
 	// Clear pointers we don't need anymore
 	mApp = NULL;
+}
+
+std::vector<std::string> ConfigReader::GetAllNameSections() const
+{
+	std::vector<std::string> v;
+
+	std::map<const std::string, typeNameValue*>::const_iterator iter;
+	for (iter = mSections.begin(); iter != mSections.end(); iter++)
+	{
+		v.push_back(iter->first);
+	}
+	return v;
 }
 
 bool ConfigReader::IsSectionEmpty(const std::string theSection) const

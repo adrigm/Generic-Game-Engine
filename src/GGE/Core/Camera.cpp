@@ -3,6 +3,26 @@
 namespace GGE
 {
 
+Camera* Camera::ms_instance = 0;
+
+Camera* Camera::Instance()
+{
+	if(ms_instance == 0)
+	{
+		ms_instance = new Camera();
+	}
+	return ms_instance;
+}
+
+void Camera::Release()
+{
+	if(ms_instance)
+	{
+		delete ms_instance;
+	}
+	ms_instance = 0;
+}
+
 Camera::Camera()
 {
 	mApp = App::Instance();

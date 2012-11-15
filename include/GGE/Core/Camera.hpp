@@ -10,10 +10,11 @@ namespace GGE
 
 class Camera : public sf::View
 {
-public:
+	static Camera* ms_instance;
 
-	Camera();
-	~Camera();
+public:
+	static Camera* Instance();
+	static void Release();
 
 	void Update();
 
@@ -37,6 +38,9 @@ private:
 	bool mConectToSprite;
 	/// Dice si la Cámara está conectada a un mapa
 	bool mConectToMap;
+
+	Camera();
+	virtual ~Camera();
 
 }; // Class Camera
 

@@ -23,6 +23,8 @@ namespace GGE
      */
     virtual ~ConfigReader();
 
+	std::vector<std::string> GetAllNameSections() const;
+
     /**
      * IsSectionEmpty determines if theSection provided exists and has 1 or
      * more name, value pairs to retrieve.
@@ -42,7 +44,7 @@ namespace GGE
      * @return the value found or theDefault if not found or correct
      */
     bool GetBool(const std::string theSection, const std::string theName,
-      const bool theDefault = false) const;
+		const bool theDefault = false) const;
 
     /**
      * GetColor will return the color value for the section and name
@@ -54,7 +56,7 @@ namespace GGE
      * @return the color found or theDefault if not found
      */
     sf::Color GetColor(const std::string theSection, const std::string theName,
-      const sf::Color theDefault = sf::Color::Black) const;
+		const sf::Color theDefault = sf::Color::Black) const;
 
     /**
      * GetFloat will return a floating point number for theSection and
@@ -66,7 +68,7 @@ namespace GGE
      * @return the value found or theDefault if not found or correct
      */
     float GetFloat(const std::string theSection, const std::string theName,
-      const float theDefault = 0.f) const;
+		const float theDefault = 0.f) const;
 
     /**
      * GetString will return the string value for theSection and theName
@@ -77,7 +79,7 @@ namespace GGE
      * @return the value found or theDefault if not found
      */
     std::string GetString(const std::string theSection,
-      const std::string theName, const std::string theDefault = "") const;
+		const std::string theName, const std::string theDefault = "") const;
 
     /**
      * GetUint32 will return an unsigned 32 bit number for theSection and
@@ -89,7 +91,7 @@ namespace GGE
      * @return the value found or theDefault if not found
      */
     Uint32 GetUint32(const std::string theSection, const std::string theName,
-      const Uint32 theDefault = 0) const;
+		const Uint32 theDefault = 0) const;
 
     /**
      * Read will open and read the configuration file specified into internal

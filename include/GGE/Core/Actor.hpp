@@ -14,9 +14,6 @@ namespace GGE
 class Actor : public GGE::Sprite
 {
 public:
-	/// Orden de prioridad de dibujado
-	GGE::Int32 mZOrder;
-
 	Actor();
 	virtual ~Actor();
 
