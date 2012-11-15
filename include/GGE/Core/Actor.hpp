@@ -53,6 +53,8 @@ public:
 	void AddAnimation(const std::string theName, const GGE::Animation theAnim);
 	GGE::Animation GetAnimation(std::string theName) const;
 
+	void LoadAnimationsFromConfig(const GGE::ConfigReader* theConfig);
+
 	void SetActiveAnimation(const std::string theName, bool reset = true);
 	GGE::Animation GetActiveAnimation() const;
 

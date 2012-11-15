@@ -1,5 +1,7 @@
+#include <string>
 #include <GGE/Core/App.hpp>
 #include <GGE/Core/Actor.hpp>
+#include <GGE/Core/ConfigReader.hpp>
 #include <iostream> // Quitar
 
 namespace GGE
@@ -79,6 +81,22 @@ void Actor::AddAnimation(const std::string theName, const GGE::Animation theAnim
 GGE::Animation Actor::GetAnimation(std::string theName) const
 {
 	return mListAnim.find(theName)->second;
+}
+
+void Actor::LoadAnimationsFromConfig(const GGE::ConfigReader* theConfig)
+{
+	std::vector<std::string>::const_iterator it;
+	std::vector<std::string> names = theConfig->GetAllNameSections();
+	for (it = names.begin(); it != names.end(); it++)
+	{
+		GGE::Animation anAnimation;
+		anAnimation.fps = theConfig->GetUint32(*it, "fps", 20);
+		anAnimation.firstFrame = theConfig->GetUint32(*it, "firstFrame", 1);
+		anAnimation.lastFrame = theConfig->GetUint32(*it, "lastFrame", 1);
+		anAnimation.flipX = theConfig->GetBool(*it, "flipX", false);
+		anAnimation.flipY = theConfig->GetBool(*it, "flipY", false);
+		this->AddAnimation(*it, anAnimation);
+	}
 }
 
 void Actor::SetActiveAnimation(const std::string theName, bool reset)

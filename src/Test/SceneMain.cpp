@@ -27,17 +27,8 @@ void SceneMain::Init()
 	this->heroe->SetFramesBySize(64, 64);
 	this->AddObject(heroe);
 
-	GGE::ConfigReader* anim_file = AM->GetConfig("inidiana_animations.cfg");
-	GGE::Animation Run_left;
-	Run_left.fps = anim_file->GetUint32("run_left", "fps", 20);
-	Run_left.firstFrame = anim_file->GetUint32("run_left", "firstFrame", 1);
-	Run_left.lastFrame = anim_file->GetUint32("run_left", "lastFrame", 1);
-	std::vector<std::string> names = anim_file->GetAllNameSections();
-	std::cout << names[0] << std::endl;
-
-
-	heroe->AddAnimation("run", Run_left);
-	heroe->SetActiveAnimation("run");
+	heroe->LoadAnimationsFromConfig(AM->GetConfig("inidiana_animations.cfg"));
+	heroe->SetActiveAnimation("run_left");
 }
 
 void SceneMain::ReInit()
