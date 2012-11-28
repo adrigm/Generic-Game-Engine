@@ -13,10 +13,9 @@ SceneMain::~SceneMain()
 
 void SceneMain::Init()
 {
-	GGE::App* APP = GGE::App::Instance();
-	GGE::SceneManager* SM = GGE::SceneManager::Instance();
+	//GGE::App* APP = GGE::App::Instance();
+	//GGE::SceneManager* SM = GGE::SceneManager::Instance();
 	GGE::AssetManager* AM = GGE::AssetManager::Instance();
-
 
 	this->SetBackgroundColor(sf::Color(200, 220, 255));
 	

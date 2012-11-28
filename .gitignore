@@ -1,3 +1,4 @@
+/test/Test
 #OS junk files
 [Tt]humbs.db
 *.DS_Store
@@ -114,3 +115,9 @@ _ReSharper*/
 boost/
 SFML/
 log.txt
+
+#codelite
+*.db
+*.txt
+*.workspace.*
+

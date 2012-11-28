@@ -83,20 +83,20 @@ int App::Run()
 	mRunning = true;
 
 	// PreInit() Se encarga de 2 cosas:
-	// 1) Abrir el archivo de configuración
+	// 1) Abrir el archivo de configuraciÃ³n
 	// 2) Crear la ventana con los valores obtenidos del archivo
 	PreInit();
 
 	// Init() Se encarga de crear el SceneManager y cargar la primera escena
 	Init();
 
-	// Loop() Implementa el bucle de la aplicación
+	// Loop() Implementa el bucle de la aplicaciÃ³n
 	Loop();
 
 	// Cleanup() Se encarga de eliminar todos los objetos creados
 	Cleanup();
 
-	// Código de salida de la aplicación
+	// CÃ³digo de salida de la aplicaciÃ³n
 	return mExitCode;
 }
 
@@ -146,6 +146,8 @@ void App::PreInit()
 	  mVideoMode.height = DEFAULT_VIDEO_HEIGHT;
 	  mVideoMode.bitsPerPixel = DEFAULT_VIDEO_BPP;
 	}
+	
+	// TODO: Comprobar si el modo de video es compatible
  
 	// Create a RenderWindow object using VideoMode object above
 	mWindow.create(mVideoMode, mTitle, mWindowStyle, mContextSettings);
@@ -164,13 +166,13 @@ void App::Init()
 	// Creamos el AssetManager
 	mAssetManager = GGE::AssetManager::Instance();
 
-	// Creamos la Cámara
+	// Creamos la CÃ¡mara
 	mCamera = GGE::Camera::Instance();
 
 	// Comprobamos que se haya establecido escena inicial
 	if (mScene != NULL)
 	{
-		// Añadimos la primera escena
+		// AÃ±adimos la primera escena
 		mSceneManager->AddScene(mScene);
 
 		mSceneManager->SetActiveScene(mScene->GetID());
@@ -184,7 +186,7 @@ void App::Init()
 		mLog << "ERROR: App::Init() No se ha establecido escena inicial"
 			<< std::endl;
 
-		// Salimos con código -2
+		// Salimos con cÃ³digo -2
 		Quit(StatusAppInitFailed);
 	}
 
@@ -194,7 +196,7 @@ void App::Init()
 
 void App::Loop()
 {
-	// Bucle mientras se esté ejecutando y la ventana esté abierta
+	// Bucle mientras se estÃ© ejecutando y la ventana estÃ© abierta
 	while (IsRunning() && mWindow.isOpen())
 	{
 		// Manejamos los eventos de la ventana
@@ -220,13 +222,13 @@ void App::Loop()
 		// Obtenemos el tiempo pasado en cada ciclo
 		mUpdateTime = mUpdateClock.restart();
 
-		// Actualizamos la cámara
+		// Actualizamos la cÃ¡mara
 		this->mWindow.setView(*mCamera);
 
-		// Llamamos al método Update() de la escena activa
+		// Llamamos al mÃ©todo Update() de la escena activa
 		mSceneManager->UpdateScene();
 
-		// Llamamos al método Draw() de la escena activa
+		// Llamamos al mÃ©todo Draw() de la escena activa
 		mSceneManager->DrawScene();
 
 		// Actualizamos la ventana
@@ -235,7 +237,7 @@ void App::Loop()
 		// Comprobamos cambios de escena
 		if (mSceneManager->HandleChangeScene())
 		{
-			// Restablecemos la cámara por defecto antes de cambiar de escena
+			// Restablecemos la cÃ¡mara por defecto antes de cambiar de escena
 			mCamera->SetDefaultCamera();
 			// Cambiamos el puntero de la escena activa
 			mSceneManager->ChangeScene(mSceneManager->mNextScene);

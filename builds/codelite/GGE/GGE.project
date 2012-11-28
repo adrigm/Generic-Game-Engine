@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Project Name="GGE" InternalType="Library">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00010001N0005Debug000000000000]]>
+    </Plugin>
+  </Plugins>
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="src">
+    <VirtualDirectory Name="Core">
+      <File Name="../../../src/GGE/Core/Actor.cpp"/>
+      <File Name="../../../src/GGE/Core/App.cpp"/>
+      <File Name="../../../src/GGE/Core/AssetManager.cpp"/>
+      <File Name="../../../src/GGE/Core/Camera.cpp"/>
+      <File Name="../../../src/GGE/Core/CircleShape.cpp"/>
+      <File Name="../../../src/GGE/Core/Clock.cpp"/>
+      <File Name="../../../src/GGE/Core/ConfigReader.cpp"/>
+      <File Name="../../../src/GGE/Core/ConvexShape.cpp"/>
+      <File Name="../../../src/GGE/Core/ObjectScene.cpp"/>
+      <File Name="../../../src/GGE/Core/RectangleShape.cpp"/>
+      <File Name="../../../src/GGE/Core/Scene.cpp"/>
+      <File Name="../../../src/GGE/Core/SceneManager.cpp"/>
+      <File Name="../../../src/GGE/Core/Shape.cpp"/>
+      <File Name="../../../src/GGE/Core/Sprite.cpp"/>
+      <File Name="../../../src/GGE/Core/Text.cpp"/>
+      <VirtualDirectory Name="maps">
+        <File Name="../../../src/GGE/Core/maps/Map.cpp"/>
+        <File Name="../../../src/GGE/Core/maps/Tileset.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="tmx">
+        <File Name="../../../src/GGE/Core/tmx/tmxLayer.cpp"/>
+        <File Name="../../../src/GGE/Core/tmx/tmxMap.cpp"/>
+        <File Name="../../../src/GGE/Core/tmx/tmxObject.cpp"/>
+        <File Name="../../../src/GGE/Core/tmx/tmxObjectgroup.cpp"/>
+        <File Name="../../../src/GGE/Core/tmx/tmxPolygon.cpp"/>
+        <File Name="../../../src/GGE/Core/tmx/tmxPropertiesSet.cpp"/>
+        <File Name="../../../src/GGE/Core/tmx/tmxTileset.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="utils">
+        <File Name="../../../src/GGE/Core/utils/base64.cpp"/>
+        <File Name="../../../src/GGE/Core/utils/base64.hpp"/>
+        <File Name="../../../src/GGE/Core/utils/pugixml.cpp"/>
+        <File Name="../../../src/GGE/Core/utils/pugixml.hpp"/>
+        <File Name="../../../src/GGE/Core/utils/StringUtils.cpp"/>
+        <File Name="../../../src/GGE/Core/utils/StringUtils.hpp"/>
+        <File Name="../../../src/GGE/Core/utils/zlib.cpp"/>
+        <File Name="../../../src/GGE/Core/utils/zlib.hpp"/>
+        <VirtualDirectory Name="zlib">
+          <File Name="../../../src/GGE/Core/utils/zlib/adler32.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/compress.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/crc32.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/crc32.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/deflate.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/deflate.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/gzclose.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/gzguts.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/gzlib.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/gzread.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/gzwrite.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/infback.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inffast.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inffast.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inffixed.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inflate.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inflate.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inftrees.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inftrees.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/trees.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/trees.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/uncompr.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/zconf.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/zlib.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/zutil.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/zutil.h"/>
+        </VirtualDirectory>
+      </VirtualDirectory>
+      <VirtualDirectory Name="collision">
+        <File Name="../../../src/GGE/Core/collision/RectCollision.cpp"/>
+      </VirtualDirectory>
+    </VirtualDirectory>
+  </VirtualDirectory>
+  <VirtualDirectory Name="include">
+    <VirtualDirectory Name="Core">
+      <VirtualDirectory Name="collision">
+        <File Name="../../../include/GGE/Core/collision/RectCollision.hpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="maps">
+        <File Name="../../../include/GGE/Core/maps/Map.hpp"/>
+        <File Name="../../../include/GGE/Core/maps/Tileset.hpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="tmx">
+        <File Name="../../../include/GGE/Core/tmx/tmx.hpp"/>
+        <File Name="../../../include/GGE/Core/tmx/tmxLayer.hpp"/>
+        <File Name="../../../include/GGE/Core/tmx/tmxMap.hpp"/>
+        <File Name="../../../include/GGE/Core/tmx/tmxObject.hpp"/>
+        <File Name="../../../include/GGE/Core/tmx/tmxObjectgroup.hpp"/>
+        <File Name="../../../include/GGE/Core/tmx/tmxPolygon.hpp"/>
+        <File Name="../../../include/GGE/Core/tmx/tmxPropertiesSet.hpp"/>
+        <File Name="../../../include/GGE/Core/tmx/tmxTileset.hpp"/>
+      </VirtualDirectory>
+      <File Name="../../../include/GGE/Core/Actor.hpp"/>
+      <File Name="../../../include/GGE/Core/App.hpp"/>
+      <File Name="../../../include/GGE/Core/AssetManager.hpp"/>
+      <File Name="../../../include/GGE/Core/Camera.hpp"/>
+      <File Name="../../../include/GGE/Core/CircleShape.hpp"/>
+      <File Name="../../../include/GGE/Core/Clock.hpp"/>
+      <File Name="../../../include/GGE/Core/ConfigReader.hpp"/>
+      <File Name="../../../include/GGE/Core/ConvexShape.hpp"/>
+      <File Name="../../../include/GGE/Core/Core_types.hpp"/>
+      <File Name="../../../include/GGE/Core/ObjectScene.hpp"/>
+      <File Name="../../../include/GGE/Core/RectangleShape.hpp"/>
+      <File Name="../../../include/GGE/Core/Scene.hpp"/>
+      <File Name="../../../include/GGE/Core/SceneManager.hpp"/>
+      <File Name="../../../include/GGE/Core/Shape.hpp"/>
+      <File Name="../../../include/GGE/Core/Sprite.hpp"/>
+      <File Name="../../../include/GGE/Core/Text.hpp"/>
+    </VirtualDirectory>
+    <File Name="../../../include/GGE/Config.hpp"/>
+    <File Name="../../../include/GGE/Core.hpp"/>
+  </VirtualDirectory>
+  <Settings Type="Static Library">
+    <GlobalSettings>
+      <Compiler Options="" C_Options="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g" C_Options="-g" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+        <IncludePath Value="."/>
+        <IncludePath Value="$(IntermediateDirectory)/../../../../include/"/>
+        <IncludePath Value="$(IntermediateDirectory)/../../../../src/"/>
+      </Compiler>
+      <Linker Options="-lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lboost_system -lboost_filesystem" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/../../../../lib/lib$(ProjectName)-d.a" IntermediateDirectory="./Debug" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName/>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths>$(IntermediateDirectory)/../../../../include/</SearchPaths>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="" C_Options="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/lib$(ProjectName).a" IntermediateDirectory="./Release" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName/>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+</CodeLite_Project>
