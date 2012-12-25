@@ -1,27 +1,32 @@
-#include <GGE/Core.hpp>
-#include "SceneMain.hpp"
+////////////////////////////////////////////////////////////
+//
+// GGE - Generic Game Engine
+// Copyright (C) 2011-2012 Adrián Guerra (adrigm@razonartificial.com)
+//
+////////////////////////////////////////////////////////////
 
-int main(int argc, char* argv[])
+#include <GGE/Core/App.hpp>
+
+int main(int argc, char** argv)
 {
-	// Establecemos el código de salida por defecto
-	GGE::Int16 anExitCode = GGE::StatusNoError;
+	// Establecemos un código de error
+	GGE::Uint32 anExitCode = GGE::StatusNoError;
 
 	// Creamos la aplicación
 	GGE::App *anApp = GGE::App::Instance();
 
 	// Procesamos los argumentos
-	anApp->ProcessArguments(argc, argv);
+	//anApp->RegisterExecutableDir(argc, argv);
 
-	// Establecemos la escena inicial
-	anApp->SetFirstScene(new SceneMain("Main"));
-
-	//Ejecutamos la aplicación
+	// Ponemos en marcha la aplicación
 	anExitCode = anApp->Run();
 
 	// Eliminamos la aplicación
 	GGE::App::Release();
+
+	// Anulamos el puntero
 	anApp = 0;
 
-	// Devolvemos el código de salida
+	// Retornamos el código devuelto por la aplicación
 	return anExitCode;
 }

@@ -14,290 +14,32 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Archivos de encabezado\Core">
-      <UniqueIdentifier>{a1357f9b-92a3-4952-9dcc-0414c35775e5}</UniqueIdentifier>
+      <UniqueIdentifier>{74a8e83a-46ad-4b9c-a718-b156cb0f7228}</UniqueIdentifier>
     </Filter>
     <Filter Include="Archivos de código fuente\Core">
-      <UniqueIdentifier>{ca59150a-fdcf-4973-8479-cb02481aef50}</UniqueIdentifier>
+      <UniqueIdentifier>{e9072e75-4d3a-47d2-88d3-22d4cb5e8095}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de código fuente\Core\tmx">
-      <UniqueIdentifier>{00e556fb-7adb-444b-83ac-4fcf5e66d06a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de código fuente\Core\utils">
-      <UniqueIdentifier>{c94a2038-8749-42c8-8f1f-a751cef5b598}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\Core\tmx">
-      <UniqueIdentifier>{73f0f1f2-bc15-4851-821d-5d53a4bb4d7a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de código fuente\Core\utils\zlib">
-      <UniqueIdentifier>{0372d76d-3205-4084-a2e9-238863c5db2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de código fuente\Core\maps">
-      <UniqueIdentifier>{936f84a7-bc93-4eaa-81ce-d5eed60015c3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\Core\maps">
-      <UniqueIdentifier>{ab620b6c-afdd-4bb2-bcba-9df8a215f8d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de código fuente\Core\collision">
-      <UniqueIdentifier>{2fb1f605-19e4-4bf4-9fb0-c7cbfcccc8cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\Core\collision">
-      <UniqueIdentifier>{26566730-b6fb-4799-83a6-7967aa64764a}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\include\GGE\Config.hpp">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core.hpp">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\App.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\Core_types.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\ConfigReader.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\SceneManager.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\Scene.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\AssetManager.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmx.hpp">
-      <Filter>Archivos de encabezado\Core\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxLayer.hpp">
-      <Filter>Archivos de encabezado\Core\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxMap.hpp">
-      <Filter>Archivos de encabezado\Core\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxObject.hpp">
-      <Filter>Archivos de encabezado\Core\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxObjectgroup.hpp">
-      <Filter>Archivos de encabezado\Core\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxPolygon.hpp">
-      <Filter>Archivos de encabezado\Core\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxPropertiesSet.hpp">
-      <Filter>Archivos de encabezado\Core\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\tmx\tmxTileset.hpp">
-      <Filter>Archivos de encabezado\Core\tmx</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\base64.hpp">
-      <Filter>Archivos de código fuente\Core\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\pugixml.hpp">
-      <Filter>Archivos de código fuente\Core\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\StringUtils.hpp">
-      <Filter>Archivos de código fuente\Core\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\zlib.hpp">
-      <Filter>Archivos de código fuente\Core\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\zlib\crc32.h">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\zlib\deflate.h">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\zlib\gzguts.h">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\zlib\inffast.h">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\zlib\inffixed.h">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\zlib\inflate.h">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\zlib\inftrees.h">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\zlib\trees.h">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\zlib\zconf.h">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\zlib\zlib.h">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\GGE\Core\utils\zlib\zutil.h">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\Clock.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\Camera.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\Actor.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\collision\RectCollision.hpp">
-      <Filter>Archivos de encabezado\Core\collision</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\ObjectScene.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\Sprite.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\CircleShape.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\ConvexShape.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\RectangleShape.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\Shape.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\GGE\Core\Text.hpp">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\GGE\Core\App.cpp">
       <Filter>Archivos de código fuente\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\ConfigReader.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\Scene.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\SceneManager.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\AssetManager.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxLayer.cpp">
-      <Filter>Archivos de código fuente\Core\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxMap.cpp">
-      <Filter>Archivos de código fuente\Core\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxObject.cpp">
-      <Filter>Archivos de código fuente\Core\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxObjectgroup.cpp">
-      <Filter>Archivos de código fuente\Core\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxPolygon.cpp">
-      <Filter>Archivos de código fuente\Core\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxPropertiesSet.cpp">
-      <Filter>Archivos de código fuente\Core\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\tmx\tmxTileset.cpp">
-      <Filter>Archivos de código fuente\Core\tmx</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\base64.cpp">
-      <Filter>Archivos de código fuente\Core\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\pugixml.cpp">
-      <Filter>Archivos de código fuente\Core\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\StringUtils.cpp">
-      <Filter>Archivos de código fuente\Core\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib.cpp">
-      <Filter>Archivos de código fuente\Core\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\adler32.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\compress.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\crc32.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\deflate.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\gzclose.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\gzlib.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\gzread.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\gzwrite.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\infback.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\inffast.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\inflate.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\inftrees.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\trees.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\uncompr.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\utils\zlib\zutil.c">
-      <Filter>Archivos de código fuente\Core\utils\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\Clock.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\Camera.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\Actor.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\collision\RectCollision.cpp">
-      <Filter>Archivos de código fuente\Core\collision</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\ObjectScene.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\Sprite.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\Text.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\Shape.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\RectangleShape.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\ConvexShape.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\GGE\Core\CircleShape.cpp">
-      <Filter>Archivos de código fuente\Core</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\GGE\Core\App.hpp">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Config.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\Export.hpp">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\GGE\Core\Core_types.hpp">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

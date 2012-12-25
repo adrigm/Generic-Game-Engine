@@ -1,15 +1,27 @@
-#ifndef APP_HPP
-#define APP_HPP
+////////////////////////////////////////////////////////////
+//
+// GGE - Generic Game Engine
+// Copyright (C) 2011-2012 Adrián Guerra (adrigm@razonartificial.com)
+//
+////////////////////////////////////////////////////////////
 
+#ifndef GGE_APP_HPP
+#define GGE_APP_HPP
+
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
 #include <string>
 #include <fstream>
 #include <SFML/Graphics.hpp>
 #include <GGE/Config.hpp>
+#include <GGE/Core/Export.hpp>
 #include <GGE/Core/Core_types.hpp>
 
 namespace GGE
 {
-class App
+
+class GGE_CORE_API App
 {
 	static App* ms_instance;
 
@@ -22,26 +34,25 @@ public:
 
 	// Variables
 	///////////////////////////////////////////////////////////////////////////
-	/// Título de la ventana
-	std::string mTitle;
 	/// Ventana de la aplicación
-	sf::RenderWindow mWindow;
+	sf::RenderWindow window;
 	/// Modo de video (Width, Height, Bpp)
-	sf::VideoMode mVideoMode;
+	sf::VideoMode videoMode;
 	/// Opciones de la ventana
-	sf::ContextSettings mContextSettings;
+	sf::ContextSettings contextSettings;
 	/// Estilo de la ventana
-	unsigned long mWindowStyle;
+	unsigned long windowStyle;
 	/// Log de la aplicación
-	std::ofstream mLog;
-	/// Puntero al SceneManager
-	GGE::SceneManager* mSceneManager;
-	/// Puntero al AssetManager
-	GGE::AssetManager* mAssetManager;
-	/// Cámara por defecto
-	GGE::Camera* mCamera;
+	std::ofstream log;
 
+	/**
+	 * Devuelve un puntero a la instancia única de la clase si existe,
+	 * si no, la crea y duevuelve el puntero.
+	 * 
+	 * @return Puntero a la instancia única de App
+	 */
 	static App* Instance();
+
 	static void Release();
 
 	/**
@@ -50,13 +61,28 @@ public:
 	 * @param argc Número de parámetros
 	 * @param argv[] Lista de parámetros
 	 */
-	virtual void ProcessArguments(int argc, char* argv[]);
+	void ProcessArguments(int argc, char** argv);
+
+	/**
+	 * Establece la ruta del ejecutable de la aplicación
+	 * 
+	 * @param argc Número de parámetros
+	 * @param argv[] Lista de parámetros
+	 */
+	void RegisterExecutableDir(int argc, char** argv);
+
+	/**
+	 * Devuelve la ruta del ejecutable de la aplicación
+	 *
+	 * @return string con la ruta de la aplicación
+	 */
+	std::string GetExecutableDir() const;
 
 	/**
 	 * Pone en funcionamiento la aplicación. Se encarga de llamar a los métodos
 	 * Preinit, Init, loop y CleanUp
 	 *
-	 * @return Devuelve el código de salida de la aplicación
+	 * @return Código de salida de la aplicación
 	 */
 	int Run(void);
 
@@ -72,7 +98,7 @@ public:
 	 *
 	 * @return	The update time.
 	 */
-	float GetUpdateTime(void) const;
+	GGE::Int64 GetUpdateTime(void) const;
 
 	/**
 	 * Detiene la aplicacion con el código de salida indicado
@@ -81,14 +107,8 @@ public:
 	 */
 	void Quit(int the_exit_code);
 
-	/**
-	 * Devuelve la ruta del ejecutable
-	 * 
-	 * @return devuelve la ruta completa del ejecutable
-	 */
-	std::string GetExecutableDir(void) const;
-
-	void SetFirstScene(GGE::Scene* theScene);
+	std::string GetTitle() const;
+	void SetTitle(const std::string theTitle);
 
 protected:
 	/**
@@ -113,25 +133,35 @@ protected:
 	virtual void Cleanup(void);
 
 private:
+	/// Título de la ventana
+	std::string m_title;
 	/// Código de salida de la aplicación
-	GGE::Int16 mExitCode;
+	GGE::Int16 m_exitCode;
 	/// Verdadero si la aplicación se está ejecutando
-	bool mRunning;
-	/// Archivo de log de la aplicación
-	std::string mLogFile;
+	bool m_running;
+	/// Ruta del ejecutable
+	std::string m_executableDir;
 	/// Reloj que obtiene el tiempo pasado en cada loop
-	sf::Clock mUpdateClock;
+	sf::Clock m_updateClock;
 	/// Almacena el tiempo pasado en cada bucle
-	sf::Time mUpdateTime;
-	/// Almacena la ruta del ejecutable
-	std::string mExecutableDir;
-	/// Puntero a la escena inicial
-	GGE::Scene* mScene;
+	sf::Time m_updateTime;
 
-	App(const std::string TheTitle = "GGE Application");
+	App();
 	virtual ~App();
 
-}; // Class App
+	/**
+	 * App copy constructor is private because we do not allow copies of
+	 * our Singleton class
+	*/
+	App(const App&);               // Intentionally undefined
+
+	/**
+	 * Our assignment operator is private because we do not allow copies
+	 * of our Singleton class
+	 */
+	App& operator=(const App&);    // Intentionally undefined
+}; // class App
 
 } // namespace GGE
-#endif // APP_HPP
+
+#endif // GGE_APP_HPP

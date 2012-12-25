@@ -1,41 +1,46 @@
+////////////////////////////////////////////////////////////
+//
+// GGE - Generic Game Engine
+// Copyright (C) 2011-2012 Adrián Guerra (adrigm@razonartificial.com)
+//
+////////////////////////////////////////////////////////////
+
 #include <boost/filesystem.hpp>
 #include <GGE/Core/App.hpp>
-#include <GGE/Core/ConfigReader.hpp>
-#include <GGE/Core/Scene.hpp>
-#include <GGE/Core/SceneManager.hpp>
-#include <GGE/Core/AssetManager.hpp>
-#include <GGE/Core/Camera.hpp>
-#include <iostream>
+#include <iostream> // Quitar
 
 namespace GGE
 {
 
 App* App::ms_instance = 0;
 
-App::App(const std::string TheTitle) :
-	mTitle(TheTitle),
-	mVideoMode(DEFAULT_VIDEO_WIDTH, DEFAULT_VIDEO_HEIGHT, DEFAULT_VIDEO_BPP),
-	mWindow(),
-	mContextSettings(),
-	mWindowStyle(sf::Style::Close | sf::Style::Resize),
-	mExitCode(GGE::StatusNoError),
-	mRunning(false),
-	mUpdateClock(),
-	mUpdateTime(),
-	mScene(NULL)
+App::App() :
+	videoMode(DEFAULT_VIDEO_WIDTH, DEFAULT_VIDEO_HEIGHT, DEFAULT_VIDEO_BPP),
+	window(),
+	contextSettings(),
+	windowStyle(sf::Style::Close | sf::Style::Resize),
+	m_title("GGE Application"),
+	m_exitCode(GGE::StatusNoError),
+	m_running(false),
+	m_executableDir("")
 {
+#if defined(GGE_DEBUG)
 	// Creamos el archivo de log
 	boost::filesystem::path path(boost::filesystem::current_path() / "log.txt");
-	mLogFile.assign(path.string());
-	mLog.open(mLogFile.c_str());
-	mLog << "LogFile: " << mLogFile << std::endl;
-
+	log.open(path.string());
+	log << "LogFile: " << path.string() << std::endl << std::endl;
+#endif
 	// Escribimos en el log
-	mLog << "App::App() consructor llamado" << std::endl;
+	log << "App::App() consructor llamado" << std::endl;
 }
 
 App::~App()
 {
+	log << std::endl << "Archivo de log cerrado" << std::endl;
+
+#if defined(GGE_DEBUG)
+	log.close();
+#endif
 }
 
 App* App::Instance()
@@ -56,152 +61,132 @@ void App::Release()
 	ms_instance = 0;
 }
 
-void App::ProcessArguments(int argc, char* argv[])
+void App::ProcessArguments(int argc, char** argv)
 {
-	// TODO: Implementar procesador de argumentos
-	mLog << "App::ProcessArguments() Program: " << argv[0] << std::endl;
-	mLog << "App::ProcessArguments() Command Line: ";
-	for(int iloop = 1; iloop<argc; iloop++)
-	{
-		mLog << argv[iloop] << ", ";
-	}
-	mLog << std::endl;
+	// TODO: Implementar Procesador de argumentos
 
-	// Obtenemos la ruta el ejecutable
-	mExecutableDir = argv[0];
-	// Buscamos rutas de Windows
-	int indx = mExecutableDir.find_last_of('\\');
-	// Si devuelve -1 buscamos rutas Unix.
-	if (indx == -1)
-		int indx = mExecutableDir.find_last_of('/');
-	mExecutableDir = mExecutableDir.substr(0, indx+1);
+	if (argc == 1)
+	{
+		log << "Aplicación: " << argv[0];
+	}
+	else
+	{
+		log << "Aplicación: " << argv[0] << ". Comandos: ";
+		m_executableDir = argv[0];
+		for (int i = 1; i < argc; i++)
+		{
+			log << argv[i];
+		}
+		log << std::endl;
+	}
+}
+
+void App::RegisterExecutableDir(int argc, char** argv)
+{
+	if (argc > 0)
+	{
+		boost::filesystem::path path;
+		path = boost::filesystem::system_complete(argv[0]);
+		path = path.remove_filename();
+		boost::filesystem::canonical(path);
+		m_executableDir = path.string();
+#if defined(GGE_SYSTEM_WINDOWS)
+		m_executableDir.append("\\");
+#else
+		m_executableDir.append("/");
+#endif
+		log << "Directorio de la aplicación: " << m_executableDir << std::endl;
+	}
+}
+
+std::string App::GetExecutableDir() const
+{
+	return m_executableDir;
 }
 
 int App::Run()
 {
+	// Comprobamos que se ha llamado a RegisterExecutableDir para establecer la ruta del ejecutable
+	if (m_executableDir == "")
+	{
+		log << "[ERROR] No se ha definido la ruta del ejecutable. ";
+		log << "LLamar a App::RegisterExecutableDir() antes que a App::Run()";
+		log << std::endl;
+
+		return GGE::StatusAppInitFailed;
+	}
+
 	// Cambiamos los aplicacion a ejecutandose
-	mRunning = true;
+	m_running = true;
 
 	// PreInit() Se encarga de 2 cosas:
-	// 1) Abrir el archivo de configuraciÃ³n
+	// 1) Abrir el archivo de configuración
 	// 2) Crear la ventana con los valores obtenidos del archivo
 	PreInit();
 
 	// Init() Se encarga de crear el SceneManager y cargar la primera escena
 	Init();
 
-	// Loop() Implementa el bucle de la aplicaciÃ³n
+	// Loop() Implementa el bucle de la aplicación
 	Loop();
 
 	// Cleanup() Se encarga de eliminar todos los objetos creados
 	Cleanup();
 
-	// CÃ³digo de salida de la aplicaciÃ³n
-	return mExitCode;
+	// Código de salida de la aplicación
+	return m_exitCode;
 }
 
 bool App::IsRunning() const
 {
-	return mRunning;
+	return m_running;
 }
 
-float App::GetUpdateTime() const
+GGE::Int64 App::GetUpdateTime() const
 {
-	return mUpdateTime.asSeconds();
+	return m_updateTime.asMicroseconds();
 }
 
 void App::Quit(int the_exit_code)
 {
-	mExitCode = the_exit_code;
-	mRunning = false;
+	m_exitCode = the_exit_code;
+	m_running = false;
 }
 
-std::string App::GetExecutableDir() const
+std::string App::GetTitle() const
 {
-	return mExecutableDir;
+	return m_title;
+}
+
+void App::SetTitle(const std::string theTitle)
+{
+	m_title = theTitle;
+	window.setTitle(theTitle);
+
+	log << "App::SetTitle() Título cambiado a: " << theTitle << std::endl;
 }
 
 void App::PreInit()
 {
-	GGE::ConfigReader anConfig; // For reading .INI style files
- 
-	// Use our default configuration file to obtain the initial window settings
-	anConfig.Read(this->GetExecutableDir() + "window.cfg"); // Read in our window settings
- 
-	// Are we in Fullscreen mode?
-	if(anConfig.GetBool("window","fullscreen", false))
-	{
-	  mWindowStyle = sf::Style::Fullscreen;
-	}
-
-	// What size window does the user want?
-	mVideoMode.width = anConfig.GetUint32("window","width",DEFAULT_VIDEO_WIDTH);
-	mVideoMode.height = anConfig.GetUint32("window","height",DEFAULT_VIDEO_HEIGHT);
-	mVideoMode.bitsPerPixel = anConfig.GetUint32("window","depth",DEFAULT_VIDEO_BPP);
- 
-	// For Fullscreen, verify valid VideoMode, otherwise revert to defaults for Fullscreen
-	if(sf::Style::Fullscreen == mWindowStyle && false == mVideoMode.isValid())
-	{
-	  mVideoMode.width = DEFAULT_VIDEO_WIDTH;
-	  mVideoMode.height = DEFAULT_VIDEO_HEIGHT;
-	  mVideoMode.bitsPerPixel = DEFAULT_VIDEO_BPP;
-	}
-	
-	// TODO: Comprobar si el modo de video es compatible
- 
 	// Create a RenderWindow object using VideoMode object above
-	mWindow.create(mVideoMode, mTitle, mWindowStyle, mContextSettings);
+	window.create(videoMode, m_title, windowStyle, contextSettings);
 
 	// Activamos VSync
-	mWindow.setVerticalSyncEnabled(true);
-
-	mLog << "App::PreInit() Completado" << std::endl;
+	window.setVerticalSyncEnabled(true);
 }
 
 void App::Init()
 {
-	// Creamos el SceneManager
-	mSceneManager = GGE::SceneManager::Instance();
-
-	// Creamos el AssetManager
-	mAssetManager = GGE::AssetManager::Instance();
-
-	// Creamos la CÃ¡mara
-	mCamera = GGE::Camera::Instance();
-
-	// Comprobamos que se haya establecido escena inicial
-	if (mScene != NULL)
-	{
-		// AÃ±adimos la primera escena
-		mSceneManager->AddScene(mScene);
-
-		mSceneManager->SetActiveScene(mScene->GetID());
-
-		// La establecemos como escena activa
-		mSceneManager->ChangeScene(mSceneManager->mNextScene);
-	}
-	else
-	{
-		// Escribimos el error en el log
-		mLog << "ERROR: App::Init() No se ha establecido escena inicial"
-			<< std::endl;
-
-		// Salimos con cÃ³digo -2
-		Quit(StatusAppInitFailed);
-	}
-
-	// Escribimos en el log
-	mLog << "App::Init() Completado" << std::endl;
 }
 
 void App::Loop()
 {
-	// Bucle mientras se estÃ© ejecutando y la ventana estÃ© abierta
-	while (IsRunning() && mWindow.isOpen())
+	// Bucle mientras se esté ejecutando y la ventana esté abierta
+	while (IsRunning() && window.isOpen())
 	{
 		// Manejamos los eventos de la ventana
 		sf::Event event;
-		while (mWindow.pollEvent(event))
+		while (window.pollEvent(event))
 		{
 			switch (event.type)
 			{
@@ -209,60 +194,27 @@ void App::Loop()
 				Quit(StatusAppOK);
 				break;
 			case sf::Event::GainedFocus:	// La ventana obtiene el foco
-				mSceneManager->ResumeScene();
+				//mSceneManager->ResumeScene();
 				break;
 			case sf::Event::LostFocus:		// La ventana pierde el foco
-				mSceneManager->PauseScene();
+				//mSceneManager->PauseScene();
 				break;
-			default:	// Otros eventos se los pasamos a la ecena activa
-				mSceneManager->EventScene(event);
+			//default:	// Otros eventos se los pasamos a la ecena activa
+				//mSceneManager->EventScene(event);
 			} // switch (event.Type)
 		} // while (window.GetEvent(event))
 
 		// Obtenemos el tiempo pasado en cada ciclo
-		mUpdateTime = mUpdateClock.restart();
+		m_updateTime = m_updateClock.restart();
 
-		// Actualizamos la cÃ¡mara
-		this->mWindow.setView(*mCamera);
-
-		// Llamamos al mÃ©todo Update() de la escena activa
-		mSceneManager->UpdateScene();
-
-		// Llamamos al mÃ©todo Draw() de la escena activa
-		mSceneManager->DrawScene();
-
+		window.clear(sf::Color(160, 200, 255));
 		// Actualizamos la ventana
-		mWindow.display();
-
-		// Comprobamos cambios de escena
-		if (mSceneManager->HandleChangeScene())
-		{
-			// Restablecemos la cÃ¡mara por defecto antes de cambiar de escena
-			mCamera->SetDefaultCamera();
-			// Cambiamos el puntero de la escena activa
-			mSceneManager->ChangeScene(mSceneManager->mNextScene);
-		}
-
+		window.display();
 	} // while (IsRunning() && window.IsOpened())
 }
 
 void App::Cleanup()
 {
-	// Eliminamos todas las escenas del SceneManager
-	mSceneManager->RemoveAllScene();
-
-	// Eliminamos el SceneManager
-	GGE::SceneManager::Release();
-
-	mLog << "App::Cleanup() Completado" << std::endl;
-}
-
-void App::SetFirstScene(GGE::Scene* theScene)
-{
-	if (mScene == NULL)
-	{
-		mScene = theScene;
-	}
 }
 
 } // namespace GGE
