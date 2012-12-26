@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // GGE - Generic Game Engine
-// Copyright (C) 2011-2012 Adri·n Guerra (adrigm@razonartificial.com)
+// Copyright (C) 2011-2012 Adri√°n Guerra (adrigm@razonartificial.com)
 //
 ////////////////////////////////////////////////////////////
 
@@ -27,7 +27,7 @@ App::App() :
 #if defined(GGE_DEBUG)
 	// Creamos el archivo de log
 	boost::filesystem::path path(boost::filesystem::current_path() / "log.txt");
-	log.open(path.string());
+	log.open(path.c_str());
 	log << "LogFile: " << path.string() << std::endl << std::endl;
 #endif
 	// Escribimos en el log
@@ -67,11 +67,11 @@ void App::ProcessArguments(int argc, char** argv)
 
 	if (argc == 1)
 	{
-		log << "AplicaciÛn: " << argv[0];
+		log << "Aplicaci√≥n: " << argv[0];
 	}
 	else
 	{
-		log << "AplicaciÛn: " << argv[0] << ". Comandos: ";
+		log << "Aplicaci√≥n: " << argv[0] << ". Comandos: ";
 		m_executableDir = argv[0];
 		for (int i = 1; i < argc; i++)
 		{
@@ -88,14 +88,13 @@ void App::RegisterExecutableDir(int argc, char** argv)
 		boost::filesystem::path path;
 		path = boost::filesystem::system_complete(argv[0]);
 		path = path.remove_filename();
-		boost::filesystem::canonical(path);
 		m_executableDir = path.string();
 #if defined(GGE_SYSTEM_WINDOWS)
 		m_executableDir.append("\\");
 #else
 		m_executableDir.append("/");
 #endif
-		log << "Directorio de la aplicaciÛn: " << m_executableDir << std::endl;
+		log << "Directorio de la aplicaci√≥n: " << m_executableDir << std::endl;
 	}
 }
 
@@ -120,20 +119,20 @@ int App::Run()
 	m_running = true;
 
 	// PreInit() Se encarga de 2 cosas:
-	// 1) Abrir el archivo de configuraciÛn
+	// 1) Abrir el archivo de configuraci√≥n
 	// 2) Crear la ventana con los valores obtenidos del archivo
 	PreInit();
 
 	// Init() Se encarga de crear el SceneManager y cargar la primera escena
 	Init();
 
-	// Loop() Implementa el bucle de la aplicaciÛn
+	// Loop() Implementa el bucle de la aplicaci√≥n
 	Loop();
 
 	// Cleanup() Se encarga de eliminar todos los objetos creados
 	Cleanup();
 
-	// CÛdigo de salida de la aplicaciÛn
+	// C√≥digo de salida de la aplicaci√≥n
 	return m_exitCode;
 }
 
@@ -163,7 +162,7 @@ void App::SetTitle(const std::string theTitle)
 	m_title = theTitle;
 	window.setTitle(theTitle);
 
-	log << "App::SetTitle() TÌtulo cambiado a: " << theTitle << std::endl;
+	log << "App::SetTitle() T√≠tulo cambiado a: " << theTitle << std::endl;
 }
 
 void App::PreInit()
@@ -181,7 +180,7 @@ void App::Init()
 
 void App::Loop()
 {
-	// Bucle mientras se estÈ ejecutando y la ventana estÈ abierta
+	// Bucle mientras se est√© ejecutando y la ventana est√© abierta
 	while (IsRunning() && window.isOpen())
 	{
 		// Manejamos los eventos de la ventana

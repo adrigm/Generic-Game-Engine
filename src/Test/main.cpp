@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // GGE - Generic Game Engine
-// Copyright (C) 2011-2012 Adri醤 Guerra (adrigm@razonartificial.com)
+// Copyright (C) 2011-2012 Adri谩n Guerra (adrigm@razonartificial.com)
 //
 ////////////////////////////////////////////////////////////
 
@@ -9,24 +9,24 @@
 
 int main(int argc, char** argv)
 {
-	// Establecemos un c骴igo de error
+	// Establecemos un c贸digo de error
 	GGE::Uint32 anExitCode = GGE::StatusNoError;
 
-	// Creamos la aplicaci髇
+	// Creamos la aplicaci贸n
 	GGE::App *anApp = GGE::App::Instance();
 
 	// Procesamos los argumentos
-	//anApp->RegisterExecutableDir(argc, argv);
+	anApp->RegisterExecutableDir(argc, argv);
 
-	// Ponemos en marcha la aplicaci髇
+	// Ponemos en marcha la aplicaci贸n
 	anExitCode = anApp->Run();
 
-	// Eliminamos la aplicaci髇
+	// Eliminamos la aplicaci贸n
 	GGE::App::Release();
 
 	// Anulamos el puntero
 	anApp = 0;
 
-	// Retornamos el c骴igo devuelto por la aplicaci髇
+	// Retornamos el c贸digo devuelto por la aplicaci贸n
 	return anExitCode;
 }

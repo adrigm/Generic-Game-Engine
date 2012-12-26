@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // GGE - Generic Game Engine
-// Copyright (C) 2011-2012 Adri·n Guerra (adrigm@razonartificial.com)
+// Copyright (C) 2011-2012 Adri√°n Guerra (adrigm@razonartificial.com)
 //
 ////////////////////////////////////////////////////////////
 
@@ -65,7 +65,7 @@
 ////////////////////////////////////////////////////////////
 #if defined(GGE_DYNAMIC)
 
-    #if defined(GGE_SYSTEM_WINDOWS)
+    #if !defined(GGE_SYSTEM_WINDOWS)
 
         // Windows compilers need specific (and different) keywords for export and import
         #define GGE_API_EXPORT __declspec(dllexport)
@@ -132,8 +132,8 @@ namespace GGE
 	typedef signed   __int64 Int64;
 	typedef unsigned __int64 Uint64;
 #else
-	typedef int64_t Int64;
-	typedef uint64_t Uint64;
+	typedef long long Int64;
+	typedef unsigned long long Uint64;
 #endif
 
 } // namespace GGE
