@@ -36,11 +36,17 @@ enum StatusType {
 
 // Forward declare GGE classes provided
 class App;
+class ConfigReader;
+class Scene;
+class SceneManager;
+class AssetManager;
 
 // Foward declare TmxMap
 
 // Foward declare Map
 
+/// ID único de las escenas
+typedef std::string SceneID;
 
 /// Declare NameValue typedef which is used for config section maps
 typedef std::map<const std::string, const std::string> typeNameValue;

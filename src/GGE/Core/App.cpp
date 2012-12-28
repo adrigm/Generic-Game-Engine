@@ -7,6 +7,10 @@
 
 #include <boost/filesystem.hpp>
 #include <GGE/Core/App.hpp>
+#include <GGE/Core/StringUtil.hpp>
+#include <GGE/Core/ConfigReader.hpp>
+#include <GGE/Core/SceneManager.hpp>
+#include <GGE/Core/Scene.hpp>
 #include <iostream> // Quitar
 
 namespace GGE
@@ -22,7 +26,8 @@ App::App() :
 	m_title("GGE Application"),
 	m_exitCode(GGE::StatusNoError),
 	m_running(false),
-	m_executableDir("")
+	m_executableDir(""),
+	m_InitialScene(0)
 {
 #if defined(GGE_DEBUG)
 	// Creamos el archivo de log
@@ -36,6 +41,8 @@ App::App() :
 
 App::~App()
 {
+	log << "App::dtor()" << std::endl;
+
 	log << std::endl << "Archivo de log cerrado" << std::endl;
 
 #if defined(GGE_DEBUG)
@@ -94,7 +101,7 @@ void App::RegisterExecutableDir(int argc, char** argv)
 #else
 		m_executableDir.append("/");
 #endif
-		log << "Directorio de la aplicación: " << m_executableDir << std::endl;
+		log << "Directorio de la aplicacion: " << m_executableDir << std::endl;
 	}
 }
 
@@ -141,9 +148,9 @@ bool App::IsRunning() const
 	return m_running;
 }
 
-GGE::Int64 App::GetUpdateTime() const
+sf::Time App::GetUpdateTime() const
 {
-	return m_updateTime.asMicroseconds();
+	return m_updateTime;
 }
 
 void App::Quit(int the_exit_code)
@@ -165,17 +172,80 @@ void App::SetTitle(const std::string theTitle)
 	log << "App::SetTitle() Título cambiado a: " << theTitle << std::endl;
 }
 
+void App::SetFirstScene(GGE::Scene* theScene)
+{
+	if (m_InitialScene == 0)
+	{
+		m_InitialScene = theScene;
+		log << "Establecida escena inicial: " << theScene->GetID() << std::endl;
+	}
+	else
+	{
+		log << "Ya se había establecido una escena inicial" << std::endl;
+	}
+}
+
 void App::PreInit()
 {
+	GGE::ConfigReader anConfig;
+	anConfig.LoadFromFile("window.cfg");
+
+	GGE::Uint32 width = anConfig.GetUint32("window", "width", DEFAULT_VIDEO_WIDTH);
+	GGE::Uint32 height = anConfig.GetUint32("window", "height", DEFAULT_VIDEO_HEIGHT);
+	GGE::Uint32 bpp = anConfig.GetUint32("window", "bpp", DEFAULT_VIDEO_BPP);
+	bool fullscreen = anConfig.GetBool("window", "fullscreen", false);
+
+	// TODO: Comprobar si el formato es válido
+	
+	/*sf::VideoMode v = sf::VideoMode::getDesktopMode();
+	std::cout << v.width << ", " << v.height << ", " << v.bitsPerPixel << std::endl;
+
+	std::vector<sf::VideoMode> b = sf::VideoMode::getFullscreenModes();
+	std::vector<sf::VideoMode>::const_iterator it;
+	for (it = b.begin(); it != b.end(); it++)
+	{
+		std::cout << it->width << ", " << it->height << ", " << it->bitsPerPixel << std::endl;
+	}*/
+
+	videoMode.width = width;
+	videoMode.height = height;
+	videoMode.bitsPerPixel = bpp;
+
+	if (fullscreen)
+		windowStyle = sf::Style::Fullscreen;
+
 	// Create a RenderWindow object using VideoMode object above
 	window.create(videoMode, m_title, windowStyle, contextSettings);
 
 	// Activamos VSync
 	window.setVerticalSyncEnabled(true);
+
+	log << "App::PreInit() Completado" << std::endl;
 }
 
 void App::Init()
 {
+	// Creamos el SceneManager
+	sceneManager = GGE::SceneManager::Instance();
+
+	// Establecemos la escene inicial
+	if (m_InitialScene != 0)
+	{
+		// Añadimos la primera escena
+		sceneManager->AddScene(m_InitialScene);
+		// La establecemos como escena activa
+		sceneManager->SetActiveScene(m_InitialScene->GetID());
+		sceneManager->ChangeScene(sceneManager->mNextScene);
+	}
+	else
+	{
+		log << "[ERROR] No se ha establecido escena inicial. LLamar a App::SetFirstScene() primero" 
+			<< std::endl;
+		// Salimos con código -2
+		Quit(GGE::StatusAppInitFailed);
+	}
+
+	log << "App::Init() Completado" << std::endl;
 }
 
 void App::Loop()
@@ -193,27 +263,46 @@ void App::Loop()
 				Quit(StatusAppOK);
 				break;
 			case sf::Event::GainedFocus:	// La ventana obtiene el foco
-				//mSceneManager->ResumeScene();
+				sceneManager->ResumeScene();
 				break;
 			case sf::Event::LostFocus:		// La ventana pierde el foco
-				//mSceneManager->PauseScene();
+				sceneManager->PauseScene();
 				break;
-			//default:	// Otros eventos se los pasamos a la ecena activa
-				//mSceneManager->EventScene(event);
+			default:	// Otros eventos se los pasamos a la ecena activa
+				sceneManager->EventScene(event);
 			} // switch (event.Type)
 		} // while (window.GetEvent(event))
 
 		// Obtenemos el tiempo pasado en cada ciclo
 		m_updateTime = m_updateClock.restart();
 
-		window.clear(sf::Color(160, 200, 255));
+		// Llamamos al método Update() de la escena activa
+		sceneManager->UpdateScene();
+
+		// Llamamos al método Draw() de la escena activa
+		sceneManager->DrawScene();
+		
 		// Actualizamos la ventana
 		window.display();
+
+		// Comprobamos cambios de escena
+		if (sceneManager->HandleChangeScene())
+		{
+			// Cambiamos el puntero de la escena activa
+			sceneManager->ChangeScene(sceneManager->mNextScene);
+		}
 	} // while (IsRunning() && window.IsOpened())
 }
 
 void App::Cleanup()
 {
+	// Eliminamos todas las escenas
+	sceneManager->RemoveAllScene();
+
+	// Eliminamos el SceneManager
+	GGE::SceneManager::Release();
+
+	log << "App::Cleanup() Completado" << std::endl;
 }
 
 } // namespace GGE

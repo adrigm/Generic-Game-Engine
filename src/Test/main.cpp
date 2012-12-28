@@ -6,6 +6,7 @@
 ////////////////////////////////////////////////////////////
 
 #include <GGE/Core/App.hpp>
+#include "SceneMain.hpp"
 
 int main(int argc, char** argv)
 {
@@ -15,8 +16,14 @@ int main(int argc, char** argv)
 	// Creamos la aplicación
 	GGE::App *anApp = GGE::App::Instance();
 
-	// Procesamos los argumentos
+	// Registramos la ruta del ejecutable
 	anApp->RegisterExecutableDir(argc, argv);
+
+	// Establecemos la escena inicial
+	anApp->SetFirstScene(new SceneMain("Main"));
+
+	// Cambiamos el título a la ventana
+	anApp->SetTitle("Test GGE");
 
 	// Ponemos en marcha la aplicación
 	anExitCode = anApp->Run();

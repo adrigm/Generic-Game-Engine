@@ -44,6 +44,8 @@ public:
 	unsigned long windowStyle;
 	/// Log de la aplicación
 	std::ofstream log;
+	/// Puntero al gestor de escenas
+	GGE::SceneManager* sceneManager;
 
 	/**
 	 * Devuelve un puntero a la instancia única de la clase si existe,
@@ -78,6 +80,8 @@ public:
 	 */
 	std::string GetExecutableDir() const;
 
+	void SetFirstScene(GGE::Scene* theScene);
+
 	/**
 	 * Pone en funcionamiento la aplicación. Se encarga de llamar a los métodos
 	 * Preinit, Init, loop y CleanUp
@@ -98,7 +102,7 @@ public:
 	 *
 	 * @return	The update time.
 	 */
-	GGE::Int64 GetUpdateTime(void) const;
+	sf::Time GetUpdateTime(void) const;
 
 	/**
 	 * Detiene la aplicacion con el código de salida indicado
@@ -145,6 +149,8 @@ private:
 	sf::Clock m_updateClock;
 	/// Almacena el tiempo pasado en cada bucle
 	sf::Time m_updateTime;
+	// Puntero a la escena inicial
+	GGE::Scene* m_InitialScene;
 
 	App();
 	virtual ~App();
