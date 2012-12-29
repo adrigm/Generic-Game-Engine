@@ -18,19 +18,17 @@ void SceneMain::Init()
 	t = m_app->GetTitle();
 
 	m_app->sceneManager->AddScene(new SceneMap("Map"));
-	time = 0U;
 	control = 0;
 }
 
 void SceneMain::Update()
 {
 
-	time += m_app->GetUpdateTime().asMilliseconds();
 	control += m_app->GetUpdateTime().asMilliseconds();
 
 	if (control >= 1000)
 	{
-		std::cout << time / 1000 << std::endl;
+		std::cout << static_cast<GGE::Uint32>(m_app->GetTotalTime().asSeconds()) << std::endl;
 		control = 0;
 	}
 	/*std::string fps = GGE::ConvertFloat(1000.0f /m_app->GetUpdateTime());

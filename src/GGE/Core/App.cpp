@@ -6,6 +6,7 @@
 ////////////////////////////////////////////////////////////
 
 #include <boost/filesystem.hpp>
+#include <SFML/System.hpp>
 #include <GGE/Core/App.hpp>
 #include <GGE/Core/StringUtil.hpp>
 #include <GGE/Core/ConfigReader.hpp>
@@ -22,12 +23,14 @@ App::App() :
 	videoMode(DEFAULT_VIDEO_WIDTH, DEFAULT_VIDEO_HEIGHT, DEFAULT_VIDEO_BPP),
 	window(),
 	contextSettings(),
-	windowStyle(sf::Style::Close | sf::Style::Resize),
+	windowStyle(sf::Style::Default),
 	m_title("GGE Application"),
 	m_exitCode(GGE::StatusNoError),
 	m_running(false),
 	m_executableDir(""),
-	m_InitialScene(0)
+	m_InitialScene(0),
+	m_updateTime(),
+	m_totalTime()
 {
 #if defined(GGE_DEBUG)
 	// Creamos el archivo de log
@@ -153,6 +156,11 @@ sf::Time App::GetUpdateTime() const
 	return m_updateTime;
 }
 
+sf::Time App::GetTotalTime() const
+{
+	return m_totalTime;
+}
+
 void App::Quit(int the_exit_code)
 {
 	m_exitCode = the_exit_code;
@@ -169,7 +177,7 @@ void App::SetTitle(const std::string theTitle)
 	m_title = theTitle;
 	window.setTitle(theTitle);
 
-	log << "App::SetTitle() Título cambiado a: " << theTitle << std::endl;
+	log << "App::SetTitle() Titulo cambiado a: " << theTitle << std::endl;
 }
 
 void App::SetFirstScene(GGE::Scene* theScene)
@@ -181,13 +189,14 @@ void App::SetFirstScene(GGE::Scene* theScene)
 	}
 	else
 	{
-		log << "Ya se había establecido una escena inicial" << std::endl;
+		log << "Ya se habia establecido una escena inicial" << std::endl;
 	}
 }
 
 void App::PreInit()
 {
 	GGE::ConfigReader anConfig;
+	// TODO: Cambiar para buscar donde se encuentra el ejecutable
 	anConfig.LoadFromFile("window.cfg");
 
 	GGE::Uint32 width = anConfig.GetUint32("window", "width", DEFAULT_VIDEO_WIDTH);
@@ -275,6 +284,7 @@ void App::Loop()
 
 		// Obtenemos el tiempo pasado en cada ciclo
 		m_updateTime = m_updateClock.restart();
+		m_totalTime += m_updateTime;
 
 		// Llamamos al método Update() de la escena activa
 		sceneManager->UpdateScene();

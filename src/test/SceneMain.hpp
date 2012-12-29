@@ -23,7 +23,6 @@ public:
 
 private:
 	std::string t;
-	GGE::Uint32 time;
 	GGE::Int32 control;
 
 }; // class SceneMain

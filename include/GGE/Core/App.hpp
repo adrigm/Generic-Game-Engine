@@ -104,6 +104,8 @@ public:
 	 */
 	sf::Time GetUpdateTime(void) const;
 
+	sf::Time GetTotalTime(void) const;
+
 	/**
 	 * Detiene la aplicacion con el código de salida indicado
 	 *
@@ -149,6 +151,8 @@ private:
 	sf::Clock m_updateClock;
 	/// Almacena el tiempo pasado en cada bucle
 	sf::Time m_updateTime;
+	/// Almacena el tiempo total de ejecución
+	sf::Time m_totalTime;
 	// Puntero a la escena inicial
 	GGE::Scene* m_InitialScene;
 
