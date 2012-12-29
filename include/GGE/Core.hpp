@@ -13,6 +13,7 @@
 ////////////////////////////////////////////////////////////
 #include <GGE/Config.hpp>
 #include <GGE/Core/Core_types.hpp>
+#include <GGE/Core/Tmx/Tmx.hpp>
 #include <GGE/Core/StringUtil.hpp>
 #include <GGE/Core/App.hpp>
 #include <GGE/Core/ConfigReader.hpp>

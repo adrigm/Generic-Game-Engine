@@ -42,6 +42,22 @@ class SceneManager;
 class AssetManager;
 
 // Foward declare TmxMap
+namespace Tmx
+{
+	class Point;
+	class Util;
+	class PropertySet;
+	class Image;
+	class Tile;
+	class Tileset;
+	class Layer;
+	class Object;
+	class ObjectGroup;
+	class Polygon;
+	class Polyline;
+	class MapTile;
+	class Map;
+} // namespace Tmx
 
 // Foward declare Map
 

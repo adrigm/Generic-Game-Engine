@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="30" tilewidth="32" tileheight="32" backgroundcolor="#636363">
+ <properties>
+  <property name="egegwewg" value="ewgew"/>
+  <property name="egwe" value=""/>
+  <property name="ewgeg" value="egw"/>
+ </properties>
+ <tileset firstgid="1" name="grassland" tilewidth="32" tileheight="32">
+  <image source="../../../TmxReader/bin/grassland.png" width="256" height="576"/>
+  <terraintypes>
+   <terrain name="New Terrain" tile="25"/>
+  </terraintypes>
+  <tile id="2">
+   <properties>
+    <property name="egwge" value="gewgew"/>
+    <property name="ewge" value=""/>
+    <property name="gewwge" value="egwe"/>
+   </properties>
+  </tile>
+  <tile id="16" terrain=",,,0"/>
+  <tile id="17" terrain=",,0,0"/>
+  <tile id="18" terrain=",,0,"/>
+  <tile id="24" terrain=",0,,0"/>
+  <tile id="25" terrain="0,0,0,0"/>
+  <tile id="26" terrain="0,,0,"/>
+  <tile id="27" terrain="0,,,0"/>
+  <tile id="28" terrain=",0,0,"/>
+  <tile id="30">
+   <properties>
+    <property name="geefgew" value=""/>
+   </properties>
+  </tile>
+  <tile id="32" terrain=",0,,"/>
+  <tile id="33" terrain="0,0,,"/>
+  <tile id="34" terrain="0,,,"/>
+  <tile id="35" terrain=",0,0,"/>
+  <tile id="36" terrain="0,0,0,0"/>
+ </tileset>
+ <tileset firstgid="145" name="town" tilewidth="32" tileheight="32" spacing="6" margin="4">
+  <tileoffset x="3" y="3"/>
+  <image source="../../../TmxReader/bin/town.png" trans="ff00ff" width="256" height="960"/>
+ </tileset>
+ <layer name="base" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6Grf9OzsQckrJqqqqqqPn0QtASx
+  </data>
+ </layer>
+ <layer name="layer 2" width="40" height="30">
+  <properties>
+   <property name="egwew" value="gewgew"/>
+   <property name="geweegw" value="egwe"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1l0lPHDEQhT2QU4KQJiMlGpg+zHbIciHJheXCcoHkj2ThQJZDIBwS4ACB/8yzZGuealxluxme9End7bb9XC7b3XvOuX1w4Oq1CbbANtgRZV3wPNCj+15lH0fgI/iklL8Cr8Eb8FaU7YI9lx5fH6wF1ul+PdEHe6/1vwHegffggyg7dPr4hmAUGGf8cVmq3EuLk5zDz+AL+Aq+gWNRX1P0O6ZnMgfGopylxUnO4Qn4Dn6An+CXqM/i/lO5J2Ns+dNyXc7hb3AKzsAfcC7qa/3Lue26+fhZsnKd9Rf8AxfgElyJ+tw/xy76k554DVmycp11DW7Af3AL7kT9KI5dap1Icv4s8dp5KcpWH9BuGy2BZfCEnll7zIuKtjnHfDw7ga4r3/eegmdghZ5Z54S1f2uKuRf9+VzQ1m1JP9basWIrxedIhyhR23NCiy3vH14xRp0EXKcX6jSF/eSkxZa9cW55P5x78dnAzfadxs3nY+n+J6XFtu9mMeC9I/oaBA8T8tbQuGT8Fi3NX/TofU3Dvb8ehXvrO4L3+zbienF/9kqtTY4jz+kw+JT+5L6e28/lGOS4S75HeS6bUHcSSI2JzyJL2hyMCt7R2vFMjXdrlRtD6nvP988xZX++rOQcafufEPueGO/ImPK6GDp9Xq02Sj2UzGfj8nHPqfQ/QcY59p0b/0Nl+eOcmrr5fCqV/Hb1svKi1B/76Yt+rPZjPb5uu9fWzK/8x821yddr+utJxVhMjf54fvuV/lx4p+25Wnt+NBX+FnHW1/qL/cbzZrAAD5bk/9Zj7xOlugfiPUqA
+  </data>
+ </layer>
+ <layer name="Capa de patrones 3" width="40" height="30" opacity="0.86">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFAwXYB9oBo2DEgNG0hh0IAbEwFnEuIGYioFeB6q7BBFJALI1DjpkO9hMCSkCsTIY+CWo7ZAQB+YF2ABIQHWgHjIJRMApGwSgYBaNgFIyCEQUA2woBKQ==
+  </data>
+ </layer>
+ <objectgroup name="Capa de Objetos 1" width="40" height="30">
+  <object x="122" y="24" width="87" height="101"/>
+  <object x="400" y="42" width="96" height="85">
+   <ellipse/>
+  </object>
+  <object name="errheerh" x="278" y="316" width="71" height="71">
+   <ellipse/>
+  </object>
+  <object x="149" y="235">
+   <polygon points="0,0 -43,114 75,74 82,10"/>
+  </object>
+  <object name="regr" type="rgrgerg" x="318" y="63">
+   <polyline points="0,0 15,185 66,107 40,58 51,20 81,61"/>
+  </object>
+  <object gid="13" x="238" y="51"/>
+  <object type="dnf" x="56" y="159" width="61" height="61"/>
+  <object x="480" y="317" width="20" height="119">
+   <ellipse/>
+  </object>
+  <object x="570" y="268"/>
+  <object x="49" y="110">
+   <ellipse/>
+  </object>
+  <object name="grereg" type="salto" x="545" y="321" width="68" height="52"/>
+  <object x="111" y="164"/>
+ </objectgroup>
+ <objectgroup color="#9335a4" name="Capa de Objetos 2" width="40" height="30" opacity="0.88">
+  <properties>
+   <property name="fewf" value="fffw"/>
+   <property name="fw" value="wffw"/>
+   <property name="wffwf" value="ru55y"/>
+  </properties>
+  <object x="209" y="390">
+   <polyline points="0,0 72,8"/>
+  </object>
+  <object name="rghhr4re" type="gerewggew" x="360" y="441" width="97" height="70">
+   <properties>
+    <property name="dsge" value="egewge"/>
+    <property name="egwgeeg" value="eggew"/>
+    <property name="egwwee" value=""/>
+    <property name="wgegew" value="gwe"/>
+   </properties>
+  </object>
+  <object name="wgeewg" type="eggew" x="220" y="420" width="29" height="35">
+   <properties>
+    <property name="ewgegw" value=""/>
+   </properties>
+  </object>
+  <object name="gewgew" type="egwgew" x="560" y="97" width="42" height="60">
+   <properties>
+    <property name="egwgew" value=""/>
+   </properties>
+  </object>
+  <object type="pinchos" x="34" y="335" width="45" height="62"/>
+ </objectgroup>
+ <layer name="Capa de patrones 4" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzjENAAAIA7A5wb9LROwgIa2CJgC05joAAADw2AKz2wAg
+  </data>
+ </layer>
+ <objectgroup name="Capa de Objetos 3" width="40" height="30">
+  <object x="211" y="168" width="30" height="98">
+   <ellipse/>
+  </object>
+  <object x="262" y="138">
+   <ellipse/>
+  </object>
+  <object x="276" y="36" width="63" height="63">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Capa de Objetos 4" width="40" height="30">
+  <object x="0" y="0" width="30" height="488">
+   <ellipse/>
+  </object>
+  <object x="0" y="0" width="96" height="96">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Capa de Objetos 5" width="40" height="30">
+  <object x="288" y="32">
+   <polygon points="0,0 -96,96 0,96"/>
+  </object>
+  <object x="96" y="256">
+   <polyline points="0,0 64,0 64,32 64,64 0,64"/>
+  </object>
+  <object x="256" y="320">
+   <polygon points="0,0 32,0 0,-32"/>
+  </object>
+  <object x="352" y="0" width="64" height="64"/>
+  <object x="352" y="0" width="64" height="64">
+   <ellipse/>
+  </object>
+  <object x="416" y="256" width="64" height="128">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

@@ -24,6 +24,7 @@ public:
 private:
 	std::string t;
 	GGE::Int32 control;
+	GGE::Tmx::Map map;
 
 }; // class SceneMain
 

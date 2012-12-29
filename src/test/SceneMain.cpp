@@ -19,6 +19,10 @@ void SceneMain::Init()
 
 	m_app->sceneManager->AddScene(new SceneMap("Map"));
 	control = 0;
+
+	map.ParseFile("Data/example.tmx");
+
+	std::cout << map.GetHeight() << std::endl;
 }
 
 void SceneMain::Update()
@@ -26,9 +30,9 @@ void SceneMain::Update()
 
 	control += m_app->GetUpdateTime().asMilliseconds();
 
-	if (control >= 1000)
+	if (control >= 100)
 	{
-		std::cout << static_cast<GGE::Uint32>(m_app->GetTotalTime().asSeconds()) << std::endl;
+		std::cout << static_cast<float>(m_app->GetTotalTime().asMilliseconds() / 1000.0f) << std::endl;
 		control = 0;
 	}
 	/*std::string fps = GGE::ConvertFloat(1000.0f /m_app->GetUpdateTime());
