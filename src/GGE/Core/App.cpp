@@ -11,6 +11,7 @@
 #include <GGE/Core/StringUtil.hpp>
 #include <GGE/Core/ConfigReader.hpp>
 #include <GGE/Core/SceneManager.hpp>
+#include <GGE/Core/AssetManager.hpp>
 #include <GGE/Core/Scene.hpp>
 #include <iostream> // Quitar
 
@@ -236,6 +237,9 @@ void App::Init()
 {
 	// Creamos el SceneManager
 	sceneManager = GGE::SceneManager::Instance();
+
+	// Creamos el AssetManager
+	assetManager = GGE::AssetManager::Instance();
 
 	// Establecemos la escene inicial
 	if (m_InitialScene != 0)

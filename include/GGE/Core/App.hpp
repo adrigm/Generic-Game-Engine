@@ -46,6 +46,8 @@ public:
 	std::ofstream log;
 	/// Puntero al gestor de escenas
 	GGE::SceneManager* sceneManager;
+	/// Puntero al gestor de recursos
+	GGE::AssetManager* assetManager;
 
 	/**
 	 * Devuelve un puntero a la instancia única de la clase si existe,

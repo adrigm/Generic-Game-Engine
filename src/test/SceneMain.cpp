@@ -20,21 +20,28 @@ void SceneMain::Init()
 	m_app->sceneManager->AddScene(new SceneMap("Map"));
 	control = 0;
 
-	map.ParseFile("Data/example.tmx");
+	sf::Image im;
 
-	std::cout << map.GetHeight() << std::endl;
+	m_app->assetManager->AddDirectory("Data/");
+	m_app->assetManager->AddDirectory("Data");
+	m_app->assetManager->AddDirectory("C:\\Users\\Adrian\\Documents\\Proyectos\\Generic-Game-Engine\\bin\\Data");
+	m_app->assetManager->AddDirectory("C:\\");
+	m_app->assetManager->AddDirectory("Data/otro");
+	m_app->assetManager->AddDirectory("../lib");
+	m_app->assetManager->AddDirectory("../../Generic-Game-Engine/lib");
 }
 
 void SceneMain::Update()
 {
 
-	control += m_app->GetUpdateTime().asMilliseconds();
+	/*control += m_app->GetUpdateTime().asMilliseconds();
 
 	if (control >= 100)
 	{
 		std::cout << static_cast<float>(m_app->GetTotalTime().asMilliseconds() / 1000.0f) << std::endl;
 		control = 0;
-	}
+	}*/
+
 	/*std::string fps = GGE::ConvertFloat(1000.0f /m_app->GetUpdateTime());
 	std::string title = t + "FPS: " + fps;
 	m_app->SetTitle(title);*/

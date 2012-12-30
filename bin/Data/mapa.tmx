@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="" value="vacia"/>
+  <property name="dias" value="5"/>
+  <property name="nombre" value="bosque"/>
+  <property name="vacia" value=""/>
+ </properties>
+ <tileset firstgid="1" name="bosque" tilewidth="32" tileheight="32">
+  <image source="tileset.png" trans="ff00ff" width="256" height="800"/>
+  <tile id="1">
+   <properties>
+    <property name="otra" value="aa"/>
+    <property name="tile" value="32"/>
+   </properties>
+  </tile>
+  <tile id="43">
+   <properties>
+    <property name="nueva" value="5.25"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="201" name="pueblo" tilewidth="32" tileheight="32">
+  <image source="../../../../../../../Program Files (x86)/Common Files/Enterbrain/RGSS/Standard/Graphics/Tilesets/015-ForestTown01.png" width="256" height="1056"/>
+ </tileset>
+ <layer name="Fondo" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJy90stOAjEYhuEp14C4ZMmSjco1CGw4qFEQ4nBIGJAEDxsVTTiZKNwS7jjcFW9jE+ofMmGcBJLnY9LSr3RS5ThOxPn9rLEyzyqkNFzUAqw5J9LIIKv+zuXhoR2gL0fkUUBR7b/OtrKer4kblFD+Z5/tjnBRQ130XRCXuAqwT4vw0EZHrLslKqiK8Wefvh7xgEc8iXUN/S74LqGs+1FBX3REcYQYjvHC4CveRN+92t6Xuu5HE2Mzv2uvOAZMDjGS51Lb+9LR/ehiZuZdc3Z7rwS+mPzGVPT1iXd8mPE58WP9xjNnt/dK+rzbMTHBp+lYEEuxpz77CU5xhlTI+zYLud7vvx2qbwPfKi9G
+  </data>
+ </layer>
+ <layer name="dsds" width="20" height="15" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJy1zsdKxAAYhdFYcKEiiAV8R93pwt5777333sAK9vZYnoEgw4CYCfHCWQT+fEleEAT55AbJrIhiChPqpZb6tzLKE2xmrp4GGmmimRZaaYvRa6eDTrropode+mL0+hlgkCGGGWGUsfCmNCd6b5wJJplimhlmmQtvqrLozbPAIksss8Iqa9EzP1tng0222GaHXfbS7gooSXuu/qW3zwGHHHHMCaecpd1Vhv7aORdcht+s4YprbiK8n7lb7rinljoeeOQpRu+ZF155450PPvmK0ctmFf/Y/gZZkTJJ
+  </data>
+ </layer>
+ <layer name="Objetos" width="20" height="15" opacity="0.86">
+  <properties>
+   <property name="casi" value="si"/>
+   <property name="creo" value="casi"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJyNkrkKAkEQRGc9YVUUjNRIxUCNPBKPxCPxSDx+wSMwMPS3/QNr2GlsmtaZggdL925tUbQxX23AFuzA3s0mYApmYG50LcASrMT8AI7gBM7Ku2s3u4AruCk5fNIyS/EcPmmZ/+ntGIAhGIFxwHdWKVAEsbIL6V0qdn6WbGRMLvrutN6laqAOGmxWcDlL8Cozv5Dem6AFOsJTU0jv5Gdpix31b3X3/IvUBT1HX+yof6tngFcaZEzSlSbq/wFebiZvhnvY3uVtVNgz9a9lppuRHta3avQ7pf7zUQLPzG+GPH79U4r7hdyM704/sD0fng==
+  </data>
+ </layer>
+ <objectgroup name="objetos" width="20" height="15" visible="0" opacity="0.85">
+  <object name="nombre" type="tipo" x="474" y="124" width="110" height="83">
+   <properties>
+    <property name="otra" value="500"/>
+    <property name="prop" value="valor"/>
+   </properties>
+  </object>
+  <object name="punto" type="punt" x="47" y="239"/>
+ </objectgroup>
+ <objectgroup color="#339df9" name="otra" width="20" height="15" opacity="0.94">
+  <properties>
+   <property name="few" value="54"/>
+   <property name="fwe" value="efeef"/>
+  </properties>
+  <object x="521" y="406" width="91" height="57"/>
+  <object name="fwee" type="fewfew" x="509" y="376">
+   <properties>
+    <property name="feefw" value="33"/>
+   </properties>
+  </object>
+  <object gid="38" x="162" y="125"/>
+  <object name="rfr" type="rfrf" gid="38" x="216" y="90">
+   <properties>
+    <property name="" value="3443"/>
+   </properties>
+  </object>
+  <object x="66" y="195">
+   <polyline points="0,0 -48,-81"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="Object Layer 3" width="20" height="15">
+  <object type="prueba" x="104" y="13">
+   <polygon points="0,0 -85,106 34,102 52,35"/>
+  </object>
+  <object name="frg" type="reer" x="415" y="274">
+   <properties>
+    <property name="ehg" value="he"/>
+   </properties>
+   <polygon points="0,0 -84,84 5,68 25,34"/>
+  </object>
+  <object x="208" y="334">
+   <polyline points="0,0 -35,101 -95,6"/>
+  </object>
+  <object x="4" y="5">
+   <polyline points="0,0 1,111"/>
+  </object>
+  <object x="1" y="1">
+   <polyline points="0,0 189,158"/>
+  </object>
+ </objectgroup>
+</map>

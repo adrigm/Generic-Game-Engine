@@ -1,6 +1,9 @@
 #ifndef GGE_Asset_MANAGER_HPP
 #define GGE_Asset_MANAGER_HPP
 
+#include <string>
+#include <vector>
+#include <map>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
@@ -18,10 +21,18 @@ public:
 
 	static void Release();
 
-private:
+	bool AddDirectory(const std::string& directory);
 
+	void RemoveDirectory(const std::string& directory);
+
+protected:
+	GGE::App* m_app;
+
+private:
+	std::vector<std::string> m_directories;
 
 	AssetManager();
+
 	virtual ~AssetManager();
 
 }; // class AssetManager
