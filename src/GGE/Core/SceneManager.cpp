@@ -53,7 +53,7 @@ void SceneManager::AddScene(Scene* theScene)
 			return;
 	}
 
-	// Si no existe la añadimos a la lista
+	// Si no existe la aÃ±adimos a la lista
 	mInactivesScenes[theScene->GetID()] = theScene;
 
 	// Inicializamos la escena si no lo esta
@@ -62,7 +62,7 @@ void SceneManager::AddScene(Scene* theScene)
 		theScene->Init();
 	}
 
-	m_app->log << "SceneManager::AddScene() Añadida escena con ID=" 
+	m_app->log << "SceneManager::AddScene() AÃ±adida escena con ID=" 
 		<< theScene->GetID() << std::endl;
 }
 
@@ -99,7 +99,7 @@ void SceneManager::ChangeScene(SceneID theSceneID)
 void SceneManager::RemoveScene(SceneID theSceneID)
 {
 	// Buscamos en la lista de escenas inactivas
-	std::map<SceneID, Scene*>::const_iterator it = mInactivesScenes.find(theSceneID);
+	std::map<SceneID, Scene*>::iterator it = mInactivesScenes.find(theSceneID);
 	if (it != mInactivesScenes.end())
 	{
 		m_app->log << "SceneManager::RemoveScene() Eliminada escena con ID=" 

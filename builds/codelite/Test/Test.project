@@ -9,6 +9,10 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="../../../src/Test/main.cpp"/>
+    <File Name="../../../src/Test/SceneMain.cpp"/>
+    <File Name="../../../src/Test/SceneMain.hpp"/>
+    <File Name="../../../src/Test/SceneMap.cpp"/>
+    <File Name="../../../src/Test/SceneMap.hpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -17,6 +21,7 @@
       </Compiler>
       <Linker Options="">
         <LibraryPath Value="."/>
+        <LibraryPath Value="/usr/local/lib"/>
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
@@ -25,7 +30,7 @@
         <IncludePath Value="."/>
         <IncludePath Value="$(IntermediateDirectory)/../../../../include/"/>
       </Compiler>
-      <Linker Options="-lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio  -lboost_system -lboost_filesystem" Required="yes">
+      <Linker Options="-lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lboost_system -lboost_filesystem" Required="yes">
         <LibraryPath Value="$(IntermediateDirectory)/../../../../lib"/>
         <Library Value="GGE-d"/>
       </Linker>
@@ -70,6 +75,7 @@
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[
+      
       
       
       ]]>

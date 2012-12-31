@@ -24,8 +24,8 @@ void SceneMain::Init()
 
 	m_app->assetManager->AddDirectory("Data/");
 	m_app->assetManager->AddDirectory("Data");
-	m_app->assetManager->AddDirectory("C:\\Users\\Adrian\\Documents\\Proyectos\\Generic-Game-Engine\\bin\\Data");
-	m_app->assetManager->AddDirectory("C:\\");
+	m_app->assetManager->AddDirectory("/home/adrigm/Proyectos/Generic-Game-Engine/bin/Data/");
+	m_app->assetManager->AddDirectory("/home/adrigm/Proyectos/Generic-Game-Engine/bin/Data");
 	m_app->assetManager->AddDirectory("Data/otro");
 	m_app->assetManager->AddDirectory("../lib");
 	m_app->assetManager->AddDirectory("../../Generic-Game-Engine/lib");

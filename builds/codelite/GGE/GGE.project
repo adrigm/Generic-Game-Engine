@@ -10,6 +10,66 @@
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="Core">
       <File Name="../../../src/GGE/Core/App.cpp"/>
+      <VirtualDirectory Name="tmx">
+        <File Name="../../../src/GGE/Core/Tmx/TmxImage.cpp"/>
+        <File Name="../../../src/GGE/Core/Tmx/TmxLayer.cpp"/>
+        <File Name="../../../src/GGE/Core/Tmx/TmxMap.cpp"/>
+        <File Name="../../../src/GGE/Core/Tmx/TmxObject.cpp"/>
+        <File Name="../../../src/GGE/Core/Tmx/TmxObjectGroup.cpp"/>
+        <File Name="../../../src/GGE/Core/Tmx/TmxPolygon.cpp"/>
+        <File Name="../../../src/GGE/Core/Tmx/TmxPolyline.cpp"/>
+        <File Name="../../../src/GGE/Core/Tmx/TmxPropertySet.cpp"/>
+        <File Name="../../../src/GGE/Core/Tmx/TmxTile.cpp"/>
+        <File Name="../../../src/GGE/Core/Tmx/TmxTileset.cpp"/>
+        <File Name="../../../src/GGE/Core/Tmx/TmxUtil.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="utils">
+        <VirtualDirectory Name="base64">
+          <File Name="../../../src/GGE/Core/utils/base64/base64.cpp"/>
+          <File Name="../../../src/GGE/Core/utils/base64/base64.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="tinyxml">
+          <File Name="../../../src/GGE/Core/utils/tinyxml/tinystr.cpp"/>
+          <File Name="../../../src/GGE/Core/utils/tinyxml/tinystr.h"/>
+          <File Name="../../../src/GGE/Core/utils/tinyxml/tinyxml.cpp"/>
+          <File Name="../../../src/GGE/Core/utils/tinyxml/tinyxml.h"/>
+          <File Name="../../../src/GGE/Core/utils/tinyxml/tinyxmlerror.cpp"/>
+          <File Name="../../../src/GGE/Core/utils/tinyxml/tinyxmlparser.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="zlib">
+          <File Name="../../../src/GGE/Core/utils/zlib/adler32.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/compress.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/crc32.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/crc32.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/deflate.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/deflate.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/gzclose.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/gzguts.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/gzlib.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/gzread.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/gzwrite.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/infback.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inffast.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inffast.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inffixed.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inflate.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inflate.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inftrees.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/inftrees.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/trees.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/trees.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/uncompr.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/zconf.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/zlib.h"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/zutil.c"/>
+          <File Name="../../../src/GGE/Core/utils/zlib/zutil.h"/>
+        </VirtualDirectory>
+      </VirtualDirectory>
+      <File Name="../../../src/GGE/Core/AssetManager.cpp"/>
+      <File Name="../../../src/GGE/Core/ConfigReader.cpp"/>
+      <File Name="../../../src/GGE/Core/Scene.cpp"/>
+      <File Name="../../../src/GGE/Core/SceneManager.cpp"/>
+      <File Name="../../../src/GGE/Core/StringUtil.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
@@ -17,6 +77,27 @@
       <File Name="../../../include/GGE/Core/App.hpp"/>
       <File Name="../../../include/GGE/Core/Core_types.hpp"/>
       <File Name="../../../include/GGE/Core/Export.hpp"/>
+      <VirtualDirectory Name="tmx">
+        <File Name="../../../include/GGE/Core/Tmx/Tmx.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxImage.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxLayer.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxMap.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxMapTile.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxObject.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxObjectGroup.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxPoint.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxPolygon.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxPolyline.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxPropertySet.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxTile.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxTileset.hpp"/>
+        <File Name="../../../include/GGE/Core/Tmx/TmxUtil.hpp"/>
+      </VirtualDirectory>
+      <File Name="../../../include/GGE/Core/AssetManager.hpp"/>
+      <File Name="../../../include/GGE/Core/ConfigReader.hpp"/>
+      <File Name="../../../include/GGE/Core/Scene.hpp"/>
+      <File Name="../../../include/GGE/Core/SceneManager.hpp"/>
+      <File Name="../../../include/GGE/Core/StringUtil.hpp"/>
     </VirtualDirectory>
     <File Name="../../../include/GGE/Config.hpp"/>
     <File Name="../../../include/GGE/Core.hpp"/>
@@ -78,6 +159,7 @@
       <General OutputFile="$(IntermediateDirectory)/lib$(ProjectName).a" IntermediateDirectory="./Release" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[
+      
       
       ]]>
       </Environment>

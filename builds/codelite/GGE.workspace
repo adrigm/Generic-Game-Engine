@@ -7,7 +7,7 @@
       <Project Name="GGE" ConfigName="Debug"/>
       <Project Name="Test" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release" Selected="yes">
+    <WorkspaceConfiguration Name="Release" Selected="no">
       <Project Name="GGE" ConfigName="Release"/>
       <Project Name="Test" ConfigName="Release"/>
     </WorkspaceConfiguration>

@@ -57,9 +57,10 @@ bool AssetManager::AddDirectory(const std::string& directory)
 	}
 
 	path = fs::system_complete(path);
-
+	
 	if (fs::exists(path) && fs::is_directory(path))
 	{
+		path = fs::canonical(path);
 		std::string path_s = path.string();
 		std::replace(path_s.begin(), path_s.end(), '\\', '/');
 
