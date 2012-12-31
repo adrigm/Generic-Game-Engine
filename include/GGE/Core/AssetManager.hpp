@@ -23,7 +23,7 @@ public:
 
 	bool AddDirectory(const std::string& directory);
 
-	void RemoveDirectory(const std::string& directory);
+	bool RemoveDirectory(const std::string& directory);
 
 protected:
 	GGE::App* m_app;
@@ -32,6 +32,8 @@ private:
 	std::vector<std::string> m_directories;
 
 	AssetManager();
+
+	std::string GetAbsolutePath(const std::string& directory) const;
 
 	virtual ~AssetManager();
 

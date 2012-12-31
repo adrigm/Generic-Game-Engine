@@ -20,15 +20,21 @@ void SceneMain::Init()
 	m_app->sceneManager->AddScene(new SceneMap("Map"));
 	control = 0;
 
-	sf::Image im;
+	GGE::AssetManager *sm = GGE::AssetManager::Instance();
 
-	m_app->assetManager->AddDirectory("Data/");
-	m_app->assetManager->AddDirectory("Data");
-	m_app->assetManager->AddDirectory("/home/adrigm/Proyectos/Generic-Game-Engine/bin/Data/");
-	m_app->assetManager->AddDirectory("/home/adrigm/Proyectos/Generic-Game-Engine/bin/Data");
-	m_app->assetManager->AddDirectory("Data/otro");
-	m_app->assetManager->AddDirectory("../lib");
-	m_app->assetManager->AddDirectory("../../Generic-Game-Engine/lib");
+	std::cout << sm->AddDirectory("Data") << std::endl;
+	std::cout << sm->AddDirectory("Data/españaíuÜán") << std::endl;
+	std::cout << sm->AddDirectory("Data/") << std::endl;
+	std::cout << sm->AddDirectory("Data/otro") << std::endl;
+	std::cout << sm->AddDirectory(".") << std::endl;
+	std::cout << sm->AddDirectory("../bin/Data") << std::endl;
+	std::cout << sm->AddDirectory("..\\lib") << std::endl;
+	std::cout << sm->AddDirectory("../../engine") << std::endl;
+	std::cout << sm->AddDirectory("C:\\Users\\Adrian\\Documents\\Proyectos\\Generic-Game-Engine\\bin\\Data") << std::endl;
+
+	sm->RemoveDirectory("Data");
+	sm->RemoveDirectory("../bin/Data");
+	sm->RemoveDirectory("../bin/Data/otro");
 }
 
 void SceneMain::Update()
