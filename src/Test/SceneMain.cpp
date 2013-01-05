@@ -14,27 +14,25 @@ SceneMain::~SceneMain()
 
 void SceneMain::Init()
 {
-	this->SetBackgroundColor(sf::Color(180, 200, 255));
-	t = m_app->GetTitle();
+	GGE::AssetManager* am = GGE::AssetManager::Instance();
 
-	m_app->sceneManager->AddScene(new SceneMap("Map"));
-	control = 0;
+	am->SetPath("Data");
 
-	GGE::AssetManager *sm = GGE::AssetManager::Instance();
+	sprite.setTexture(*am->GetTexture("sprite.png"));
+	sound.setBuffer(*am->GetSoundBuffer("sonido.ogg"));
+	text.setFont(*am->GetFont("segoeui.ttf"));
+	text.setString("Hola GGE");
+	text.setPosition(200, 200);
+	text.setColor(sf::Color(255,0,0));
 
-	std::cout << sm->AddDirectory("Data") << std::endl;
-	std::cout << sm->AddDirectory("Data/españaíuÜán") << std::endl;
-	std::cout << sm->AddDirectory("Data/") << std::endl;
-	std::cout << sm->AddDirectory("Data/otro") << std::endl;
-	std::cout << sm->AddDirectory(".") << std::endl;
-	std::cout << sm->AddDirectory("../bin/Data") << std::endl;
-	std::cout << sm->AddDirectory("..\\lib") << std::endl;
-	std::cout << sm->AddDirectory("../../engine") << std::endl;
-	std::cout << sm->AddDirectory("C:\\Users\\Adrian\\Documents\\Proyectos\\Generic-Game-Engine\\bin\\Data") << std::endl;
+	map = am->GetTmxMap("example.tmx");
+	std::cout << map->GetHeight() << std::endl;
 
-	sm->RemoveDirectory("Data");
-	sm->RemoveDirectory("../bin/Data");
-	sm->RemoveDirectory("../bin/Data/otro");
+	conf = am->GetConfigFile("../window.cfg");
+	std::cout << conf->GetUint32("window", "width", 666) << std::endl;
+
+	music = am->GetMusic("musica.ogg");
+	music->play();
 }
 
 void SceneMain::Update()
@@ -54,7 +52,7 @@ void SceneMain::Update()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		std::cout << "Pulsando A" << std::endl;
+		sound.play();
 	}
 }
 
@@ -77,4 +75,12 @@ void SceneMain::Pause()
 
 void SceneMain::Cleanup()
 {
+}
+
+void SceneMain::Draw()
+{
+	m_app->window.clear(sf::Color(200, 200, 200));
+
+	m_app->window.draw(sprite);
+	m_app->window.draw(text);
 }

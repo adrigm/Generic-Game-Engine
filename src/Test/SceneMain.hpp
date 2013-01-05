@@ -21,10 +21,15 @@ public:
 
 	void Cleanup();
 
+	void Draw();
+
 private:
-	std::string t;
-	GGE::Int32 control;
-	GGE::Tmx::Map map;
+	sf::Sprite sprite;
+	sf::Sound sound;
+	sf::Music* music;
+	sf::Text text;
+	GGE::Tmx::Map* map;
+	GGE::ConfigReader* conf;
 
 }; // class SceneMain
 
